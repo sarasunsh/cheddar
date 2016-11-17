@@ -9,7 +9,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import Sidebar from './components/Sidebar';
 import App from './components/App';
 import Video from './components/Video/Video';
-import Login from './components/Login/Login';
+import AuthContainer from './components/Auth/Auth';
 import Landing from './components/Landing';
 
 // import { fetchMiceFromServer } from './reducers/allMice';
@@ -26,7 +26,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path='/' component={App}>
-        <Route path="login" component={Login} />
+        <Route path="auth" component={AuthContainer} />
         <Route path="video" component={Video}  />
         <IndexRoute component={Landing}/>
       </Route>
