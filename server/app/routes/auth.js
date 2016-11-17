@@ -1,24 +1,26 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../../db/models').User;
+import passport from 'passport';
+
 module.exports = router;
 
-router.post('/login', function (req, res, next) {
-  User.findOne({
-    where: req.body
-  })
-  .then(function (user) {
-    if (!user) {
-      res.sendStatus(401);
-    } else {
-      // req.session.userId = user.id;
+// router.post('/login',
+//   User.findOne({
+//     where: req.body
+//   })
+//   .then(function (user) {
+//     if (!user) {
+//       res.sendStatus(401);
+//     } else {
+//       // req.session.userId = user.id;
 
-      console.log('found user!');
-      res.send(user);
-    }
-  })
-  .catch(next);
-});
+//       console.log('found user!');
+//       res.send(user);
+//     }
+//   })
+//   .catch(next);
+// });
 
 router.get('/logout', function (req, res, next) {
   req.session.destroy();

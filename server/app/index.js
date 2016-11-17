@@ -1,12 +1,60 @@
 'use strict';
 import path from 'path';
 import express from 'express';
+var User = require('../db/models').User;
+
+import passport from 'passport';
+import { Strategy } from 'passport-local';
+
 const app = express();
 
 // const env = require('path.join(rootPath, './server/env'));
 
 // Export app
 module.exports = app;
+
+// PASSPORT MIDDLEWARE
+// Configure the local strategy for use by Passport.
+//
+// The local strategy require a `verify` function which receives the credentials
+// (`username` and `password`) submitted by the user.  The function must verify
+// that the password is correct and then invoke `cb` with a user object, which
+// will be set at `req.user` in route handlers after authentication.
+passport.use(new Strategy(
+    function(username, password, cb) {
+        User.findOne({
+            where: req.body
+        })
+        .then(user => cb(null, user)) // need to add error-handling if user doesn't exist etc.
+        .catch(err => cb(err))
+    }
+));
+
+
+// Configure Passport authenticated session persistence.
+//
+// In order to restore authentication state across HTTP requests, Passport needs
+// to serialize users into and deserialize users out of the session.  The
+// typical implementation of this is as simple as supplying the user ID when
+// serializing, and querying the user record by ID from the database when
+// deserializing.
+passport.serializeUser(function(user, cb) {
+  cb(null, user.id);
+});
+
+passport.deserializeUser(function(id, cb) {
+  User.findById(id, function (err, user) {
+    if (err) { return cb(err); }
+    cb(null, user);
+  });
+});
+
+// Initialize Passport and restore authentication state, if any, from the
+// session.
+app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 // Logging middleware
 import logMiddleware from 'volleyball';
@@ -25,9 +73,19 @@ const publicPath = path.join(__dirname, '../../public');
 app.use(favicon(faviconPath));
 app.use(express.static(publicPath));
 
+app.post('/login',
+  passport.authenticate('local', { failureRedirect: '/' }),
+  function(req, res) {
+    console.log('hit passport login')
+    res.redirect('/');
+  });
+
 // Routes that will be accessed via AJAX should be prepended with
 // /api so they are isolated from our GET /* wildcard.
 app.use('/api', require('./routes'));
+
+
+
 
 // React-Router browserHistory requirement: this will handle every other route with index.html, which will contain
 // a script tag to your application's JavaScript file(s).

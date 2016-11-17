@@ -22505,8 +22505,7 @@
 	
 	var login = exports.login = function login(credentials) {
 	  return function (dispatch) {
-	    _axios2.default.post('api/auth/login', credentials).then(function (res) {
-	      console.log("response in axios post", res);
+	    _axios2.default.post('/login', credentials).then(function (res) {
 	      return dispatch(set(res.data));
 	    }).catch(function (err) {
 	      return console.error('Login unsuccesful', err);

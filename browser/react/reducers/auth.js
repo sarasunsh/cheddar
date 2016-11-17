@@ -29,11 +29,8 @@ export default function reducer (currentUser = null, action) {
 /* ------------       DISPATCHERS     ------------------ */
 
 export const login = credentials => dispatch => {
-  axios.post('api/auth/login', credentials)
-       .then(res => {
-          console.log("response in axios post", res)
-          return dispatch(set(res.data));
-       })
+  axios.post('/login', credentials)
+       .then(res => dispatch(set(res.data)))
        .catch(err => console.error('Login unsuccesful', err));
 }
 
