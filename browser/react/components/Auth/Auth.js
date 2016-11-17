@@ -95,6 +95,7 @@ class Auth extends React.Component {
 const mapStateLogin = () => ({ message: 'Log in' })
 const mapDispatchLogin = dispatch => ({
   login: credentials => {
+    console.log(credentials)
     dispatch(login(credentials));
     browserHistory.push('/');
   }
