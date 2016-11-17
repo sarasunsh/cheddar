@@ -3,7 +3,6 @@
 import React, { Component } from 'react';
 
 import Sidebar from '../components/Sidebar';
-import NavBar from './NavBar';
 
 export default class App extends Component {
 

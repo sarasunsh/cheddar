@@ -9,7 +9,7 @@ const app = express();
 module.exports = app;
 
 // Logging middleware
-import logMiddleware from 'morgan';
+import logMiddleware from 'volleyball';
 app.use(logMiddleware);
 
 // Parsing middleware
