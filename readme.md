@@ -3,4 +3,4 @@ Pay-Per-Emotion advertising - a platform for advertisers to entice their target 
 A platform for people to monetize their face.
 Say cheese to make cheddar.
 
-Tools for emotional branding.
+Enhancing emotional engagement for brands.
