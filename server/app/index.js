@@ -20,14 +20,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Static middleware
 import favicon from 'serve-favicon';
 const faviconPath = path.join(__dirname, '../../public/favicon.ico');
-const npmPath = path.join(__dirname, '../../node_modules');
 const publicPath = path.join(__dirname, '../../public');
-const browserPath = path.join(__dirname, '../../browser');
 
 app.use(favicon(faviconPath));
-// app.use(express.static(npmPath));
 app.use(express.static(publicPath));
-// app.use(express.static(browserPath));
 
 // Routes that will be accessed via AJAX should be prepended with
 // /api so they are isolated from our GET /* wildcard.

@@ -3,7 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 import { connect } from'react-redux';
 import SubmitModal from './SubmitModal';
 
-import { toggleEuthanize } from '../../ducks/euthanize';
+import { toggleEuthanize } from '../../reducers/euthanize';
 
 const mapStateToProps = function(state){
     return {

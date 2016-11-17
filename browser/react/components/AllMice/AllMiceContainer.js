@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import AllMice from './AllMice';
-import { fetchMiceFromServer } from '../../ducks/allMice';
+import { fetchMiceFromServer } from '../../reducers/allMice';
 
 
 const mapStateToProps = function(state){

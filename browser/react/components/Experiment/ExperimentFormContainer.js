@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from'react-redux';
 import ExperimentForm from './ExperimentForm';
 import ExperimentFormDecorator from './FormDecorator';
-import { addNewArm } from '../../ducks/experiment';
+import { addNewArm } from '../../reducers/experiment';
 
 const mapDispatchToProps = function (dispatch) {
   return {

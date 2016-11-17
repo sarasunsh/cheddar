@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import SingleMouse from './SingleMouse';
-import { reportMouseDeath } from '../../ducks/allMice';
+import { reportMouseDeath } from '../../reducers/allMice';
 
 
 const mapStateToProps = function (state) {

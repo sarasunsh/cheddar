@@ -1,7 +1,6 @@
 'use strict';
 
 const express = require('express');
-const mime = require('mime');
 const models = require('../../db/models');
 const Mouse = models.Mouse;
 const Arm = models.Arm;

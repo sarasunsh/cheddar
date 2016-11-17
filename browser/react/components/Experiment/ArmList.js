@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Well, Button, Glyphicon, Table, Col } from 'react-bootstrap';
-import { removeArm } from '../../ducks/experiment';
+import { removeArm } from '../../reducers/experiment';
 
 
 class ArmList extends Component {

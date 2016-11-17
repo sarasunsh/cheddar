@@ -17,9 +17,9 @@ import AnalyticsContainer from './components/Analytics';
 import Gantt from './components/Gantt';
 import Landing from './components/Landing';
 
-import { fetchMiceFromServer } from './ducks/allMice';
-import { fetchMouseFromServer } from './ducks/singleMouse';
-import { fetchArmsFromServer } from './ducks/experiment';
+import { fetchMiceFromServer } from './reducers/allMice';
+import { fetchMouseFromServer } from './reducers/singleMouse';
+import { fetchArmsFromServer } from './reducers/experiment';
 
 
 // onEnter prompts ----------------------------------------------------

@@ -1,3 +1,11 @@
+// Once the app is up and running, check these items:
+// -- do we need Bootstrap CDN links in index.html?
+// -- do we need the log.js in bin folder?
+// -- can we remove request from package.json?
+// -- can we refactor to eliminate HTTP and use Express only?
+
+
+// Package.json notes
 {
   "name": "cheddar",
   "version": "1.0.0",
@@ -23,7 +31,6 @@
     "install": "^0.8.2",
     "lodash": "^4.15.0",
         // "mime": "^1.3.4", Consider removing -- do not know what this does
-
     "morgan": "^1.7.0",
     "node-status": "^0.1.7", // shows the status bar when you're NPM installing
     "nodemon": "^1.3.7",
