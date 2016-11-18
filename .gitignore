@@ -1,3 +1,6 @@
 node_modules
 .DS_Store
 public/bundle*
+js/af
+yarn.lock
+npm-debug.log

@@ -1,6 +1,7 @@
 'use strict';
-import path from 'path';
+import path, {resolve} from 'path';
 import express from 'express';
+
 const app = express();
 
 // const env = require('path.join(rootPath, './server/env'));
@@ -24,6 +25,8 @@ const publicPath = path.join(__dirname, '../../public');
 
 app.use(favicon(faviconPath));
 app.use(express.static(publicPath));
+app.use('/bootstrap', express.static(resolve(__dirname, '..', 'node_modules', 'bootstrap', 'dist')))
+app.use('/jquery', express.static(resolve(__dirname, '..', 'node_modules', 'jquery', 'dist')))
 
 // Routes that will be accessed via AJAX should be prepended with
 // /api so they are isolated from our GET /* wildcard.
