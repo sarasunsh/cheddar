@@ -1,5 +1,17 @@
 * {
   box-sizing: border-box; }
+#affdex_elements {
+  margin-top: Calc(50vh - 240px);
+}
+
+#playButton:hover {
+  text-shadow: 0 0 25px lightblue;
+}
+
+#playButton:active {
+  color: lightgreen;
+  text-shadow: 0 0 25px lightblue;
+}
 
 #main {
   padding-left: 0; }
