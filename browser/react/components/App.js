@@ -12,9 +12,12 @@ export default class App extends Component {
         <div className="col-xs-2">
           <Sidebar />
         </div>
-        <div className="col-xs-10">
+        <div className="col-xs-8">
           { this.props.children }
         </div>
+        <div className="col-xs-2">
+        </div>
+
       </div>
     );
   }
