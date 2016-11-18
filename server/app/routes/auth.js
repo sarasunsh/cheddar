@@ -5,46 +5,30 @@ import passport from 'passport';
 
 module.exports = router;
 
-// router.post('/login',
-//   User.findOne({
-//     where: req.body
-//   })
-//   .then(function (user) {
-//     if (!user) {
-//       res.sendStatus(401);
-//     } else {
-//       // req.session.userId = user.id;
-
-//       console.log('found user!');
-//       res.send(user);
-//     }
-//   })
-//   .catch(next);
+// router.get('/logout', function (req, res, next) {
+//   req.session.destroy();
+//   res.sendStatus(204);
 // });
 
-router.get('/logout', function (req, res, next) {
-  req.session.destroy();
-  res.sendStatus(204);
-});
+// router.post('/signup', function (req, res, next) {
 
-router.post('/signup', function (req, res, next) {
+//   User.findOrCreate({
+//     where: {
+//       email: req.body.email
+//     },
+//     defaults: {
+//       password: req.body.password
+//     }
+//   })
+//   .then(function (user) {
+//     req.session.userId = user.id;
+//     res.sendStatus(204);
+//   });
 
-  User.findOrCreate({
-    where: {
-      email: req.body.email
-    },
-    defaults: {
-      password: req.body.password
-    }
-  })
-  .then(function (user) {
-    req.session.userId = user.id;
-    res.sendStatus(204);
-  });
-
-});
+// });
 
 router.get('/me', function (req, res, next) {
+  console.log('in me', req.user)
   if (req.user) {
     res.send(req.user);
   } else {

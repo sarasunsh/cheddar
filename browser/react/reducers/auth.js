@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {browserHistory} from 'react-router';
 
 /* -----------------    ACTIONS     ------------------ */
 
@@ -14,15 +15,9 @@ const remove  = () => ({ type: REMOVE })
 
 export default function reducer (currentUser = null, action) {
   switch (action.type) {
-
-    case SET:
-      return action.user;
-
-    case REMOVE:
-      return null;
-
-    default:
-      return currentUser;
+    case SET: return action.user;
+    case REMOVE: return null;
+    default: return currentUser;
   }
 }
 
@@ -31,26 +26,18 @@ export default function reducer (currentUser = null, action) {
 export const login = credentials => dispatch => {
   axios.post('/login', credentials)
       .then(res => {
-        console.log("response", res.data);
-        dispatch(set(res.data));
-
-
+        dispatch(retrieveLoggedInUser());
         })
-
-
-
-       .catch(err => console.error('Login unsuccesful', err));
+       .catch(err => console.error('Login unsuccessful', err));
 }
-
-// export const signup = credentials => dispatch => {
-//   axios.post('/auth/signup', credentials)
-//        .then(res => dispatch(set(res.data)))
-//        .catch(err => console.error('Signup unsuccesful', err));
-// }
 
 export const retrieveLoggedInUser = () => dispatch => {
   axios.get('api/auth/me')
-      .then(res => dispatch(set(res.data)))
+      .then(res => {
+        dispatch(set(res.data))
+        browserHistory.push('/video')
+
+      })
       .catch(err => console.error('retrieveLoggedInUser unsuccesful', err));
 }
 
