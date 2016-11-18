@@ -8,7 +8,7 @@ export default function (props) {
 
   return (
     <div>
-        I am a fake sidebar.
+        <Link to='/video'>Video</Link>
     </div>
 
   )

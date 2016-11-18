@@ -1,8 +1,8 @@
 'use strict';
-import path from 'path';
+import path, {resolve} from 'path';
 import express from 'express';
-var User = require('../db/models').User;
 
+var User = require('../db/models').User;
 import passport from 'passport';
 import { Strategy } from 'passport-local';
 
@@ -29,6 +29,8 @@ const publicPath = path.join(__dirname, '../../public');
 
 app.use(favicon(faviconPath));
 app.use(express.static(publicPath));
+app.use('/bootstrap', express.static(resolve(__dirname, '..', 'node_modules', 'bootstrap', 'dist')))
+app.use('/jquery', express.static(resolve(__dirname, '..', 'node_modules', 'jquery', 'dist')))
 
 // PASSPORT MIDDLEWARE
 
