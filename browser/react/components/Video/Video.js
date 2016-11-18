@@ -15,9 +15,11 @@ export default class Video extends React.Component {
   render() {
     return (
         <div>
-          This is the video component.
-          <div id="affdex_elements" style={{width:'680px',height:'480px',textAlign:'center', margin: '0 auto'}}>
-            <span id='playButton' onClick={() => onStart()} style={{fontSize: '200px', margin: '33%', textAlign:'center' }} className="glyphicon glyphicon-play-circle"></span>
+          <div id="affdex_elements" style={{width:'640px',height:'480px',textAlign:'center', margin: '0 auto'}}>
+            <span id='playButton' onClick={(e) => {
+              onStart()
+              e.target.remove();
+            }} style={{fontSize: '200px', margin: '33%', textAlign:'center' }} className="glyphicon glyphicon-play-circle"></span>
           </div>
           <div id="logs"></div>
         </div>
