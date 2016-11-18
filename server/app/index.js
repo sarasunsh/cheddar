@@ -20,13 +20,37 @@ module.exports = app;
 // (`username` and `password`) submitted by the user.  The function must verify
 // that the password is correct and then invoke `cb` with a user object, which
 // will be set at `req.user` in route handlers after authentication.
-passport.use(new Strategy(
+console.log("Strategy", Strategy);
+
+passport.use('local', new Strategy(
+    {
+      usernameField: 'email',
+      passwordField: 'password'
+    },
     function(username, password, cb) {
+        console.log("passport local strategy running");
+        console.log("username, password:", username, password);
+
         User.findOne({
-            where: req.body
+            where: {
+              email: username,
+            }
         })
-        .then(user => cb(null, user)) // need to add error-handling if user doesn't exist etc.
-        .catch(err => cb(err))
+        .then(user => {
+          console.log("user that was found: ", user);
+
+          if(!user) {
+            cb(null, false, {message: "Unknown user"})
+          } else if (password != user.password) {
+            cb(null, false, {message: 'Invalid password'})
+          } else {
+            cb(null, user);
+          }
+        })
+        .catch(err => {
+          console.log("error from passport", err);
+          cb(err);
+        });
     }
 ));
 
@@ -74,10 +98,13 @@ app.use(favicon(faviconPath));
 app.use(express.static(publicPath));
 
 app.post('/login',
-  passport.authenticate('local', { failureRedirect: '/' }),
+  passport.authenticate('local'),
   function(req, res) {
     console.log('hit passport login')
-    res.redirect('/');
+    // // console.log("************** req.session", req.session);
+    // console.log("************** req.user", req.user);
+    // console.log("res", res);
+    res.send(req.user);
   });
 
 // Routes that will be accessed via AJAX should be prepended with

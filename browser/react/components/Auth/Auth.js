@@ -16,7 +16,7 @@ class Auth extends React.Component {
   }
 
   render() {
-
+    console.log("this.props", this.props)
     return (
       <div className="signin-container">
         <div className="buffer local">
@@ -92,12 +92,12 @@ class Auth extends React.Component {
 
 /* -----------------    CONTAINER     ------------------ */
 
-const mapStateLogin = () => ({ message: 'Log in' })
+const mapStateLogin = (state) => ({ message: 'Log in', user: state.auth })
 const mapDispatchLogin = dispatch => ({
   login: credentials => {
     console.log(credentials)
     dispatch(login(credentials));
-    browserHistory.push('/');
+    // browserHistory.push('/');
   }
 })
 
