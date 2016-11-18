@@ -21,7 +21,7 @@ export default class Video extends React.Component {
               e.target.remove();
             }} style={{fontSize: '200px', margin: '140px', textAlign:'center' }} className="glyphicon glyphicon-play-circle"></span>
           </div>
-          <div id="logs"></div>
+          <div id="logs"><span></span></div>
         </div>
     )
   }

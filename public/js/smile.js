@@ -16,7 +16,7 @@ detector.detectAllEmojis();
 detector.detectAllAppearance();
 //Add a callback to notify when the detector is initialized and ready for runing.
 detector.addEventListener("onInitializeSuccess", function() {
-log('#logs', "The detector reports initialized");
+log('#logs', "Keep smiling!");
 //Display canvas instead of video feed because we want to draw the feature points on it
 $("#face_video_canvas").css("display", "block");
 $("#face_video").css("display", "none");
@@ -28,7 +28,7 @@ const smilyAvg = (lastSmilyScore) => {
 
 const preSmilyScoreAvg = (lastSmilyScore) => {
   preSmilyScore.push(lastSmilyScore);
-  if (preSmilyScore.length>20){
+  if (preSmilyScore.length>30){
     preSmilyScore.shift();
     return preSmilyScore.reduce((a,b) => a+b)/preSmilyScore.length;
   }
@@ -37,7 +37,7 @@ const preSmilyScoreAvg = (lastSmilyScore) => {
 
 
 function log(node_name, msg) {
-$(node_name).append("<span>" + msg + "</span><br />")
+  // $(node_name).children().first().replaceWith("<span>" + msg + "</span><br />")
 }
 //function executes when Start button is pushed.
 function onStart() {
@@ -45,7 +45,7 @@ if (detector && !detector.isRunning) {
     $("#logs").html("");
     detector.start();
 }
-log('#logs', "Clicked the start button");
+log('#logs', "Smile for the Camera!");
 }
 //function executes when the Stop button is pushed.
 function onStop() {
