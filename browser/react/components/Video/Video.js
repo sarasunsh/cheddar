@@ -1,6 +1,5 @@
 import React from 'react';
 import moment from "moment";
-//import smiles from '/public/js/smile.js'
 
 export default class Video extends React.Component {
 
@@ -8,7 +7,6 @@ export default class Video extends React.Component {
    var aftag = document.createElement('script');
    aftag.setAttribute('src','/js/af/affdex.js');
    document.head.appendChild(aftag);
-   console.log(aftag)
    var smileTag = document.createElement('script');
    smileTag.setAttribute('src','/js/smile.js');
    document.head.appendChild(smileTag);
