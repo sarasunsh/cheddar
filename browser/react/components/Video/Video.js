@@ -13,13 +13,14 @@ export default class Video extends React.Component {
  }
 
   render() {
+    function clickPlay(e){
+      onStart();
+      e.target.remove();
+    }
     return (
         <div>
-          <div id="affdex_elements" style={{width:'640px',height:'480px',textAlign:'center', margin: 'Calc(50vh - 240px) auto'}}>
-            <span id='playButton' onClick={(e) => {
-              onStart()
-              e.target.remove();
-            }} style={{fontSize: '200px', margin: '140px', textAlign:'center' }} className="glyphicon glyphicon-play-circle"></span>
+          <div id="affdex_elements">
+            <span id='playButton' onClick={clickPlay} className="glyphicon glyphicon-play-circle"></span>
           </div>
           <div id="logs"><span></span></div>
         </div>

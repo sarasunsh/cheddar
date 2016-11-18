@@ -1,7 +1,24 @@
 * {
   box-sizing: border-box; }
+
+  
 #affdex_elements {
-  margin-top: Calc(50vh - 240px);
+  width: 640px;
+  height: 480px;
+  text-align: center;
+  margin: Calc(50vh - 240px) auto;
+}
+
+#playButton {
+  font-size: 200px;
+  margin: 140px;
+  text-align: center;
+
+}
+
+#theAd {
+  width: 640px;
+  height: 640px;
 }
 
 #playButton:hover {
