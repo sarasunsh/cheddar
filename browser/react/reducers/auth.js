@@ -26,17 +26,20 @@ export default function reducer (currentUser = null, action) {
 export const login = credentials => dispatch => {
   axios.post('/login', credentials)
       .then(res => {
+        console.log('res', res.data)
+        if (res.body){
+          console.log('IN THE IF')
+          browserHistory.push('/video')
+        }
         dispatch(retrieveLoggedInUser());
-        })
-       .catch(err => console.error('Login unsuccessful', err));
+      })
+     .catch(err => console.error('Login unsuccessful', err));
 }
 
 export const retrieveLoggedInUser = () => dispatch => {
   axios.get('api/auth/me')
       .then(res => {
         dispatch(set(res.data))
-        browserHistory.push('/video')
-
       })
       .catch(err => console.error('retrieveLoggedInUser unsuccesful', err));
 }
@@ -45,6 +48,6 @@ export const retrieveLoggedInUser = () => dispatch => {
 export const logout = () => dispatch => {
   dispatch(remove())
   axios.get('api/auth/logout')
-       .catch(err => console.error('logout unsuccesful', err));
+       .catch(err => console.error('logout unsuccessful', err));
 }
 

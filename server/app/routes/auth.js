@@ -28,7 +28,6 @@ module.exports = router;
 // });
 
 router.get('/me', function (req, res, next) {
-  console.log('in me', req.user)
   if (req.user) {
     res.send(req.user);
   } else {
