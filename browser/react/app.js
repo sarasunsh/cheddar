@@ -9,24 +9,23 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import Sidebar from './components/Sidebar';
 import App from './components/App';
 import Video from './components/Video/Video';
-import Login from './components/Login/Login';
+import AuthContainer from './components/Auth/Auth';
 import Landing from './components/Landing';
 
-// import { fetchMiceFromServer } from './reducers/allMice';
-// import { fetchMouseFromServer } from './reducers/singleMouse';
-// import { fetchArmsFromServer } from './reducers/experiment';
-
+import {retrieveLoggedInUser} from './reducers/auth';
 
 // onEnter prompts ----------------------------------------------------
-
+function fetchInitialData () {
+  store.dispatch(retrieveLoggedInUser());
+}
 
 
 // React-Router--------------------------------------------------------
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path='/' component={App}>
-        <Route path="login" component={Login} />
+      <Route path='/' component={App} onEnter={fetchInitialData}>
+        <Route path="auth" component={AuthContainer} />
         <Route path="video" component={Video}  />
         <IndexRoute component={Landing}/>
       </Route>
@@ -34,22 +33,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('app')
 );
-
-
-// ReactDOM.render(
-//   <Provider store={store}>
-//     <Router history={browserHistory}>
-//       <Route path='/' component={App}>
-//         <Route path="mice" component={AllMiceContainer} onEnter={onMiceEnter}/>
-//         <Route path="mice/:mouseId" component={SingleMouseContainer} onEnter={onSingleMouseEnter} />
-//         <Route path="addmouse" component={NewMouseFormContainer} />
-//         <Route path="experiment" component={ExperimentPageContainer} onEnter={onExperimentEnter}/>
-//         <Route path="chat" component={Chatroom}/>
-//         <Route path="analytics" component={AnalyticsContainer} />
-//         <Route path="gantt" component={Gantt} />
-//         <IndexRoute component={Landing}/>
-//       </Route>
-//     </Router>
-//   </Provider>,
-//   document.getElementById('app')
-// );

@@ -3,6 +3,8 @@
 // -- do we need the log.js in bin folder?
 // -- can we remove request from package.json?
 // -- can we refactor to eliminate HTTP and use Express only?
+// -- get rid of "use strict"
+// -- change volleyball to morgan
 
 
 // Package.json notes

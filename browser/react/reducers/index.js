@@ -2,16 +2,10 @@
 
 import { combineReducers } from 'redux';
 
-import mice from './allMice';
-import currentMouse from './singleMouse';
-import exptArms from './experiment';
-import euthanize from './euthanize';
+import auth from './auth';
 
 const rootReducer = combineReducers({
-  mice,
-  currentMouse,
-  exptArms,
-  euthanize
+  auth
 });
 
 export default rootReducer;
