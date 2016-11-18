@@ -43,6 +43,8 @@ const preSmilyScoreAvg = (lastSmilyScore) => {
 
 function log(node_name, msg) {
   // $(node_name).children().first().replaceWith("<span>" + msg + "</span><br />")
+  var logElement = document.getElementById("logs");
+  logElement.textContent = msg;
 }
 //function executes when Start button is pushed.
 function onStart() {
