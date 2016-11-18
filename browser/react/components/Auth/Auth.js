@@ -1,14 +1,9 @@
 import React from 'react';
-import moment from "moment";
-import { connect } from'react-redux';
-import { browserHistory } from 'react-router';
-import { login } from '../../reducers/auth';
-
 
 
 /* -----------------    COMPONENT     ------------------ */
 
-class Auth extends React.Component {
+export default class Auth extends React.Component {
   constructor(props) {
     super(props);
 
@@ -16,7 +11,6 @@ class Auth extends React.Component {
   }
 
   render() {
-    console.log("this.props", this.props)
     return (
       <div className="signin-container">
         <div className="buffer local">
@@ -57,13 +51,6 @@ class Auth extends React.Component {
 
     login(credentials);
 
-    // if (login) {
-    //   login(credentials);
-    // } else if (signup) {
-    //   signup(credentials);
-    // } else {
-    //   console.log(`${message} isn't implemented yet`);
-    // }
   }
 }
 
@@ -89,27 +76,3 @@ class Auth extends React.Component {
 
 */
 
-
-/* -----------------    CONTAINER     ------------------ */
-
-const mapStateLogin = (state) => ({ message: 'Log in', user: state.auth })
-const mapDispatchLogin = dispatch => ({
-  login: credentials => {
-    console.log(credentials)
-    dispatch(login(credentials));
-    // browserHistory.push('/');
-  }
-})
-
-// const mapStateSignup = () => ({ message: 'Sign up' })
-// const mapDispatchSignup = dispatch => ({
-//   signup: credentials => {
-//     dispatch(signup(credentials));
-//     browserHistory.push('/');
-//   }
-// })
-
-const AuthContainer = connect(mapStateLogin, mapDispatchLogin)(Auth);
-export default AuthContainer;
-
-// export const Signup = connect(mapStateSignup, mapDispatchSignup)(Auth);

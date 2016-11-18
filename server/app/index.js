@@ -58,7 +58,6 @@ passport.use('local', new Strategy(
             }
         })
         .then(user => {
-            console.log('made it into THEN', user)
           if(!user) {
             cb(null, false, {message: "Unknown user"})
           } else if (password != user.password) {
@@ -95,6 +94,13 @@ passport.deserializeUser(function(id, cb) {
   })
 });
 
+function loggedIn(req, res, next) {
+  if (req.user) {
+    next();
+  } else {
+    res.redirect('/auth')
+  }
+}
 
 app.post('/login',
   passport.authenticate('local', { successRedirect: '/video',
@@ -103,7 +109,6 @@ app.post('/login',
 // Routes that will be accessed via AJAX should be prepended with
 // /api so they are isolated from our GET /* wildcard.
 app.use('/api', require('./routes'));
-
 
 // React-Router browserHistory requirement: this will handle every other route with index.html, which will contain
 // a script tag to your application's JavaScript file(s).
