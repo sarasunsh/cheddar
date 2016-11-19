@@ -94,17 +94,20 @@ passport.deserializeUser(function(id, cb) {
   })
 });
 
-function loggedIn(req, res, next) {
-  if (req.user) {
-    next();
-  } else {
-    res.redirect('/auth')
-  }
-}
-
 app.post('/login',
   passport.authenticate('local', { successRedirect: '/video',
                                    failureRedirect: '/auth' }));
+
+app.post('/signup', function (req,res,next) {
+  User.create(req.body)
+  .then(user => {
+    console.log("SIGNUP",user)
+    passport.authenticate('local', { successRedirect: '/video',
+                                   failureRedirect: '/auth' })
+    res.send(user)
+  })
+  .catch(err => console.error(err))
+})
 
 // Routes that will be accessed via AJAX should be prepended with
 // /api so they are isolated from our GET /* wildcard.

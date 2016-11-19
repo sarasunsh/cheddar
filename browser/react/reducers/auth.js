@@ -26,11 +26,6 @@ export default function reducer (currentUser = null, action) {
 export const login = credentials => dispatch => {
   axios.post('/login', credentials)
       .then(res => {
-        console.log('res', res.data)
-        // if (res.body){
-        //   console.log('IN THE IF')
-        //   browserHistory.push('/video')
-        // }
         localStorage.setItem('token', JSON.stringify(res.data))
         dispatch(retrieveLoggedInUser());
       })
@@ -38,8 +33,9 @@ export const login = credentials => dispatch => {
 }
 
 export const signup = credentials => dispatch => {
-  axios.post('/api/auth/signup', credentials)
+  axios.post('/signup', credentials)
       .then(res => {
+        localStorage.setItem('token', JSON.stringify(res.data))
         dispatch(set(res.data))
       })
      .catch(err => console.error('Signup unsuccessful', err));
@@ -55,7 +51,9 @@ export const retrieveLoggedInUser = () => dispatch => {
 
 // optimistic
 export const logout = () => dispatch => {
-  dispatch(remove())
-  axios.get('api/auth/logout')
-       .catch(err => console.error('logout unsuccessful', err));
+    dispatch(remove())
+    localStorage.removeItem('token');
+    axios.get('api/auth/logout')
+    .then(res => browserHistory.push('/auth'))
+    .catch(err => console.error('logout unsuccessful', err));
 }

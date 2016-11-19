@@ -12,30 +12,7 @@ router.get('/logout', function (req, res, next) {
   res.sendStatus(204);
 });
 
-// router.post('/signup', function (req, res, next) {
 
-//   User.findOrCreate({
-//     where: {
-//       email: req.body.email
-//     },
-//     defaults: {
-//       password: req.body.password
-//     }
-//   })
-//   .then(function (user) {
-//     req.session.userId = user.id;
-//     res.sendStatus(204);
-//   });
-
-// });
-
-
-router.post('/signup', function (req,res,next) {
-  console.log("SIGNUP",req.body)
-  User.create(req.body)
-  .then(user => res.send(user))
-  .catch(err => console.error(err))
-})
 
 router.get('/me', function (req, res, next) {
   console.log(req.session)
@@ -45,5 +22,3 @@ router.get('/me', function (req, res, next) {
     res.sendStatus(401);
   }
 });
-
-// router.use('/google', require('./google'));

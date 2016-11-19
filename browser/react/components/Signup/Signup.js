@@ -39,7 +39,6 @@ export default class Auth extends React.Component {
                       name="age"
                       type="number"
                       className="form-control"
-                      required
                     />
                 </div>
                 <div className="form-group">
