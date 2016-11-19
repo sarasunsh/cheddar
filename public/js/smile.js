@@ -3,6 +3,7 @@ var isPlaying = false;
 let smilyScore = [0,0];
 let preSmilyScore = [];
 var theAd = document.getElementById('theAd')
+var context = null;
 
 // SDK Needs to create video and canvas nodes in the DOM in order to function
 // Here we are adding those nodes a predefined div.
@@ -53,7 +54,9 @@ function log(node_name, msg) {
 
 }
 //function executes when Start button is pushed.
-function onStart() {
+function onStart(ctx) {
+  context = ctx;
+
   if (detector && !detector.isRunning) {
       $("#logs").html("Loading...");
       detector.start();
@@ -151,6 +154,7 @@ detector.addEventListener("onImageResultsSuccess", function(faces, image, timest
       }
     } else {
       smilyAvg(faces[0].expressions.smile);
+      context.setState({determinate: true, progress: `${smilyScore[0]}%`});
       console.log("smilyScore!",smilyScore[0]);
       console.log(faces[0].emojis.dominantEmoji);
     }
