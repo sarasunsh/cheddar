@@ -2,6 +2,8 @@
 var isPlaying = false;
 let smilyScore = [0,0];
 let preSmilyScore = [];
+var theAd = document.getElementById('theAd')
+
 // SDK Needs to create video and canvas nodes in the DOM in order to function
 // Here we are adding those nodes a predefined div.
 var divRoot = $("#affdex_elements")[0];
@@ -17,7 +19,7 @@ detector.detectAllEmojis();
 detector.detectAllAppearance();
 //Add a callback to notify when the detector is initialized and ready for running.
 detector.addEventListener("onInitializeSuccess", function() {
-log('#logs', "Keep smiling!");
+log('#logs', "Smile to start the video!");  // Dots are first displayed
 //Display canvas instead of video feed because we want to draw the feature points on it
 $("#face_video_canvas").css("display", "block"); // this is the ID on the <canvas> that actually displays the video
 $("#face_video").css("display", "none");  // affdex creates a <video> tag with fae_video to capture video from the webcam but this does not display the video
@@ -31,7 +33,7 @@ const smilyAvg = (lastSmilyScore) => {
 }
 
 
-// preSmilyScoreAvg adds the smileScore to the array preSmilyScore until it reaches 30 elements and then only keeps the most recent 30 samples; returns the most recent average
+// preSmilyScoreAvg adds the smilyScore to the array preSmilyScore until it reaches 30 elements and then only keeps the most recent 30 samples; returns the most recent average
 const preSmilyScoreAvg = (lastSmilyScore) => {
   preSmilyScore.push(lastSmilyScore);
   if (preSmilyScore.length>30){
@@ -52,31 +54,31 @@ function log(node_name, msg) {
 }
 //function executes when Start button is pushed.
 function onStart() {
-if (detector && !detector.isRunning) {
-    $("#logs").html("");
-    detector.start();
-}
-log('#logs', "Smile for the Camera!");
+  if (detector && !detector.isRunning) {
+      $("#logs").html("Loading...");
+      detector.start();
+  }
+  log('#logs', "Other status message...");
 }
 //function executes when the Stop button is pushed.
 function onStop() {
-log('#logs', "Clicked the stop button");
-if (detector && detector.isRunning) {
-    detector.removeEventListener();
-    detector.stop();
+  log('#logs', "Clicked the stop button");
+  if (detector && detector.isRunning) {
+      detector.removeEventListener();
+      detector.stop();
+  }
 }
-};
 //function executes when the Reset button is pushed. not being used
 function onReset() {
-log('#logs', "Clicked the reset button");
-if (detector && detector.isRunning) {
-    detector.reset();
-    $('#results').html("");
+  log('#logs', "Clicked the reset button");
+  if (detector && detector.isRunning) {
+      detector.reset();
+      $('#results').html("");
+  }
 }
-};
 //Add a callback to notify when camera access is allowed
 detector.addEventListener("onWebcamConnectSuccess", function() {
-log('#logs', "Webcam access allowed");
+log('#logs', "Webcam access allowed. Loading...");
 });
 //Add a callback to notify when camera access is denied
 detector.addEventListener("onWebcamConnectFailure", function() {
@@ -95,38 +97,47 @@ $("#results").html("");
 function startVideo() {
   var theCanvas = document.getElementById('face_video_canvas');
   theCanvas && (theCanvas.style.display = 'none');
-  var theAd = document.getElementById('theAd')
   theAd.style.display = 'block';
-  commandYT(theAd,'playVideo')
+  commandYT('playVideo')
   isPlaying = true;
 
 }
-//pass iframe to invoke postMessage, and playVideo, pauseVideo or stopVideo
-function commandYT(iframeElement, commandName){
-  let theIframe = iframeElement.contentWindow
-  theIframe.postMessage(`{"event":"command","func":"${commandName}","args":""}`,'*')
+
+const pauseVideo = () => {
+  var theCanvas = document.getElementById('face_video_canvas');
+  theCanvas.style.display = 'block'
+  if (isPlaying) {
+    commandYT("pauseVideo");
+    theAd.style.display = "none";
+   }
+  isPlaying = false;
 }
 
-
+//pass iframe to invoke postMessage, and playVideo, pauseVideo
+function commandYT(commandName){
+  let theIframe = document.getElementById("theAd");
+  theIframe = theIframe.contentWindow;
+  theIframe.postMessage(`{"event":"command","func":"${commandName}","args":""}`,'*');
+}
 
 function onYouTubeIframeAPIReady(){
-  var theAd = document.getElementById('theAd')
   player = new YT.Player(theAd, {
     events: {
       'onReady' : console.log.bind(console),
-      'onStateChange' : console.log.bind(console)
+      'onStateChange' : onYouTubeStateChange
     }
   })
+}
+
+function onYouTubeStateChange(state) {
+  if(state.data === YT.PlayerState.ENDED ) {
+    theAd.style.display = "none";
+    log('#logs', `Congratulations! Your smilyScore was ${Math.trunc(smilyScore[0])}`);
+    console.log("Video completed bitch");
+  }
 
 }
 
-const stopVideo = () => {
-  var theCanvas = document.getElementById('face_video_canvas');
-  theCanvas.style.display = 'block'
-  var theAd = document.getElementById('theAd')
-  if (isPlaying) { theAd.remove() };
-  isPlaying = false;
-}
 
 // faces is an array, always accessing the first element which is ONE face as opposed to many, first element is an object with the features of the face for ONE frame
 // image is unknown (can be checked out later)
@@ -144,7 +155,7 @@ detector.addEventListener("onImageResultsSuccess", function(faces, image, timest
       console.log(faces[0].emojis.dominantEmoji);
     }
   } else {
-    stopVideo();
+    pauseVideo();
   }
 });
 
