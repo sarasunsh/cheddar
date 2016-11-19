@@ -9,7 +9,8 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import Sidebar from './components/Sidebar';
 import App from './components/App';
 import Video from './components/Video/Video';
-import AuthContainer from './components/Auth/Auth';
+import LoginContainer from './components/Login/LoginContainer';
+import SignupContainer from './components/Signup/SignupContainer';
 import Landing from './components/Landing';
 
 import {retrieveLoggedInUser} from './reducers/auth';
@@ -19,14 +20,23 @@ function fetchInitialData () {
   store.dispatch(retrieveLoggedInUser());
 }
 
+function requireAuth (nextRouterState, replace){
+  if (!localStorage.token) {
+    replace({
+      pathname: '/login',
+      state: { nextPathname: nextRouterState.location.pathname }
+    })
+  }
+}
 
 // React-Router--------------------------------------------------------
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path='/' component={App} onEnter={fetchInitialData}>
-        <Route path="auth" component={AuthContainer} />
-        <Route path="video" component={Video}  />
+        <Route path="login" component={LoginContainer} />
+        <Route path="signup" component={SignupContainer} />
+        <Route path="video" component={Video}  onEnter={requireAuth}/>
         <IndexRoute component={Landing}/>
       </Route>
     </Router>

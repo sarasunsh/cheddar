@@ -1,14 +1,9 @@
 import React from 'react';
-import moment from "moment";
-import { connect } from'react-redux';
-import { browserHistory } from 'react-router';
-import { login } from '../../reducers/auth';
-
 
 
 /* -----------------    COMPONENT     ------------------ */
 
-class Auth extends React.Component {
+export default class Auth extends React.Component {
   constructor(props) {
     super(props);
 
@@ -16,7 +11,6 @@ class Auth extends React.Component {
   }
 
   render() {
-    console.log("this.props", this.props)
     return (
       <div className="signin-container">
         <div className="buffer local">
@@ -39,31 +33,46 @@ class Auth extends React.Component {
                       required
                     />
                 </div>
-                <button type="submit" className="btn btn-block btn-primary">Login</button>
+                <div className="form-group">
+                    <label>Age</label>
+                    <input
+                      name="age"
+                      type="number"
+                      className="form-control"
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Gender</label>
+                    <select name="Gender">
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label>Income</label>
+                    <input
+                      name="income"
+                      type="dropdown"
+                      className="form-control"
+                    />
+                </div>
+                <button type="submit" className="btn btn-block btn-primary">Signup</button>
             </form>
         </div>
-
       </div>
     );
   }
 
   onSubmit(event) {
     event.preventDefault();
-    const { login, signup } = this.props;
+    const { signup } = this.props;
     const credentials = {
       email: event.target.email.value,
       password: event.target.password.value
     }
 
-    login(credentials);
+    signup(credentials);
 
-    // if (login) {
-    //   login(credentials);
-    // } else if (signup) {
-    //   signup(credentials);
-    // } else {
-    //   console.log(`${message} isn't implemented yet`);
-    // }
   }
 }
 
@@ -88,28 +97,3 @@ class Auth extends React.Component {
 
 
 */
-
-
-/* -----------------    CONTAINER     ------------------ */
-
-const mapStateLogin = (state) => ({ message: 'Log in', user: state.auth })
-const mapDispatchLogin = dispatch => ({
-  login: credentials => {
-    console.log(credentials)
-    dispatch(login(credentials));
-    // browserHistory.push('/');
-  }
-})
-
-// const mapStateSignup = () => ({ message: 'Sign up' })
-// const mapDispatchSignup = dispatch => ({
-//   signup: credentials => {
-//     dispatch(signup(credentials));
-//     browserHistory.push('/');
-//   }
-// })
-
-const AuthContainer = connect(mapStateLogin, mapDispatchLogin)(Auth);
-export default AuthContainer;
-
-// export const Signup = connect(mapStateSignup, mapDispatchSignup)(Auth);

@@ -1,39 +1,104 @@
 var express = require('express');
-var router = express.Router();
+var auth = express.Router();
 var User = require('../../db/models').User;
 import passport from 'passport';
+import { Strategy } from 'passport-local';
 
-module.exports = router;
 
-// router.get('/logout', function (req, res, next) {
-//   req.session.destroy();
-//   res.sendStatus(204);
-// });
+// Configure the local strategy for use by Passport.
+//
+// The local strategy require a `verify` function which receives the credentials
+// (`username` and `password`) submitted by the user.  The function must verify
+// that the password is correct and then invoke `cb` with a user object, which
+// will be set at `req.user` in route handlers after authentication.
 
-// router.post('/signup', function (req, res, next) {
+passport.use('local', new Strategy(
+    {
+        usernameField: 'email',
+        passwordField: 'password'
+    },
+    function(email, password, done) {
+        User.findOne({
+            where: {
+                email: email,
+            }
+        })
+        .then(user => {
+            if(!user) {
+                return done(null, false, {message: "Unknown user"})
+            } else {
+                return user.authenticate(password)
+                        .then(ok => {
+                            if (!ok){
+                                return done(null, false, {message: 'Invalid password'})
+                            } else {
+                                return done(null, user)
+                            }
+                        })
+            }
+        })
+        .catch(err => {
+            console.log("error from passport", err);
+            return done(err);
+        });
+    }
+));
 
-//   User.findOrCreate({
-//     where: {
-//       email: req.body.email
-//     },
-//     defaults: {
-//       password: req.body.password
-//     }
-//   })
-//   .then(function (user) {
-//     req.session.userId = user.id;
-//     res.sendStatus(204);
-//   });
-
-// });
-
-router.get('/me', function (req, res, next) {
-  console.log('in me', req.user)
-  if (req.user) {
-    res.send(req.user);
-  } else {
-    res.sendStatus(401);
-  }
+// Configure Passport authenticated session persistence.
+//
+// In order to restore authentication state across HTTP requests, Passport needs
+// to serialize users into and deserialize users out of the session.  The
+// typical implementation of this is as simple as supplying the user ID when
+// serializing, and querying the user record by ID from the database when
+// deserializing.
+passport.serializeUser(function(user, cb) {
+  cb(null, user.id);
 });
 
-// router.use('/google', require('./google'));
+passport.deserializeUser(function(id, cb) {
+  User.findById(id)
+  .then((user) => {
+    cb(null, user);
+  })
+  .catch(err => {
+    return cb(err);
+  })
+});
+
+
+auth.post('/login',
+    passport.authenticate('local', { successRedirect: '/video', failureRedirect: '/login' })
+);
+
+auth.post('/signup', function (req,res,next) {
+    User.findOne( { where: { email: req.body.email }})
+    .then(user => {
+        if (user) {
+            console.log('User already exists.');
+            // res.redirect('/login') // why doesn't this work??
+        } else {
+            return User.create(req.body)
+                .then(user => {
+                    passport.authenticate('local', { successRedirect: '/video',
+                    failureRedirect: '/login' })
+                    res.send(user)
+                })
+        }
+    })
+    .catch(err => console.error(err))
+})
+
+auth.get('/logout', function (req, res, next) {
+    req.session.destroy();
+    res.sendStatus(204);
+});
+
+auth.get('/me', function (req, res, next) {
+    if (req.user) {
+        res.send(req.user);
+    } else {
+        res.sendStatus(401);
+    }
+});
+
+module.exports = auth;
