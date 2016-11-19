@@ -5,6 +5,7 @@ import express from 'express';
 var User = require('../db/models').User;
 import passport from 'passport';
 import { Strategy } from 'passport-local';
+import { browserHistory } from 'react-router';
 
 const app = express();
 
@@ -95,18 +96,23 @@ passport.deserializeUser(function(id, cb) {
 });
 
 app.post('/login',
-  passport.authenticate('local', { successRedirect: '/video',
-                                   failureRedirect: '/auth' }));
+    passport.authenticate('local', { successRedirect: '/video', failureRedirect: '/auth' }));
 
 app.post('/signup', function (req,res,next) {
-  User.create(req.body)
-  .then(user => {
-    console.log("SIGNUP",user)
-    passport.authenticate('local', { successRedirect: '/video',
-                                   failureRedirect: '/auth' })
-    res.send(user)
-  })
-  .catch(err => console.error(err))
+    User.create(req.body)
+    // .spread((user, created) => {
+    .then(user => {
+        // if (!created){
+        //     console.log('User already exists.');
+        //     browserHistory.push('/auth'); // Would be nice if we could have email autofilled in the login form based on the data collected here
+        // } else {
+            console.log("SIGNUP",user)
+            passport.authenticate('local', { successRedirect: '/video',
+            failureRedirect: '/auth' })
+            res.send(user)
+        // }
+    })
+    .catch(err => console.error(err))
 })
 
 // Routes that will be accessed via AJAX should be prepended with
@@ -116,7 +122,7 @@ app.use('/api', require('./routes'));
 // React-Router browserHistory requirement: this will handle every other route with index.html, which will contain
 // a script tag to your application's JavaScript file(s).
 app.get('*', function (request, response){
-  response.sendFile(path.resolve(__dirname, '../../browser/index.html'))
+    response.sendFile(path.resolve(__dirname, '../../browser/index.html'))
 })
 
 // Error catching endware.
