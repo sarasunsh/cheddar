@@ -30,8 +30,9 @@ const publicPath = path.join(__dirname, '../../public');
 
 app.use(favicon(faviconPath));
 app.use(express.static(publicPath));
-app.use('/bootstrap', express.static(resolve(__dirname, '..', 'node_modules', 'bootstrap', 'dist')))
-app.use('/jquery', express.static(resolve(__dirname, '..', 'node_modules', 'jquery', 'dist')))
+// app.use('/bootstrap', express.static(resolve(__dirname, '..', '..', 'node_modules', 'bootstrap', 'dist')))
+app.use('/materialize-css', express.static(resolve(__dirname, '..', '..', 'node_modules', 'materialize-css', 'dist')));
+app.use('/jquery', express.static(resolve(__dirname, '..', '..',  'node_modules', 'jquery', 'dist')))
 
 // PASSPORT MIDDLEWARE
 

@@ -1,12 +1,12 @@
 * {
   box-sizing: border-box; }
 
-  
+
 #affdex_elements {
   width: 640px;
   height: 480px;
   text-align: center;
-  margin: Calc(50vh - 240px) auto;
+  margin: Calc(50vh - 240px) auto 0 auto;
 }
 
 #playButton {
@@ -18,7 +18,7 @@
 
 #theAd {
   width: 640px;
-  height: 640px;
+  height: 480px;
 }
 
 #playButton:hover {
@@ -69,4 +69,9 @@ color: #d3e3ea !important;
 
 .carousel-caption p {
 color: #079eb4 !important;
+}
+
+#logs {
+  text-align: center;
+  font-size: 2em;
 }
