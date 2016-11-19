@@ -27,13 +27,22 @@ export const login = credentials => dispatch => {
   axios.post('/login', credentials)
       .then(res => {
         console.log('res', res.data)
-        if (res.body){
-          console.log('IN THE IF')
-          browserHistory.push('/video')
-        }
+        // if (res.body){
+        //   console.log('IN THE IF')
+        //   browserHistory.push('/video')
+        // }
+        localStorage.setItem('token', JSON.stringify(res.data))
         dispatch(retrieveLoggedInUser());
       })
      .catch(err => console.error('Login unsuccessful', err));
+}
+
+export const signup = credentials => dispatch => {
+  axios.post('/api/auth/signup', credentials)
+      .then(res => {
+        dispatch(set(res.data))
+      })
+     .catch(err => console.error('Signup unsuccessful', err));
 }
 
 export const retrieveLoggedInUser = () => dispatch => {
@@ -50,4 +59,3 @@ export const logout = () => dispatch => {
   axios.get('api/auth/logout')
        .catch(err => console.error('logout unsuccessful', err));
 }
-
