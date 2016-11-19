@@ -26,7 +26,11 @@ export default class Video extends React.Component {
     return (
         <div>
           <div id="affdex_elements">
-            <span id='playButton' onClick={this.clickPlay} className="glyphicon glyphicon-play-circle"></span>
+            <i className="large material-icons" onClick={this.clickPlay}>play_circle_outline</i>
+
+          </div>
+          <div className="progress">
+            <div id="logs_animation" className="indeterminate"></div>
           </div>
           <div id="logs">Click Play when ready . . .</div>
         </div>

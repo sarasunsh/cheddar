@@ -45,6 +45,9 @@ function log(node_name, msg) {
   // $(node_name).children().first().replaceWith("<span>" + msg + "</span><br />")
   var logElement = document.getElementById("logs");
   logElement.textContent = msg;
+
+  var logAnimation = document.getElementById("logs_animation");
+
 }
 //function executes when Start button is pushed.
 function onStart() {
