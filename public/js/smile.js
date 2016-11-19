@@ -1,3 +1,4 @@
+//isPLaying could also be called 'AdIsSupposedToBePlaying'
 var isPlaying = false;
 let smilyScore = [0,0];
 let preSmilyScore = [];
@@ -91,18 +92,32 @@ $("#results").html("");
 //The faces object contains the list of the faces detected in an image.
 //Faces object contains probabilities for all the different expressions, emotions and appearance metrics
 
-const startVideo = (url) => {
+function startVideo() {
   var theCanvas = document.getElementById('face_video_canvas');
-  theCanvas.style.display = 'none';
-  var theAd = document.createElement('iframe');
-  theAd.setAttribute('src',`${url}`);
-  theAd.id = 'theAd';
-  theAd.setAttribute('width', 640);
-  theAd.setAttribute('frameborder', 0);
-  theAd.setAttribute('height', 480);
-  var theContainer = document.getElementById('affdex_elements');
-  theContainer.appendChild(theAd);
+  theCanvas && (theCanvas.style.display = 'none');
+  var theAd = document.getElementById('theAd')
+  theAd.style.display = 'block';
+  commandYT(theAd,'playVideo')
   isPlaying = true;
+
+}
+//pass iframe to invoke postMessage, and playVideo, pauseVideo or stopVideo
+function commandYT(iframeElement, commandName){
+  let theIframe = iframeElement.contentWindow
+  theIframe.postMessage(`{"event":"command","func":"${commandName}","args":""}`,'*')
+}
+
+
+
+function onYouTubeIframeAPIReady(){
+  var theAd = document.getElementById('theAd')
+  player = new YT.Player(theAd, {
+    events: {
+      'onReady' : console.log.bind(console),
+      'onStateChange' : console.log.bind(console)
+    }
+  })
+
 }
 
 const stopVideo = () => {
@@ -121,7 +136,7 @@ detector.addEventListener("onImageResultsSuccess", function(faces, image, timest
     if (!isPlaying){
       drawFeaturePoints(image, faces[0].featurePoints);
       if (preSmilyScoreAvg(faces[0].expressions.smile) > 50){
-        startVideo("https://www.youtube.com/embed/MaYv3Y8tyoQ?autoplay=1");
+        startVideo();
       }
     } else {
       smilyAvg(faces[0].expressions.smile);
