@@ -21,6 +21,7 @@ function fetchInitialData () {
 }
 
 function requireAuth (nextRouterState, replace){
+  fetchInitialData();
   if (!localStorage.token) {
     replace({
       pathname: '/login',
@@ -33,7 +34,7 @@ function requireAuth (nextRouterState, replace){
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path='/' component={App} onEnter={fetchInitialData}>
+      <Route path='/' component={App}>
         <Route path="login" component={LoginContainer} />
         <Route path="signup" component={SignupContainer} />
         <Route path="video" component={Video}  onEnter={requireAuth}/>
