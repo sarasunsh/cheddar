@@ -43,7 +43,7 @@ export default class Login extends React.Component {
 
   onSubmit(event) {
     event.preventDefault();
-    const { login, signup } = this.props;
+    const { login } = this.props;
     const credentials = {
       email: event.target.email.value,
       password: event.target.password.value
@@ -75,4 +75,3 @@ export default class Login extends React.Component {
 
 
 */
-

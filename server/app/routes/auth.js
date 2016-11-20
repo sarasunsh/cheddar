@@ -2,7 +2,8 @@ var express = require('express');
 var auth = express.Router();
 var User = require('../../db/models').User;
 import passport from 'passport';
-import { Strategy } from 'passport-local';
+var LocalStrategy = require('passport-local').Strategy;
+
 
 
 // Configure the local strategy for use by Passport.
@@ -12,36 +13,26 @@ import { Strategy } from 'passport-local';
 // that the password is correct and then invoke `cb` with a user object, which
 // will be set at `req.user` in route handlers after authentication.
 
-passport.use('local', new Strategy(
-    {
-        usernameField: 'email',
-        passwordField: 'password'
-    },
-    function(email, password, done) {
-        User.findOne({
-            where: {
-                email: email,
-            }
-        })
-        .then(user => {
-            if(!user) {
-                return done(null, false, {message: "Unknown user"})
-            } else {
-                return user.authenticate(password)
-                        .then(ok => {
-                            if (!ok){
-                                return done(null, false, {message: 'Invalid password'})
-                            } else {
-                                return done(null, user)
-                            }
-                        })
-            }
-        })
-        .catch(err => {
-            console.log("error from passport", err);
-            return done(err);
-        });
-    }
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password'
+  },
+  function(username, password, done) {
+    User.findOne({ where:{email: username }})
+    .then(user => {
+      if (!user) { return done(null, false); }
+      return user.authenticate(password)
+        .then(ok => {
+          if (!ok){
+            return done(null, false);
+          } else {
+            return done(null, user);
+          }
+        }
+      );
+    })
+    .catch(done)
+  }
 ));
 
 // Configure Passport authenticated session persistence.
@@ -65,23 +56,26 @@ passport.deserializeUser(function(id, cb) {
   })
 });
 
-
 auth.post('/login',
-    passport.authenticate('local', { successRedirect: '/video', failureRedirect: '/login' })
-);
+  passport.authenticate('local'),
+  function(req, res) {
+     res.send('/video');
+  })
+
 
 auth.post('/signup', function (req,res,next) {
     User.findOne( { where: { email: req.body.email }})
     .then(user => {
         if (user) {
             console.log('User already exists.');
-            // res.redirect('/login') // why doesn't this work??
+            res.send('/login');
         } else {
             return User.create(req.body)
                 .then(user => {
-                    passport.authenticate('local', { successRedirect: '/video',
-                    failureRedirect: '/login' })
-                    res.send(user)
+                  req.login(user, function(err) {
+                    if (err) { return next(err); }
+                    res.send('/video')
+                  });
                 })
         }
     })
