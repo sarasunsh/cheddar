@@ -13,7 +13,7 @@ export default class Video extends React.Component {
     }
     this.clickPlay = this.clickPlay.bind(this);
     //this is a hardcoded youtube on the class. Change this to be a this.props thing.
-    this.url = 'https://www.youtube.com/embed/MaYv3Y8tyoQ' + '?enablejsapi=1';
+    this.url = 'https://www.youtube.com/watch?v=WcwsDJhrREU' + '?enablejsapi=1';
     //enablejsapi=1 must be appended to embed url so we can control play/pause via iframe.postMessage
  }
 
@@ -28,7 +28,7 @@ export default class Video extends React.Component {
   render() {
     return (
         <div>
-     
+
           <div id="affdex_elements">
             <i className="large material-icons" onClick={this.clickPlay}>play_circle_outline</i>
             <iframe style={{display: 'none'}} src={this.url} width='640' height='480' frameBorder='0' id='theAd'></iframe>
