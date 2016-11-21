@@ -14,7 +14,10 @@ class Navbar extends React.Component {
                 <Link className="brand-logo" to='/'> Cheddar </Link>
                 <ul className="right hide-on-med-and-down">
                   {this.props.user ?
-                  <li><Button className='btn' onClick={this.props.logoutClick}>Log out</Button></li>
+                  <div>
+                    <li><Link to='/ads'>{this.props.user.name}</Link></li>
+                    <li><Button className='btn' onClick={this.props.logoutClick}>Log out</Button></li>
+                  </div>
                   :
                   <div>
                     <li><Link className='btn' to="/login">Log in</Link></li>
