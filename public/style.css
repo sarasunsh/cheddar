@@ -1,6 +1,13 @@
 * {
   box-sizing: border-box; }
 
+nav {
+  padding: 0 10px;
+}
+
+#slide-out {
+  top: 64px;
+}
 
 #affdex_elements {
   width: 640px;

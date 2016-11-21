@@ -7,6 +7,7 @@ class Ads extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+
     };
     console.log(this.props)
   }
@@ -15,13 +16,14 @@ class Ads extends React.Component {
   render() {
 
     let {user} = this.props;
+    let urlA = 'WcwsDJhrREU',
+        urlB = 'MaYv3Y8tyoQ';
     return (
       <div id="ads">
         <ul id="slide-out" className="side-nav fixed">
           <li>
             <div className="userView">
               <div className="background">
-                <img src="img/smile/2.jpg"/>
               </div>
               <a href="#!user"><img className="circle" src="img/smile/1.jpg"/></a>
               <a href="#!name"><span className="black-text name">John Doe</span></a>
@@ -37,46 +39,38 @@ class Ads extends React.Component {
           <li><a className="waves-effect" href="#!">Third Link With Waves</a></li>
         </ul>
         <a href="#" data-activates="slide-out" className="button-collapse"><i className="material-icons">menu</i></a>
-
-
         <div className="container">
           <div className="row">
-            <div className="col s12 m7">
-              <div className="card horizontal">
+            <div className="col s6">
+              <div className="card">
                 <div className="card-image">
-                  <img src="img/smile/3.jpg"/>
+                  <img src={`http://img.youtube.com/vi/${urlA}/maxresdefault.jpg`}/>
                   <span className="card-title">Ad 1</span>
                 </div>
                 <div className="card-content">
                   <p>Ad on cool thing #1</p>
                 </div>
                 <div className="card-action">
-                  <a href="#">This is a link</a>
+                  <a href={`/video?${urlA}`}>Watch Option A</a>
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="row">
-            <div className="col s12 m7">
-              <div className="card horizontal">
+            <div className="col s6">
+              <div className="card">
                 <div className="card-image">
-                  <img src="img/smile/4.jpg"/>
+                  <img src={`http://img.youtube.com/vi/${urlB}/maxresdefault.jpg`}/>
                   <span className="card-title">Ad 2</span>
                 </div>
                 <div className="card-content">
                   <p>Ad on cool thing #2</p>
                 </div>
                 <div className="card-action">
-                  <a href="#">This is a link</a>
+                  <a href={`/video?${urlB}`}>Watch Option B</a>
                 </div>
               </div>
             </div>
           </div>
-
-
         </div>
-
       </div>
     )
   }
