@@ -1,14 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
-export default class Ads extends React.Component {
+class Ads extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-    }
+    };
+    console.log(this.props)
   }
 
+
   render() {
+
+    let {user} = this.props;
     return (
       <div id="ads">
         <ul id="slide-out" className="side-nav fixed">
@@ -19,7 +25,7 @@ export default class Ads extends React.Component {
               </div>
               <a href="#!user"><img className="circle" src="img/smile/1.jpg"/></a>
               <a href="#!name"><span className="black-text name">John Doe</span></a>
-              <a href="#!email"><span className="black-text email">jdandturk@gmail.com</span></a>
+              <a href="#!email"><span className="black-text email">{user ? user.email : "Props didnt happen"}</span></a>
               <a href="#!email"><span className="black-text">Watched # ads</span></a>
               <a href="#!email"><span className="black-text">Earned # smilyPoints</span></a>
             </div>
@@ -75,3 +81,10 @@ export default class Ads extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  user: state.auth
+})
+
+const AdsContainer = connect(mapStateToProps)(Ads)
+export default AdsContainer;

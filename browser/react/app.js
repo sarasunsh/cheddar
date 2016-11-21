@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 import Sidebar from './components/Sidebar';
+import AdsContainer from './components/Ads/AdsContainer';
 import App from './components/App';
 import Video from './components/Video/Video';
 import LoginContainer from './components/Login/LoginContainer';
@@ -36,6 +37,7 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path='/' component={App}>
         <Route path="login" component={LoginContainer} />
+        <Route path="ads" component={AdsContainer} onEnter={requireAuth} />
         <Route path="signup" component={SignupContainer} />
         <Route path="video" component={Video}  onEnter={requireAuth}/>
         <IndexRoute component={Landing}/>
