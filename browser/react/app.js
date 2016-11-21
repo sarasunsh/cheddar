@@ -6,7 +6,7 @@ import store from './store';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-import Sidebar from './components/Sidebar';
+import Navbar from './components/Navbar.js';
 import App from './components/App';
 import Video from './components/Video/Video';
 import LoginContainer from './components/Login/LoginContainer';

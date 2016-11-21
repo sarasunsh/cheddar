@@ -2,22 +2,23 @@
 
 import React, { Component } from 'react';
 
-import Sidebar from '../components/Sidebar';
+import Navbar from './Navbar';
 
 export default class App extends Component {
 
   render () {
     return (
       <div id="main" className="container-fluid">
-        <div className="col-xs-2">
-          <Sidebar />
+        <div className='row'> <Navbar/> </div>
+        <div className='row'>
+          <div className="col-xs-2">
+          </div>
+          <div className="col-xs-8">
+            { this.props.children }
+          </div>
+          <div className="col-xs-2">
+          </div>
         </div>
-        <div className="col-xs-8">
-          { this.props.children }
-        </div>
-        <div className="col-xs-2">
-        </div>
-
       </div>
     );
   }
