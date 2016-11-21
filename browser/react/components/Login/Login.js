@@ -1,4 +1,5 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
 
 
 /* -----------------    COMPONENT     ------------------ */
@@ -8,6 +9,11 @@ export default class Login extends React.Component {
     super(props);
 
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentDidMount(){
+    if(localStorage.token)
+      browserHistory.push('/video')
   }
 
   render() {
@@ -43,7 +49,7 @@ export default class Login extends React.Component {
 
   onSubmit(event) {
     event.preventDefault();
-    const { login, signup } = this.props;
+    const { login } = this.props;
     const credentials = {
       email: event.target.email.value,
       password: event.target.password.value
@@ -75,4 +81,3 @@ export default class Login extends React.Component {
 
 
 */
-

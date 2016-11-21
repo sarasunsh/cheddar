@@ -10,6 +10,11 @@ export default class Auth extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentDidMount(){
+    if(localStorage.token)
+      browserHistory.push('/video')
+  }
+
   render() {
     return (
       <div className="signin-container">
