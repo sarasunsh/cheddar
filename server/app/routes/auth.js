@@ -59,7 +59,7 @@ passport.deserializeUser(function(id, cb) {
 auth.post('/login',
   passport.authenticate('local'),
   function(req, res) {
-     res.send('/video');
+     res.send('/ads');
   })
 
 
@@ -74,7 +74,7 @@ auth.post('/signup', function (req,res,next) {
                 .then(user => {
                   req.login(user, function(err) {
                     if (err) { return next(err); }
-                    res.send('/video')
+                    res.send('/ads')
                   });
                 })
         }

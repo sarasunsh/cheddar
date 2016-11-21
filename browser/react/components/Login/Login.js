@@ -13,7 +13,7 @@ export default class Login extends React.Component {
 
   componentDidMount(){
     if(localStorage.token)
-      browserHistory.push('/video')
+      browserHistory.push('/ads')
   }
 
   render() {
