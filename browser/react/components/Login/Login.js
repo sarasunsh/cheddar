@@ -1,4 +1,5 @@
 import React from 'react';
+import { browserHistory } from 'react-router';
 
 
 /* -----------------    COMPONENT     ------------------ */
@@ -8,6 +9,11 @@ export default class Login extends React.Component {
     super(props);
 
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentDidMount(){
+    if(localStorage.token)
+      browserHistory.push('/video')
   }
 
   render() {

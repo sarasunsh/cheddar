@@ -70,7 +70,7 @@ auth.post('/signup', function (req,res,next) {
             console.log('User already exists.');
             res.send('/login');
         } else {
-            return User.create(req.body)
+            User.create(req.body)
                 .then(user => {
                   req.login(user, function(err) {
                     if (err) { return next(err); }
