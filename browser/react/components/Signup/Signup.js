@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {browserHistory} from 'react-router';
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -11,8 +11,10 @@ export default class Auth extends React.Component {
   }
 
   componentDidMount(){
-    if(localStorage.token)
+    if(localStorage.token) {
       browserHistory.push('/video')
+    }
+    $('select').material_select();
   }
 
   render() {
@@ -21,10 +23,18 @@ export default class Auth extends React.Component {
         <div className="buffer local">
             <form onSubmit={this.onSubmit}>
                 <div className="form-group">
+                  <label>name</label>
+                  <input
+                    name="name"
+                    type="text"
+                    className="form-control"
+                  />
+                </div>
+                <div className="form-group">
                   <label>email</label>
                   <input
                     name="email"
-                    type="email"
+                    type="text"
                     className="form-control"
                     required
                   />
@@ -33,7 +43,7 @@ export default class Auth extends React.Component {
                     <label>password</label>
                     <input
                       name="password"
-                      type="password"
+                      type="text"
                       className="form-control"
                       required
                     />
@@ -47,19 +57,22 @@ export default class Auth extends React.Component {
                     />
                 </div>
                 <div className="form-group">
-                    <label>Gender</label>
-                    <select name="Gender">
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                    </select>
+                  <p>
+                    <input className="group1" type="radio" name="gender" id="test1" />
+                    <label htmlFor="test1">Female</label>
+                  </p>
+                  <p>
+                    <input className="group1" type="radio" name="gender" id="test2" />
+                    <label htmlFor="test2">Male</label>
+                  </p>
                 </div>
-                <div className="form-group">
-                    <label>Income</label>
-                    <input
-                      name="income"
-                      type="dropdown"
-                      className="form-control"
-                    />
+                <div className="form-group input-field">
+                  <select>
+                    <option defaultValue value="">Income</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                  </select>
                 </div>
                 <button type="submit" className="btn btn-block btn-primary">Signup</button>
             </form>
@@ -72,6 +85,7 @@ export default class Auth extends React.Component {
     event.preventDefault();
     const { signup } = this.props;
     const credentials = {
+      name: event.target.name.value,
       email: event.target.email.value,
       password: event.target.password.value
     }
