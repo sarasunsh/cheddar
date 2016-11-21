@@ -13,7 +13,7 @@ export default class Video extends React.Component {
     }
     this.clickPlay = this.clickPlay.bind(this);
     //this is a hardcoded youtube on the class. Change this to be a this.props thing.
-    this.url = 'https://www.youtube.com/watch?v=WcwsDJhrREU' + '?enablejsapi=1';
+    this.url = 'https://www.youtube.com/embed/WcwsDJhrREU' + '?enablejsapi=1';
     //enablejsapi=1 must be appended to embed url so we can control play/pause via iframe.postMessage
  }
 
