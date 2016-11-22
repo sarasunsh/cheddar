@@ -1,20 +1,8 @@
 import React from 'react';
-import moment from "moment";
 import * as funcs from './funcs'
 
+
 //pass iframe to invoke postMessage, and playVideo, pauseVideo
-
-const onYouTubeIframeAPIReady = () => {
-  player = new YT.Player(document.getElementById("theAd"), {
-    events: {
-      'onReady' : console.log.bind(console),
-      'onStateChange' : funcs.onYouTubeStateChange
-    }
-  })
-}
-
-
-
 export default class Video extends React.Component {
   constructor(props) {
     super(props);
@@ -35,7 +23,8 @@ export default class Video extends React.Component {
   }
 
   componentDidMount(){
-    var theAd = document.getElementById('theAd')
+    let theAd = document.getElementById('theAd')
+
     const divRoot = $("#affdex_elements")[0];
     const width = 640,
       height = 480;
@@ -46,6 +35,17 @@ export default class Video extends React.Component {
     window.detector.detectAllExpressions();
     window.detector.detectAllEmojis();
 
+    //Add a callback to notify when camera access is allowed
+    window.detector.addEventListener("onWebcamConnectSuccess", () => {
+      funcs.log('#logs', "Webcam access allowed. Loading...");
+    });
+
+    //Add a callback to notify when camera access is denied
+    window.detector.addEventListener("onWebcamConnectFailure", () => {
+      funcs.log('#logs', "webcam denied");
+      console.log("Webcam access denied");
+    });
+
     //Add a callback to notify when the detector is initialized and ready for running.
     window.detector.addEventListener("onInitializeSuccess", () => {
       funcs.log('#logs', "Smile to start the video!");  // Dots are first displayed
@@ -53,19 +53,11 @@ export default class Video extends React.Component {
       $("#face_video_canvas").css("display", "block"); // this is the ID on the <canvas> that actually displays the video
       $("#face_video").css("display", "none");  // affdex creates a <video> tag with face_video to capture video from the webcam but this does not display the video
     });
-    //Add a callback to notify when camera access is allowed
-    window.detector.addEventListener("onWebcamConnectSuccess", () => {
-      funcs.log('#logs', "Webcam access allowed. Loading...");
-    });
-    //Add a callback to notify when camera access is denied
-    window.detector.addEventListener("onWebcamConnectFailure", () => {
-      funcs.log('#logs', "webcam denied");
-      console.log("Webcam access denied");
-    });
+
+
     //Add a callback to notify when detector is stopped
     window.detector.addEventListener("onStopSuccess", () => {
-      funcs.log('#logs', "The detector reports stopped");
-      $("#results").html("");
+      console.log( "The detector reports stopped");
     });
     // faces is an array, always accessing the first element which is ONE face as opposed to many, first element is an object with the features of the face for ONE frame
     // image is unknown (can be checked out later)
@@ -75,7 +67,7 @@ export default class Video extends React.Component {
         if (!funcs.isPlaying){
           funcs.drawFeaturePoints(image, faces[0].featurePoints);
           if (funcs.preSmilyScoreAvg(faces[0].expressions.smile) > 50){
-            funcs.startVideo();
+            funcs.startVideo(theAd);
           }
         } else {
           funcs.smilyScoreAvg(faces[0].expressions.smile);
@@ -84,12 +76,28 @@ export default class Video extends React.Component {
           console.log(faces[0].emojis.dominantEmoji);
         }
       } else {
-        funcs.pauseVideo();
+        funcs.pauseVideo(theAd);
       }
     });
+
+    var apiTag = document.createElement('script');
+    apiTag.setAttribute('src','https://www.youtube.com/iframe_api');
+    apiTag.id = 'apiTag';
+    document.head.appendChild(apiTag);
+
+    window.onYouTubeIframeAPIReady = () => {
+        let theAd = document.getElementById("theAd");
+        window.player = new YT.Player(theAd, {
+          events: {
+            'onStateChange' : funcs.onYouTubeStateChange
+          }
+        });
+      }
   }
   componentWillUnmount(){
     funcs.onStop();
+    let apiTag = document.getElementById('apiTag')
+    apiTag.remove();
   }
 
   render() {

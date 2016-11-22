@@ -54,34 +54,35 @@ export function onReset() {
 //The faces object contains the list of the faces detected in an image.
 //Faces object contains probabilities for all the different expressions, emotions and appearance metrics
 
-export const startVideo = () => {
+export const startVideo = (theAd) => {
   var theCanvas = document.getElementById('face_video_canvas');
   theCanvas && (theCanvas.style.display = 'none');
   theAd.style.display = 'block';
-  commandYT('playVideo')
+  commandYT('playVideo',theAd)
   isPlaying = true;
   log('#logs', "Keep smiling!");
 
 }
 
-export const pauseVideo = () => {
+export const pauseVideo = (theAd) => {
   var theCanvas = document.getElementById('face_video_canvas');
   theCanvas.style.display = 'block'
   if (isPlaying) {
-    commandYT("pauseVideo");
+    commandYT("pauseVideo",theAd);
     theAd.style.display = "none";
     log('#logs', "Keep watching and smiling!");
    }
   isPlaying = false;
 }
 
-const commandYT = (commandName) => {
-  let theIframe = document.getElementById("theAd");
+const commandYT = (commandName, theIframe) => {
   theIframe = theIframe.contentWindow;
   theIframe.postMessage(`{"event":"command","func":"${commandName}","args":""}`,'*');
 }
 
-const onYouTubeStateChange = (state) => {
+export const onYouTubeStateChange = (state) => {
+  let theAd = document.getElementById("theAd");
+
   if(state.data === YT.PlayerState.ENDED ) {
     theAd.style.display = "none";
     log('#logs', `Congratulations! Your smilyScore was ${Math.trunc(smilyScore[0])}`);
