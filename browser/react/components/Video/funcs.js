@@ -1,6 +1,7 @@
 const preSmilyScore = [];
 export let isPlaying = false; // to be on the state
 export const smilyScore = [0,0]; // to be on the state
+var theAd = document.getElementById('theAd')
 
 export const smilyScoreAvg = (lastSmilyScore) => {
   smilyScore[0] = ((smilyScore[0] * smilyScore[1]) + lastSmilyScore) / (++smilyScore[1])

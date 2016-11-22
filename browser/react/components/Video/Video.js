@@ -5,7 +5,7 @@ import * as funcs from './funcs'
 //pass iframe to invoke postMessage, and playVideo, pauseVideo
 
 const onYouTubeIframeAPIReady = () => {
-  player = new YT.Player(theAd, {
+  player = new YT.Player(document.getElementById("theAd"), {
     events: {
       'onReady' : console.log.bind(console),
       'onStateChange' : funcs.onYouTubeStateChange
