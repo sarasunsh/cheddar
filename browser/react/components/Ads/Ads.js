@@ -14,14 +14,14 @@ export default class Ads extends React.Component {
 
   componentDidMount(){
     this.props.findAds();
-  } 
+  }
 
   render() {
-    
+
     let {user,ads} = this.props;
-    
-    let choiceA = ads[0],
-        choiceB = ads[1];
+
+    let urlA = ads[0] ? ads[0].url : "",
+        urlB =ads[1] ? ads[1].url : "";
     return (
       <div id="ads">
         <ul id="slide-out" className="side-nav fixed">
