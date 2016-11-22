@@ -4,6 +4,12 @@
 nav {
   padding: 0 10px;
 }
+@media only screen and (min-width: 992px){
+  .videocards {
+    margin-left: 235px;
+  }
+
+}
 
 #slide-out {
   top: 64px;

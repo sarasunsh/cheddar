@@ -39,7 +39,7 @@ class Ads extends React.Component {
           <li><a className="waves-effect" href="#!">Third Link With Waves</a></li>
         </ul>
         <a href="#" data-activates="slide-out" className="button-collapse"><i className="material-icons">menu</i></a>
-        <div className="container">
+        <div className="container videocards">
           <div className="row">
             <div className="col s6">
               <div className="card">
