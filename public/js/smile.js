@@ -1,6 +1,8 @@
 //isPLaying could also be called 'AdIsSupposedToBePlaying'
 var isPlaying = false;
 let smilyScore = [0,0];
+// smilyScore[0] = current rolling average
+// smilyScore[1] = number of total samples
 let preSmilyScore = [];
 var theAd = document.getElementById('theAd')
 var context = null;
@@ -23,13 +25,11 @@ detector.addEventListener("onInitializeSuccess", function() {
 log('#logs', "Smile to start the video!");  // Dots are first displayed
 //Display canvas instead of video feed because we want to draw the feature points on it
 $("#face_video_canvas").css("display", "block"); // this is the ID on the <canvas> that actually displays the video
-$("#face_video").css("display", "none");  // affdex creates a <video> tag with fae_video to capture video from the webcam but this does not display the video
+$("#face_video").css("display", "none");  // affdex creates a <video> tag with face_video to capture video from the webcam but this does not display the video
 });
 
-// smilyScore[0] = current rolling average
-// smilyScore[1] = number of total samples
 
-const smilyAvg = (lastSmilyScore) => {
+const smilyScoreAvg = (lastSmilyScore) => {
   smilyScore[0] = ((smilyScore[0] * smilyScore[1]) + lastSmilyScore) / (++smilyScore[1])
 }
 
@@ -153,7 +153,7 @@ detector.addEventListener("onImageResultsSuccess", function(faces, image, timest
         startVideo();
       }
     } else {
-      smilyAvg(faces[0].expressions.smile);
+      smilyScoreAvg(faces[0].expressions.smile);
       context.setState({determinate: true, progress: `${smilyScore[0]}%`});
       console.log("smilyScore!",smilyScore[0]);
       console.log(faces[0].emojis.dominantEmoji);
