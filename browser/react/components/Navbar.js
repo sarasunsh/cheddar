@@ -16,7 +16,7 @@ class Navbar extends React.Component {
                   {this.props.user ?
                   <div>
                     <li><Link to='/ads'>{this.props.user.name}</Link></li>
-                    <li><Button className='btn' onClick={this.props.logoutClick}>Log out</Button></li>
+                    <li><Link to='/' className='btn' onClick={this.props.logoutClick}>Log out</Link></li>
                   </div>
                   :
                   <div>

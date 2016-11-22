@@ -39,7 +39,7 @@ ReactDOM.render(
         <Route path="login" component={LoginContainer} />
         <Route path="ads" component={AdsContainer} onEnter={requireAuth} />
         <Route path="signup" component={SignupContainer} />
-        <Route path="video" component={Video}  onEnter={requireAuth}/>
+        <Route path="video" component={VideoContainer}  onEnter={requireAuth}/>
         <IndexRoute component={Landing}/>
       </Route>
     </Router>

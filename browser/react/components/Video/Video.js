@@ -7,13 +7,13 @@ export default class Video extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-        determinate: true,
-        progress: '0%'
-    }
+            determinate: true,
+            progress: '0%'
+        }
     this.clickPlay = this.clickPlay.bind(this);
     this.onPlayerStateChange = this.onPlayerStateChange.bind(this);
-    //this is a hardcoded youtube on the class. Change this to be a this.props thing.
-    this.url = 'https://www.youtube.com/embed/WcwsDJhrREU' + '?enablejsapi=1';
+
+    this.url = `https://www.youtube.com/embed/${this.props.currentAd.url}enablejsapi=1`;
     //enablejsapi=1 must be appended to embed url so we can control play/pause
     }
 
@@ -29,7 +29,7 @@ export default class Video extends React.Component {
             document.getElementById("theAd").style.display = "none";
             funcs.log('#logs', `Congratulations! Your smilyScore was ${Math.trunc(finalSmile)}`);
             funcs.onStop();
-            axios.post('api/views/1/1', {smilyScore: finalSmile})
+            axios.post(`api/views/${this.props.user.id}/${this.props.currentAd.id}`, {smilyScore: finalSmile})
                 .catch(err => console.log(err))
         }
     }
