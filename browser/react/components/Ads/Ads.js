@@ -19,9 +19,13 @@ export default class Ads extends React.Component {
   render() {
 
     let {user,ads} = this.props;
-
+    //ads is a array of objects. Each object has a url, title, id. Its also represented on the global store.
     let urlA = ads[0] ? ads[0].url : "",
-        urlB =ads[1] ? ads[1].url : "";
+        titleA = ads[0] ? ads[0].title : "",
+        urlB = ads[1] ? ads[1].url : "",
+        titleB = ads[1] ? ads[1].title : "";
+
+          
     return (
       <div id="ads">
         <ul id="slide-out" className="side-nav fixed">
@@ -30,7 +34,7 @@ export default class Ads extends React.Component {
               <div className="background">
               </div>
               <a href="#!user"><img className="circle" src="img/smile/1.jpg"/></a>
-              <a href="#!name"><span className="black-text name">John Doe</span></a>
+              <a href="#!name"><span className="black-text name">{user ? user.name : 'Props didnt happen'} </span></a>
               <a href="#!email"><span className="black-text email">{user ? user.email : "Props didnt happen"}</span></a>
               <a href="#!email"><span className="black-text">Watched # ads</span></a>
               <a href="#!email"><span className="black-text">Earned # smilyPoints</span></a>
@@ -52,7 +56,7 @@ export default class Ads extends React.Component {
                   <span className="card-title">Ad 1</span>
                 </div>
                 <div className="card-content">
-                  <p>Ad on cool thing #1</p>
+                  <p>{titleA}</p>
                 </div>
                 <div className="card-action">
                   <a href={`/video?${urlA}`}>Watch Option A</a>
@@ -66,7 +70,7 @@ export default class Ads extends React.Component {
                   <span className="card-title">Ad 2</span>
                 </div>
                 <div className="card-content">
-                  <p>Ad on cool thing #2</p>
+                  <p>{titleB}</p>
                 </div>
                 <div className="card-action">
                   <a href={`/video?${urlB}`}>Watch Option B</a>
