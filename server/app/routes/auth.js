@@ -5,7 +5,6 @@ import passport from 'passport';
 var LocalStrategy = require('passport-local').Strategy;
 
 
-
 // Configure the local strategy for use by Passport.
 //
 // The local strategy require a `verify` function which receives the credentials

@@ -21,5 +21,6 @@ Ad.hasMany(View);
 // exported just in case, but can also be fetched via db.model('Mouse') etc.
 module.exports = {
   User,
-  Ad
+  Ad,
+  View
 };
