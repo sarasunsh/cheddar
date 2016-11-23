@@ -50,6 +50,7 @@ export function onReset() {
 //Faces object contains probabilities for all the different expressions, emotions and appearance metrics
 
 export const startVideo = (theAd) => {
+    console.log('called start video. hide webcam. show youtube')
     var theCanvas = document.getElementById('face_video_canvas');
     theCanvas && (theCanvas.style.display = 'none');
     theAd.style.display = 'block';
@@ -59,6 +60,7 @@ export const startVideo = (theAd) => {
 }
 
 export const pauseVideo = (theAd) => {
+    console.log('pause video fired')
     var theCanvas = document.getElementById('face_video_canvas');
     theCanvas.style.display = 'block'
     if (isPlaying) {
@@ -70,18 +72,19 @@ export const pauseVideo = (theAd) => {
 }
 
 const commandYT = (commandName, theIframe) => {
+    console.log(`commandYT called with ${commandName}`)
     theIframe = theIframe.contentWindow;
     theIframe.postMessage(`{"event":"command","func":"${commandName}","args":""}`,'*');
 }
 
-export const onYouTubeStateChange = (state) => {
-    let theAd = document.getElementById("theAd");
-    if(state.data === YT.PlayerState.ENDED ) {
-        theAd.style.display = "none";
-        log('#logs', `Congratulations! Your smilyScore was ${Math.trunc(smilyScore[0])}`);
-        onStop();
-    }
-}
+// export const onYouTubeStateChange = (state) => {
+//     let theAd = document.getElementById("theAd");
+//     if(state.data === YT.PlayerState.ENDED ) {
+//         theAd.style.display = "none";
+//         log('#logs', `Congratulations! Your smilyScore was ${Math.trunc(smilyScore[0])}`);
+//         onStop();
+//     }
+// }
 
 //Draw the detected facial feature points on the image
 export const drawFeaturePoints = (img, featurePoints) => {
