@@ -6,9 +6,8 @@ export default class Ads extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-
-    };
+    //the props handed down include a findAds function from reducers/adsFromDb 
+    //                         and a selectAd function from reducers/adsFromClick
     console.log(this.props)
   }
 
@@ -18,7 +17,9 @@ export default class Ads extends React.Component {
 
   render() {
 
-    let {user,ads} = this.props;
+    let {user, selectAd, currentAds} = this.props;
+    //user is an obect with .name, .email etc, selectAd is a function to put the selected ad obj on the store, current Ads is an array of two ad objects to render in the component.
+    let ads = currentAds;
     //ads is a array of objects. Each object has a url, title, id. Its also represented on the global store.
     let urlA = ads[0] ? ads[0].url : "",
         titleA = ads[0] ? ads[0].title : "",
@@ -59,7 +60,7 @@ export default class Ads extends React.Component {
                   <p>{titleA}</p>
                 </div>
                 <div className="card-action">
-                  <a href={`/video?${urlA}`}>Watch Option A</a>
+                  <Link  onClick={() => selectAd(ads[0])} to="/video" >Watch Option A</Link>
                 </div>
               </div>
             </div>
@@ -73,7 +74,7 @@ export default class Ads extends React.Component {
                   <p>{titleB}</p>
                 </div>
                 <div className="card-action">
-                  <a href={`/video?${urlB}`}>Watch Option B</a>
+                  <Link onClick={() => selectAd(ads[1])} to="/video" >Watch Option B</Link>
                 </div>
               </div>
             </div>
