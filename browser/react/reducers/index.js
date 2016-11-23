@@ -3,10 +3,10 @@
 import { combineReducers } from 'redux';
 
 import auth from './auth';
-import ads from './ads';
+import currentAds from './ads';
 
 const rootReducer = combineReducers({
-  auth, ads
+  auth, currentAds
 });
 
 export default rootReducer;

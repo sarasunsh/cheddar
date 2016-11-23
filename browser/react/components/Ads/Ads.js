@@ -18,7 +18,9 @@ export default class Ads extends React.Component {
 
   render() {
 
-    let {user,ads} = this.props;
+    let {user, selectAd} = this.props;
+   
+    let ads = this.props.currentAds.ads
     //ads is a array of objects. Each object has a url, title, id. Its also represented on the global store.
     let urlA = ads[0] ? ads[0].url : "",
         titleA = ads[0] ? ads[0].title : "",
@@ -59,7 +61,7 @@ export default class Ads extends React.Component {
                   <p>{titleA}</p>
                 </div>
                 <div className="card-action">
-                  <a href={`/video?${urlA}`}>Watch Option A</a>
+                  <Link  onClick={() => selectAd(0)} to="/video" >Watch Option A</Link>
                 </div>
               </div>
             </div>
@@ -73,7 +75,7 @@ export default class Ads extends React.Component {
                   <p>{titleB}</p>
                 </div>
                 <div className="card-action">
-                  <a href={`/video?${urlB}`}>Watch Option B</a>
+                  <Link onClick={() => selectAd(1)} to="/video" >Watch Option B</Link>
                 </div>
               </div>
             </div>

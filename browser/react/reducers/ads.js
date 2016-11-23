@@ -4,18 +4,27 @@ import axios from 'axios'
 
 
 const SET_NEXT_ADS = 'SET_NEXT_ADS';
+const SET_SELECT_ADS = 'SET_SELECT_ADS';
 
 
 
 /* ------------   ACTION CREATORS     ------------------ */
 
 const setAds = (ads) => ({type: SET_NEXT_ADS, ads});
+export const selectAds = (select) => ({type: SET_SELECT_ADS, select})
 
 /* ------------       REDUCER     ------------------ */
 
-export default function reducer (currentAds = [], action) {
+export default function reducer (currentAds = {selected:null, ads:[]}, action) {
     switch (action.type){
-        case SET_NEXT_ADS: return action.ads;
+        case SET_NEXT_ADS: return {
+            selected:null,
+            ads:action.ads
+        };
+        case SET_SELECT_ADS: return {
+            selected:action.select,
+            ads: currentAds.ads
+        };
         default: return currentAds;
     }
 }
