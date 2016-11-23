@@ -1,8 +1,8 @@
 const casual = require('casual');
 
-const NUMBER_OF_ADS = 10;
-const NUMBER_OF_USERS = 50;
-const NUMBER_OF_VIEWS = 200;
+const NUMBER_OF_ADS = 20;
+const NUMBER_OF_USERS = 100;
+const NUMBER_OF_VIEWS = 300;
 
 const gender = ['male', 'female'];
 
@@ -25,6 +25,15 @@ const income = [
     '$150,000 or more'
 ];
 
+const categories = [
+    'Pets',
+    'Health & Fitness',
+    'Household Goods',
+    'Sports',
+    'Cars',
+    'Beauty'
+]
+
 const userModel = casual.define('userModel', () => {
   return {
     name: casual.full_name,
@@ -40,7 +49,8 @@ const adModel = casual.define('adModel', () => {
   return {
     title: casual.catch_phrase,
     url: casual.random_element(URLs),
-    cost: casual.integer(1, 20)
+    cost: casual.integer(1, 20),
+    category: casual.random_element(categories)
   }
 })
 
