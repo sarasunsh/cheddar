@@ -6,9 +6,9 @@ export default class Ads extends React.Component {
 
   constructor(props) {
     super(props);
-    //the props handed down include a findAds function from reducers/adsFromDb 
+    //the props handed down include a findAds function from reducers/adsFromDb
     //                         and a selectAd function from reducers/adsFromClick
-    console.log(this.props)
+
   }
 
   componentDidMount(){
@@ -16,7 +16,6 @@ export default class Ads extends React.Component {
   }
 
   render() {
-
     let {user, selectAd, currentAds} = this.props;
     //user is an obect with .name, .email etc, selectAd is a function to put the selected ad obj on the store, current Ads is an array of two ad objects to render in the component.
     let ads = currentAds;
@@ -26,7 +25,7 @@ export default class Ads extends React.Component {
         urlB = ads[1] ? ads[1].url : "",
         titleB = ads[1] ? ads[1].title : "";
 
-          
+
     return (
       <div id="ads">
         <ul id="slide-out" className="side-nav fixed">

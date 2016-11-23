@@ -3,14 +3,12 @@
 
 const router = require('express').Router();
 var Ads = require('../../db/models').Ad;
+var User = require('../../db/models').User;
 
 module.exports = router;
 
 router.use('/auth', require('./auth'));
 router.use('/views', require('./views'));
-
-
-
 
 router.get('/videos', (req,res) => {
   Ads.findAll({
