@@ -40,7 +40,7 @@ const adModel = casual.define('adModel', () => {
   return {
     title: casual.catch_phrase,
     url: casual.random_element(URLs),
-    cost: casual.integer(1, 20)
+    cost: parseFloat(Math.round(casual.double(.5, 20) * 100) / 100).toFixed(2)
   }
 })
 
@@ -66,4 +66,3 @@ const dataGenerator = (times, generator) => {
 exports.ads = dataGenerator(NUMBER_OF_ADS, casual._adModel);
 exports.users = dataGenerator(NUMBER_OF_USERS, casual._userModel);
 exports.views = dataGenerator(NUMBER_OF_VIEWS, casual._viewModel);
-

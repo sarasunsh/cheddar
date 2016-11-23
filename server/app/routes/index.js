@@ -3,14 +3,19 @@
 
 const router = require('express').Router();
 var Ads = require('../../db/models').Ad;
+var User = require('../../db/models').User;
 
 module.exports = router;
 
 router.use('/auth', require('./auth'));
 router.use('/views', require('./views'));
 
-
-
+// test route, to be removed when earned_pay implemented
+router.get('/test', (req,res) => {
+  User.findById(38)
+  .then(user => user.earned_pay())
+  .then(e => res.json(e))
+})
 
 router.get('/videos', (req,res) => {
   Ads.findAll({
