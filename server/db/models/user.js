@@ -42,19 +42,21 @@ const User = db.define('user', {
         beforeCreate: setEmailAndPassword,
         beforeUpdate: setEmailAndPassword,
         afterFind: function(user){
-          return Views.findAll({
-            where: {userId: user.id},
-            include: [
-              { model: Ads, required: true}
-            ]
-          })
-          .then(ret => {
-            let total = 0;
-            ret.forEach(e => {
-              total += (e.smilyScore / 100) * e.ad.cost;
+          if (user){
+            return Views.findAll({
+              where: {userId: user.id},
+              include: [
+                { model: Ads, required: true}
+              ]
             })
-            user.set('earnedPay',"$" + parseFloat(Math.round(total * 100) / 100).toFixed(2));
-          })
+            .then(ret => {
+              let total = 0;
+              ret.forEach(e => {
+                total += (e.smilyScore / 100) * e.ad.cost;
+              })
+              user.set('earnedPay',"$" + parseFloat(Math.round(total * 100) / 100).toFixed(2));
+            })
+          }
         }
     },
     instanceMethods: {
