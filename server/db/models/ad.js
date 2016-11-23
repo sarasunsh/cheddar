@@ -9,6 +9,10 @@ const Ad = db.define('ad', {
     url: {
       type: Sequelize.STRING,
       allowNull: false
+    },
+    cost: {
+      type: Sequelize.INTEGER,
+      allowNull: false
     }
 });
 

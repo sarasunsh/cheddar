@@ -39,7 +39,8 @@ const userModel = casual.define('userModel', () => {
 const adModel = casual.define('adModel', () => {
   return {
     title: casual.catch_phrase,
-    url: casual.random_element(URLs)
+    url: casual.random_element(URLs),
+    cost: casual.integer(1, 20)
   }
 })
 
