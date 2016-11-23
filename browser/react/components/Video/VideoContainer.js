@@ -11,5 +11,5 @@ const mapStateToVideo = (state) => ({
 
 
 
-const VideoContainer = connect(mapStateToAds)(Video)
+const VideoContainer = connect(mapStateToVideo)(Video)
 export default VideoContainer;

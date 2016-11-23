@@ -10,11 +10,11 @@ export default class Video extends React.Component {
             determinate: true,
             progress: '0%'
         }
-    this.clickPlay = this.clickPlay.bind(this);
-    this.onPlayerStateChange = this.onPlayerStateChange.bind(this);
+        this.clickPlay = this.clickPlay.bind(this);
+        this.onPlayerStateChange = this.onPlayerStateChange.bind(this);
 
-    this.url = `https://www.youtube.com/embed/${this.props.currentAd.url}enablejsapi=1`;
-    //enablejsapi=1 must be appended to embed url so we can control play/pause
+        this.url = `https://www.youtube.com/embed/${this.props.currentAd.url}enablejsapi=1`;
+        //enablejsapi=1 must be appended to embed url so we can control play/pause
     }
 
     clickPlay(e){
