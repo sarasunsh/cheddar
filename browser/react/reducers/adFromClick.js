@@ -13,7 +13,7 @@ export const selectAds = (select) => ({type: SET_SELECT_ADS, select})
 
 /* ------------       REDUCER     ------------------ */
 
-export default function reducer (adChoice = {}, action) {
+export default function reducer (adChoice = {url: "", title: "", id: 0}, action) {
     switch (action.type){
         case SET_SELECT_ADS: return action.select;
         default: return adChoice;
