@@ -9,7 +9,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import AdsContainer from './components/Ads/AdsContainer';
 import Navbar from './components/Navbar.js';
 import App from './components/App';
-import Video from './components/Video/Video';
+import VideoContainer from './components/Video/VideoContainer';
 import LoginContainer from './components/Login/LoginContainer';
 import SignupContainer from './components/Signup/SignupContainer';
 import Landing from './components/Landing';

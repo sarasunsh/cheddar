@@ -3,6 +3,7 @@
 
 const router = require('express').Router();
 var Ads = require('../../db/models').Ad;
+var User = require('../../db/models').User;
 
 module.exports = router;
 

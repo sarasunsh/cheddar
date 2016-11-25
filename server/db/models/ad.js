@@ -11,7 +11,7 @@ const Ad = db.define('ad', {
       allowNull: false
     },
     cost: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.DOUBLE,
       allowNull: false
     },
     category: {
