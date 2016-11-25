@@ -1,6 +1,5 @@
 'use strict';
 /* eslint-disable new-cap */
-import Promise from 'bluebird'
 
 const router = require('express').Router();
 var Ads = require('../../db/models').Ad;
