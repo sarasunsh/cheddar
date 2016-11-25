@@ -1,19 +1,24 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Advertisers from './Advertisers'
-import {findAds} from '../../reducers/adsFromDb';
+import {findAllAdsForAdvertiser} from '../../reducers/adsFromDb';
 import {selectAds} from '../../reducers/adFromClick';
 
 
 
 
-const mapStateToAds = (state) => ({
-  user: state.auth
+const mapStateToProps = (state) => ({
+  user: state.auth,
+  currentAds: state.currentAds
 })
-const mapDispatchToAds = (dispatch) => ({
-    findAds: () => {
-        dispatch(findAds())
+const mapDispatchToProps = (dispatch) => ({
+    findAllAdsForAdvertiser: (advertiserId) => {
+        console.log("findAllAdsForAdvertiser running in mapDispatchToProps")
+        dispatch(findAllAdsForAdvertiser(advertiserId))
     },
+    // We are not using the advertiserId at the moment because we are assuming there is only one advertiser; this will just get ALL of the ads in the database for the moment; the parameter is there for when we need it in the next step
+
+
     //selectAd is a function that will be used in the Ads component which
     //, when a choice is clicked, will fire an action to set the store while redirecting to the video page
     selectAd: (theChosenAdObj) => {
@@ -21,5 +26,5 @@ const mapDispatchToAds = (dispatch) => ({
     }
 })
 
-const AdvertiersContainer = connect(mapStateToAds, mapDispatchToAds)(Advertisers)
+const AdvertisersContainer = connect(mapStateToProps, mapDispatchToProps)(Advertisers)
 export default AdvertisersContainer;

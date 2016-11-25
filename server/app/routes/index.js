@@ -18,6 +18,16 @@ router.get('/videos', (req,res) => {
   .then(ads => res.json(ads))
 })
 
+router.get('/advertisers/:advertiserId', (req,res) => {
+
+  // Right now, we are not using the advertiserId
+  Ads.findAll({
+    // limit: 2,
+    order: [['id', 'DESC']]
+  })
+  .then(ads => res.json(ads))
+})
+
 
 // Make sure this is after all of
 // the registered routes!
