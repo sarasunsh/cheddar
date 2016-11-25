@@ -1,9 +1,12 @@
 'use strict';
 /* eslint-disable new-cap */
+import Promise from 'bluebird'
 
 const router = require('express').Router();
 var Ads = require('../../db/models').Ad;
 var User = require('../../db/models').User;
+const View = require('../../db/models').View;
+
 
 module.exports = router;
 
@@ -11,11 +14,20 @@ router.use('/auth', require('./auth'));
 router.use('/views', require('./views'));
 
 router.get('/videos', (req,res) => {
-  Ads.findAll({
-    limit: 2,
-    order: [['id', 'DESC']]
+  View.findAll({
+    where: {userId:req.user.id},
+    attributes: ['adId']
   })
-  .then(ads => res.json(ads))
+  .then(viewedAds => {
+    Ads.findAll({
+      order: [['cost', 'DESC']],
+      where: {
+          id: {$notIn: viewedAds.map(e => e.adId)}
+      },
+      limit: 2
+    })
+    .then(ads => res.json(ads))
+  })
 })
 
 
