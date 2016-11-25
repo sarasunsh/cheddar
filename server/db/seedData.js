@@ -15,15 +15,15 @@ const URLs = [
     '2_9FKYmR75g'
 ];
 
-const income = [
-    'Less than $25,000',
-    '$25,000 to $34,999',
-    '$35,000 to $49,999',
-    '$50,000 to $74,999',
-    '$75,000 to $99,999',
-    '$100,000 to $149,999',
-    '$150,000 or more'
-];
+// const income = [
+//     'Less than $25,000',
+//     '$25,000 to $34,999',
+//     '$35,000 to $49,999',
+//     '$50,000 to $74,999',
+//     '$75,000 to $99,999',
+//     '$100,000 to $149,999',
+//     '$150,000 or more'
+// ];
 
 const categories = [
     'Pets',
@@ -32,15 +32,18 @@ const categories = [
     'Sports',
     'Cars',
     'Beauty'
-]
+];
+
+const ages = ['18-30', '31-40', '41-60', 'over 61']
 
 const userModel = casual.define('userModel', () => {
   return {
     name: casual.full_name,
     email: casual.email,
-    age: casual.integer(18, 75),
+    age: casual.random_element(ages),
     gender: casual.random_element(gender),
-    income: casual.random_element(income),
+    petOwner: casual.boolean,
+    // income: casual.random_element(income),
     password: casual.password
   }
 })

@@ -8,9 +8,7 @@ module.exports = router;
 
 router.use('/auth', require('./auth'));
 router.use('/views', require('./views'));
-
-
-
+router.use('/ad', require('./ad'));
 
 router.get('/videos', (req,res) => {
   Ads.findAll({
