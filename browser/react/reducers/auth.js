@@ -37,21 +37,24 @@ export const login = credentials => dispatch => {
         return res.data;
       })
       .then(redirect => browserHistory.push(redirect))
-     .catch(err => {
-       browserHistory.push('/login#failed')
-       console.error('Login unsuccessful', err)
-     });
+     .catch(err => browserHistory.push('/login#failed'));
 }
 
 export const signup = credentials => dispatch => {
   axios.post('/api/auth/signup', credentials)
       .then(res => {
         localStorage.setItem('token', JSON.stringify(credentials.email))
-        dispatch(retrieveLoggedInUser());
+        if(res.status === 200) dispatch(retrieveLoggedInUser());
+        //res.data will be the redirect url path
         return res.data;
       })
-      .then(redirect => browserHistory.push(redirect))
-     .catch(err => console.error('Signup unsuccessful', err));
+      .then(redirect => {        
+        browserHistory.push(redirect)
+      })
+     .catch(err => {
+       console.error(err)
+       browserHistory.push('/signup#failed')
+     })
 }
 
 export const retrieveLoggedInUser = () => dispatch => {
