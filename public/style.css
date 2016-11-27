@@ -16,22 +16,21 @@ nav {
 }
 
 #affdex_elements {
+  display: none;
   width: 640px;
   height: 480px;
   text-align: center;
-  margin: Calc(50vh - 240px) auto 0 auto;
-}
-
-#playButton {
-  font-size: 200px;
-  margin: 140px;
-  text-align: center;
-
+  margin: 20px auto 0 auto;
 }
 
 #theAd {
   width: 640px;
   height: 480px;
+}
+
+#playButton {
+  font-size: 200px;
+  margin: 150px;
 }
 
 #playButton:hover {
@@ -87,4 +86,6 @@ color: #079eb4 !important;
 #logs {
   text-align: center;
   font-size: 2em;
+  padding-top: 10px;
+  font-family: 'Happy Monkey', cursive;
 }

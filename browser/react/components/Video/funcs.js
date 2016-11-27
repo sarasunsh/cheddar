@@ -17,17 +17,17 @@ export const preSmilyScoreAvg = (lastSmilyScore) => {
 }
 
 export function log(node_name, msg) {
-    const logElement = document.getElementById("logs");
+    const logElement = document.getElementById(node_name);
     logElement.textContent = msg;
-    const logAnimation = document.getElementById("logs_animation");
+    // const logAnimation = document.getElementById("logs_animation");
 }
 //function executes when Start button is pushed.
 export function onStart() {
     if (window.detector && !window.detector.isRunning) {
-        $("#logs").html("Loading...");
+        log("logs","Loading...");
         window.detector.start();
     }
-    log('#logs', "Error...");
+    // log("logs", "Error...");
 }
 //function executes when the Stop button is pushed.
 export function onStop() {
@@ -38,10 +38,10 @@ export function onStop() {
 }
 //function executes when the Reset button is pushed. not being used
 export function onReset() {
-    log('#logs', "Clicked the reset button");
+    log('logs', "Clicked the reset button");
     if (window.detector && window.detector.isRunning) {
         window.detector.reset();
-        $('#results').html("");
+        log('results',"");
     }
 }
 
@@ -56,7 +56,7 @@ export const startVideo = (theAd) => {
     theAd.style.display = 'block';
     commandYT('playVideo',theAd)
     isPlaying = true;
-    log('#logs', "Keep smiling!");
+    log('logs', "Keep smiling!");
 }
 
 export const pauseVideo = (theAd) => {
@@ -66,7 +66,7 @@ export const pauseVideo = (theAd) => {
     if (isPlaying) {
         commandYT("pauseVideo",theAd);
         theAd.style.display = "none";
-        log('#logs', "Keep watching and smiling!");
+        log('logs', "Keep watching and smiling!");
     }
     isPlaying = false;
 }

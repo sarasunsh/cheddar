@@ -25,16 +25,15 @@ export default class Video extends React.Component {
     clickPlay(e){
         this.setState({determinate: false, progress: '0%'})
         funcs.onStart();
-        e.target.remove(); 
+        document.getElementById("affdex_elements").style.display = "block";
+        e.target.parentNode.remove();
     }
 
     onPlayerStateChange(state){
-        console.log('player state was changed')
         if(state.data === YT.PlayerState.ENDED ) {
-            console.log('vieo is over')
             let finalSmile = funcs.smilyScore[0];
             document.getElementById("theAd").style.display = "none";
-            funcs.log('#logs', `Congratulations! Your smilyScore was ${Math.trunc(finalSmile)}`);
+            funcs.log('logs', `Congratulations! Your smilyScore was ${Math.trunc(finalSmile)}`);
             funcs.onStop();
             axios.post(`api/views/${this.props.user.id}/${this.props.currentAd.id}`, {smilyScore: finalSmile})
                 .catch(err => console.log(err));
@@ -60,18 +59,18 @@ export default class Video extends React.Component {
 
         //Add a callback to notify when camera access is allowed
         window.detector.addEventListener("onWebcamConnectSuccess", () => {
-            funcs.log('#logs', "Webcam access allowed. Loading...");
+            funcs.log('logs', "Webcam access allowed. Loading...");
         });
 
         //Add a callback to notify when camera access is denied
         window.detector.addEventListener("onWebcamConnectFailure", () => {
-            funcs.log('#logs', "webcam denied");
+            funcs.log('logs', "webcam denied");
             console.log("Webcam access denied");
         });
 
         //Add a callback to notify when the detector is initialized and ready for running.
         window.detector.addEventListener("onInitializeSuccess", () => {
-            funcs.log('#logs', "Smile to start the video!");  // Dots are first displayed
+            funcs.log('logs', "Smile to start the video!");  // Dots are first displayed
             //Display canvas instead of video feed because we want to draw the feature points on it
             $("#face_video_canvas").css("display", "block"); // this is the ID on the <canvas> that actually displays the video
             $("#face_video").css("display", "none");  // affdex creates a <video> tag with face_video to capture video from the webcam but this does not display the video
@@ -130,9 +129,12 @@ export default class Video extends React.Component {
 
     render() {
         return (
-            <div>
+            <div style={{height:600}}>
+              <div id="logs">Click Play when ready . . .</div>
+              <div style={{textAlign:"center"}}>
+                <i id="playButton" className="large material-icons" onClick={this.clickPlay}>play_circle_outline</i>
+              </div>
               <div id="affdex_elements">
-                <i className="large material-icons" onClick={this.clickPlay}>play_circle_outline</i>
                 <iframe
                     style={{display: 'none'}}
                     src={this.url}
@@ -149,7 +151,6 @@ export default class Video extends React.Component {
                     style={{width: this.state.progress}}>
                 </div>
               </div>
-              <div id="logs">Click Play when ready . . .</div>
             </div>
         )
     }
