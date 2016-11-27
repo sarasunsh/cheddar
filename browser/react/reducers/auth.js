@@ -37,7 +37,10 @@ export const login = credentials => dispatch => {
         return res.data;
       })
       .then(redirect => browserHistory.push(redirect))
-     .catch(err => console.error('Login unsuccessful', err));
+     .catch(err => {
+       browserHistory.push('/login#failed')
+       console.error('Login unsuccessful', err)
+     });
 }
 
 export const signup = credentials => dispatch => {

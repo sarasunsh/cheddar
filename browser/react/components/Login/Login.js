@@ -19,6 +19,9 @@ export default class Login extends React.Component {
   render() {
     return (
       <div className="signin-container">
+        <div className="errorContainer">
+        {location.hash === '#failed' ? <span> Username and password were incorrect </span> : null}
+        </div>
         <div className="buffer local">
             <form onSubmit={this.onSubmit}>
                 <div className="form-group">
