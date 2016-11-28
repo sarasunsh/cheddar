@@ -27,8 +27,7 @@ const User = db.define('user', {
       type: Sequelize.BOOLEAN
     },
     isAdvertiser: {
-      type: Sequelize.BOOLEAN,
-      allowNull: false
+      type: Sequelize.BOOLEAN
     },
     // income: {
     //   type: Sequelize.ENUM(

@@ -56,7 +56,7 @@ export default class Analytics extends Component {
             <div>
               <div className="col s3">
                   <div className="switch" onChange={() => this.toggleClick('gender')}>
-                    <p> Filter by coffee </p>
+                    <p> Filter by gender </p>
                     <label>
                       Off
                       <input type="checkbox"/>
