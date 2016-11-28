@@ -32,6 +32,10 @@ export function onStart() {
 //function executes when the Stop button is pushed.
 export function onStop() {
     if (window.detector && window.detector.isRunning) {
+        smilyScore[0] = 0;
+        smilyScore[1] = 0;
+        isPlaying = false;
+        preSmilyScore.length = 0;
         window.detector.removeEventListener();
         window.detector.stop();
     }

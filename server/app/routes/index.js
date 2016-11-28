@@ -15,7 +15,6 @@ router.use('/ad', require('./ad'));
 
 router.get('/videos', (req,res) => {
   if(req.user){
-    console.log('user is ', req.user.id, ' finding all now...')
     View.findAll({
         where: {userId:req.user.id},
         attributes: ['adId']
