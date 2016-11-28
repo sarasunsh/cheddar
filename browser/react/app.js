@@ -12,6 +12,7 @@ import App from './components/App';
 import VideoContainer from './components/Video/VideoContainer';
 import LoginContainer from './components/Login/LoginContainer';
 import SignupContainer from './components/Signup/SignupContainer';
+import AdvertisersContainer from './components/Advertisers/AdvertisersContainer';
 import Landing from './components/Landing';
 
 import {retrieveLoggedInUser} from './reducers/auth';
@@ -40,6 +41,7 @@ ReactDOM.render(
         <Route path="ads" component={AdsContainer} onEnter={requireAuth} />
         <Route path="signup" component={SignupContainer} />
         <Route path="video" component={VideoContainer}  onEnter={requireAuth}/>
+        <Route path="advertisers" component={AdvertisersContainer} onEnter={requireAuth}/>
         <IndexRoute component={Landing}/>
       </Route>
     </Router>
