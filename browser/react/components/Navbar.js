@@ -9,24 +9,26 @@ import { logout } from '../reducers/auth'
 class Navbar extends React.Component {
     render(){
         return (
-          <nav>
-            <div className="nav-wrapper">
-                <Link className="brand-logo" to='/'> Cheddar </Link>
-                <ul className="right hide-on-med-and-down">
-                  {this.props.user ?
-                  <div>
-                    <li><Link to='/ads'>{this.props.user.name}</Link></li>
-                    <li><Link to='/' className='btn' onClick={this.props.logoutClick}>Log out</Link></li>
-                  </div>
-                  :
-                  <div>
-                    <li><Link className='btn' to="/login">Log in</Link></li>
-                    <li><Link className='btn' to="/signup">Sign Up</Link></li>
-                  </div>
-                  }
-                </ul>
-            </div>
-          </nav>
+          <div className='navbar-fixed'>
+            <nav>
+              <div className="nav-wrapper">
+                  <Link className="brand-logo" to='/'> Cheddar </Link>
+                  <ul className="right hide-on-med-and-down">
+                    {this.props.user ?
+                    <div>
+                      <li><Link to='/ads'>{this.props.user.name}</Link></li>
+                      <li><Link to='/' className='btn' onClick={this.props.logoutClick}>Log out</Link></li>
+                    </div>
+                    :
+                    <div>
+                      <li><Link className='btn' to="/login">Log in</Link></li>
+                      <li><Link className='btn' to="/signup">Sign Up</Link></li>
+                    </div>
+                    }
+                  </ul>
+              </div>
+            </nav>
+          </div>
         )
     }
 }

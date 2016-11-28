@@ -9,6 +9,10 @@
   text-align: center;
   color: red;
 }
+.card-image img {
+  height: 230px;
+  object-fit: cover;
+}
 
 nav {
   padding: 0 10px;
