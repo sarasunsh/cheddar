@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 export default class Ads extends React.Component {
 
   constructor(props) {
-    console.log('')
     super(props);
     //yeah so numberOfAds is basically ads.length but this way I can check if the axios happened. numberOfAds is undefined unless it is 0.
     this.state = {
@@ -22,13 +21,11 @@ export default class Ads extends React.Component {
       axios.get(`/api/views/adHistory`)
            .then(res => {
              this.setState({adHistory: res.data})
-             console.log(this.state.adHistory)
            })
            .catch(err => console.log(err))
   }
 
   render() {
-    console.log('rendering')
     let {user, selectAd, currentAds} = this.props;
     //once there is a user, an earnedPay property will exist. otherwise just put it at $0
     let earnedPay = user ? user.earnedPay : '$0.00'
