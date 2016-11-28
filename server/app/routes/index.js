@@ -19,6 +19,8 @@ router.get('/videos', (req,res) => {
     attributes: ['adId']
   })
   .then(viewedAds => {
+    if (!viewedAds.length)
+      viewedAds = [{adId:0}]
     Ads.findAll({
       order: [['cost', 'DESC']],
       where: {
