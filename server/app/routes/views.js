@@ -16,6 +16,7 @@ views.post('/:userID/:adID', function (req, res, next) {
 views.get('/adHistory', (req,res,next) => {
     if(req.user){
         View.findAll({
+            order: [['updatedAt', 'DESC']],
             where: {
                 userId: req.user.id
             },
