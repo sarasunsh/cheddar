@@ -1,8 +1,8 @@
 const casual = require('casual');
 
 const NUMBER_OF_ADS = 20;
-const NUMBER_OF_USERS = 100;
-const NUMBER_OF_VIEWS = 300;
+const NUMBER_OF_USERS = 200;
+const NUMBER_OF_VIEWS = 500;
 
 const gender = ['male', 'female'];
 
@@ -43,6 +43,7 @@ const userModel = casual.define('userModel', () => {
     age: casual.random_element(ages),
     gender: casual.random_element(gender),
     petOwner: casual.boolean,
+    isAdvertiser: casual.boolean,
     // income: casual.random_element(income),
     password: casual.password
   }

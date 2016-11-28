@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import store from './store';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-
+ 
 import AdsContainer from './components/Ads/AdsContainer';
 import Navbar from './components/Navbar.js';
 import App from './components/App';
@@ -14,7 +14,7 @@ import LoginContainer from './components/Login/LoginContainer';
 import SignupContainer from './components/Signup/SignupContainer';
 import AdvertisersContainer from './components/Advertisers/AdvertisersContainer';
 import Landing from './components/Landing';
-import Analytics from './Components/Analytics';
+import Analytics from './components/Analytics';
 
 import {retrieveLoggedInUser} from './reducers/auth';
 
