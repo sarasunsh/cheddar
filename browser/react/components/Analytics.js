@@ -17,6 +17,8 @@ export default class Analytics extends Component {
                 'age': false,
                 'petOwner': false
             },
+            total: 0,
+            count: 0,
             graphData: []
         }
         this.filterData = this.filterData.bind(this);
@@ -26,7 +28,12 @@ export default class Analytics extends Component {
     componentDidMount(){
         // axios.get(`/api/ad/${this.props.currentAd.id}`)
         axios.get('/api/ad/2')
-        .then(res => this.setState({ data: res.data }))
+        .then(res => this.setState({
+                total: res.data[0],
+                count: res.data[1],
+                data: res.data[2]
+            })
+        )
         .catch(err => console.log(err))
     }
 
@@ -51,12 +58,15 @@ export default class Analytics extends Component {
     }
 
     render(){
-      console.log('length', this.state.graphData.length, this.state.graphData)
+      console.log('state', this.state)
         return (
             <div>
-              <div className="col s3">
+              <h5>{this.state.count} people have watched this ad.</h5>
+              <h5>{this.state.total} has been paid out to viewers for this ad.</h5>
+              <div className="col s4">
+                <div className="card-panel teal lighten-4 z-depth-5">Select up to two filters. </div>
                   <div className="switch" onChange={() => this.toggleClick('gender')}>
-                    <p> Filter by gender </p>
+                    <p> Gender </p>
                     <label>
                       Off
                       <input type="checkbox"/>
@@ -65,7 +75,7 @@ export default class Analytics extends Component {
                     </label>
                   </div>
                   <div className="switch" onChange={() => this.toggleClick('age')}>
-                    <p> Filter by age </p>
+                    <p> Age </p>
                     <label>
                       Off
                       <input type="checkbox"/>
@@ -74,7 +84,7 @@ export default class Analytics extends Component {
                     </label>
                   </div>
                  <div className="switch" onChange={() => this.toggleClick('petOwner')}>
-                    <p> Filter by pet ownership status </p>
+                    <p> Pet ownership status </p>
                     <label>
                       Off
                       <input type="checkbox"/>
@@ -83,7 +93,7 @@ export default class Analytics extends Component {
                     </label>
                   </div>
               </div>
-              <div className="col s9">
+              <div className="col s4">
                 {this.state.graphData.length <= 1 ?
                   <BarChart width={400} height={400} data={test}
                         margin={{top: 40, right: 30, left: 20, bottom: 5}}>
