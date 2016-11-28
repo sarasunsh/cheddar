@@ -102,10 +102,9 @@ export default class Ads extends React.Component {
                 <ul>
                  <li>
                      <div className="row card history">
-                        <div className='col s1'>Score</div>
-                        <div className='col s1'>Earned</div>
-                        <div className='col s6'>Title</div>
-                        <div className='col s4'>Time</div>
+                        <div className='col s2'>Points</div>
+                        <div className='col s7'>Title</div>
+                        <div className='col s3'>Time</div>
                      </div>
                   </li>
                 {
@@ -113,10 +112,9 @@ export default class Ads extends React.Component {
                     return(
                     <li key={each.id}>
                      <div className="row card history">
-                        <div className='col s1'>{each.smilyScore.toFixed(0)}</div>
-                        <div className='col s1'>${(each.ad.cost * (each.smilyScore / 100)).toFixed(2)}</div>
-                        <div className='col s6'>{each.ad.title}</div>
-                        <div className='col s4'>{moment(each.updatedAt).fromNow()}</div>
+                        <div className='col s2'>{(each.ad.cost * each.smilyScore).toFixed(0)}</div>
+                        <div className='col s7'>{each.ad.title}</div>
+                        <div className='col s3' title={moment(each.updatedAt).format('llll')}>{moment(each.updatedAt).fromNow()}</div>
                      </div>
                     </li>)
                   })

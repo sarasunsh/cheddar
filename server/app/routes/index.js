@@ -15,6 +15,7 @@ router.use('/ad', require('./ad'));
 
 router.get('/videos', (req,res) => {
   if(req.user){
+    console.log('user is ', req.user.id, ' finding all now...')
     View.findAll({
         where: {userId:req.user.id},
         attributes: ['adId']
@@ -29,16 +30,7 @@ router.get('/videos', (req,res) => {
         },
         limit: 2
       })
-      .then(viewedAds => {
-        Ads.findAll({
-          order: [['cost', 'DESC']],
-          where: {
-              id: {$notIn: viewedAds.map(e => e.adId)}
-          },
-          limit: 2
-        })
-        .then(ads => res.json(ads))
-      })
+      .then(ads => res.json(ads))
     })
   } else {
     res.sendStatus(404)

@@ -29,6 +29,7 @@ export const findAds = () => dispatch => {
     //respond to get api ads next should be an array of ad urls
     axios.get('/api/videos')
         .then(res => {
+            console.log(res.data)
             //the server will return an array of 2 objects representing ads. url, title, id.
             dispatch(setAds(res.data))
         })
