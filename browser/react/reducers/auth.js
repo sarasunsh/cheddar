@@ -40,6 +40,17 @@ export const login = credentials => dispatch => {
      .catch(err => browserHistory.push('/login#failed'));
 }
 
+export const adv_login = credentials => dispatch => {
+  axios.post('/api/auth/adv_login', credentials)
+      .then((res) => {
+        localStorage.setItem('token', JSON.stringify(credentials.email))
+        dispatch(retrieveLoggedInUser());
+        return res.data;
+      })
+      .then(redirect => browserHistory.push(redirect))
+     .catch(err => browserHistory.push('/login#failed'));
+}
+
 export const signup = credentials => dispatch => {
   axios.post('/api/auth/signup', credentials)
       .then(res => {
@@ -48,7 +59,24 @@ export const signup = credentials => dispatch => {
         //res.data will be the redirect url path
         return res.data;
       })
-      .then(redirect => {        
+      .then(redirect => {
+        browserHistory.push(redirect)
+      })
+     .catch(err => {
+       console.error(err)
+       browserHistory.push('/signup#failed')
+     })
+}
+
+export const adv_signup = credentials => dispatch => {
+  axios.post('/api/auth/adv_signup', credentials)
+      .then(res => {
+        localStorage.setItem('token', JSON.stringify(credentials.email))
+        if(res.status === 200) dispatch(retrieveLoggedInUser());
+        //res.data will be the redirect url path
+        return res.data;
+      })
+      .then(redirect => {
         browserHistory.push(redirect)
       })
      .catch(err => {
