@@ -20,6 +20,9 @@ export default class Auth extends React.Component {
   render() {
     return (
       <div className="signin-container">
+        <div className="errorContainer">
+        {location.hash === '#failed' ? <span> Sign Up Unsuccessful. Perhaps the email was already used. </span> : null}
+        </div>
         <div className="buffer local">
             <form onSubmit={this.onSubmit}>
                 <div className="form-group">

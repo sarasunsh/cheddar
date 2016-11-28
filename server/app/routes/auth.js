@@ -67,7 +67,8 @@ auth.post('/signup', function (req,res,next) {
     .then(user => {
         if (user) {
             console.log('User already exists.');
-            res.send('/login');
+            res.status(409) //Server conflict, user should resubmit
+            res.send('/signup#failed');
         } else {
             User.create(req.body)
                 .then(user => {
