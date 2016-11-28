@@ -10,7 +10,7 @@ export function filterFunc(dataArr, filters){
     let filterCount = 1;
 
     // First we check which of the filters have been marked as TRUE
-    for (let i = 0; i< filterKeys.length; i++){ // loop through each filter
+    for (let i = 0; i < filterKeys.length; i++){ // loop through each filter
         const category = filterKeys[i] // e.g. 'gender'
         if (filters[category]){ // check if filter category is marked as true
             filterCount += 1;
