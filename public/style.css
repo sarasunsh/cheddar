@@ -1,6 +1,9 @@
 * {
   box-sizing: border-box; }
-
+.history {
+  margin-top: -0.75em;
+  padding: 5px 0;
+}
 .errorContainer {
   min-height: 5px;
   text-align: center;

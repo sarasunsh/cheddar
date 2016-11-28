@@ -32,13 +32,8 @@ export const findAds = () => dispatch => {
             //the server will return an array of 2 objects representing ads. url, title, id.
             dispatch(setAds(res.data))
         })
-        .catch(err => {
-            console.error(err);
-          //  dispatch(setAds(['WcwsDJhrREU','MaYv3Y8tyoQ']))
-        })
+        .catch(err => console.error(err))
 }
-
-
 
 export const findAllAdsForAdvertiser = (advertiserId) => dispatch => {
     //respond to get api ads next should be an array of ad urls

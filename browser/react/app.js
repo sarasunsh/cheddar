@@ -14,7 +14,7 @@ import LoginContainer from './components/Login/LoginContainer';
 import SignupContainer from './components/Signup/SignupContainer';
 import AdvertisersContainer from './components/Advertisers/AdvertisersContainer';
 import Landing from './components/Landing';
-import Analytics from './Components/Analytics';
+import Analytics from './components/Analytics';
 
 import {retrieveLoggedInUser} from './reducers/auth';
 
