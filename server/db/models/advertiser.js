@@ -3,7 +3,7 @@ const db = require('../db');
 const bcrypt = require('bcrypt');
 
 const Advertiser = db.define('advertiser', {
-    name: {
+    advertiser_name: {
       type: Sequelize.STRING,
       allowNull: true
     },

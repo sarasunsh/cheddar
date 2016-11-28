@@ -1,6 +1,7 @@
 var express = require('express');
 var auth = express.Router();
 var User = require('../../db/models').User;
+var Advertiser = require('../../db/models').Advertiser;
 import passport from 'passport';
 var LocalStrategy = require('passport-local').Strategy;
 
@@ -34,6 +35,28 @@ passport.use(new LocalStrategy({
   }
 ));
 
+passport.use('advertisers',new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password'
+  },
+  function(username, password, done) {
+    Advertiser.findOne({ where:{email: username }})
+    .then(user => {
+      if (!user) { return done(null, false); }
+      return user.authenticate(password)
+        .then(ok => {
+          if (!ok){
+            return done(null, false);
+          } else {
+            return done(null, user);
+          }
+        }
+      );
+    })
+    .catch(done)
+  }
+));
+
 // Configure Passport authenticated session persistence.
 //
 // In order to restore authentication state across HTTP requests, Passport needs
@@ -41,12 +64,18 @@ passport.use(new LocalStrategy({
 // typical implementation of this is as simple as supplying the user ID when
 // serializing, and querying the user record by ID from the database when
 // deserializing.
+
 passport.serializeUser(function(user, cb) {
-  cb(null, user.id);
+  let key = {
+    id: user.id,
+    type: "advertiser_name" in user? 'adv' : 'user'
+  }
+  cb(null, key);
 });
 
-passport.deserializeUser(function(id, cb) {
-  User.findById(id)
+passport.deserializeUser(function(key, cb) {
+  let Model = key.type === 'user' ? User : Advertiser;
+  Model.findById(key.id)
   .then((user) => {
     cb(null, user);
   })
@@ -59,7 +88,15 @@ auth.post('/login',
   passport.authenticate('local'),
   function(req, res) {
      res.send('/ads');
-  })
+  }
+)
+
+auth.post('/adv_login',
+  passport.authenticate('advertisers'),
+  function(req, res) {
+     res.send('/advertisers');
+  }
+)
 
 
 auth.post('/signup', function (req,res,next) {
@@ -75,6 +112,26 @@ auth.post('/signup', function (req,res,next) {
                   req.login(user, function(err) {
                     if (err) { return next(err); }
                     res.send('/ads')
+                  });
+                })
+        }
+    })
+    .catch(err => console.error(err))
+})
+
+auth.post('/adv_signup', function (req,res,next) {
+    Advertiser.findOne( { where: { email: req.body.email }})
+    .then(user => {
+        if (user) {
+            console.log('User already exists.');
+            res.status(409) //Server conflict, user should resubmit
+            res.send('/adv_signup#failed');
+        } else {
+            Advertiser.create(req.body)
+                .then(user => {
+                  req.login(user, function(err) {
+                    if (err) { return next(err); }
+                    res.send('/advertisers')
                   });
                 })
         }
