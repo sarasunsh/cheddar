@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import store from './store';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-
+ 
 import AdsContainer from './components/Ads/AdsContainer';
 import Navbar from './components/Navbar.js';
 import App from './components/App';
