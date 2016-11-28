@@ -13,6 +13,9 @@ const Ad = db.define('ad', {
     cost: {
       type: Sequelize.DOUBLE,
       allowNull: false
+    },
+    category: {
+        type: Sequelize.STRING
     }
 });
 

@@ -18,21 +18,24 @@ const User = db.define('user', {
       }
     },
     age: {
-      type: Sequelize.INTEGER
+      type: Sequelize.ENUM('18-30', '31-40', '41-60', 'over 61')
     },
     gender: {
       type: Sequelize.ENUM('male', 'female')
     },
-    income: {
-      type: Sequelize.ENUM(
-        'Less than $25,000',
-        '$25,000 to $34,999',
-        '$35,000 to $49,999',
-        '$50,000 to $74,999',
-        '$75,000 to $99,999',
-        '$100,000 to $149,999',
-        '$150,000 or more')
+    petOwner: {
+      type: Sequelize.BOOLEAN
     },
+    // income: {
+    //   type: Sequelize.ENUM(
+    //     'Less than $25,000',
+    //     '$25,000 to $34,999',
+    //     '$35,000 to $49,999',
+    //     '$50,000 to $74,999',
+    //     '$75,000 to $99,999',
+    //     '$100,000 to $149,999',
+    //     '$150,000 or more')
+    // },
     password_digest: Sequelize.STRING,
     password: Sequelize.VIRTUAL,
     earnedPay: Sequelize.STRING

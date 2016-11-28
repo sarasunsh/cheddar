@@ -6,7 +6,7 @@ const Ad = require('../../db/models').Ad;
 
 module.exports = views;
 
-// Adding a new mouse
+// Adding a new view
 views.post('/:userID/:adID', function (req, res, next) {
     View.create({ smilyScore: req.body.smilyScore, userId: req.params.userID, adId: req.params.adID})
     .then(view => res.send(view))

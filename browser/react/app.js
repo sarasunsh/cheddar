@@ -14,6 +14,7 @@ import LoginContainer from './components/Login/LoginContainer';
 import SignupContainer from './components/Signup/SignupContainer';
 import AdvertisersContainer from './components/Advertisers/AdvertisersContainer';
 import Landing from './components/Landing';
+import Analytics from './Components/Analytics';
 
 import {retrieveLoggedInUser} from './reducers/auth';
 
@@ -42,6 +43,7 @@ ReactDOM.render(
         <Route path="signup" component={SignupContainer} />
         <Route path="video" component={VideoContainer}  onEnter={requireAuth}/>
         <Route path="advertisers" component={AdvertisersContainer} onEnter={requireAuth}/>
+        <Route path="metrics" component={Analytics}/>
         <IndexRoute component={Landing}/>
       </Route>
     </Router>
