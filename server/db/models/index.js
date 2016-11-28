@@ -10,11 +10,14 @@ const db = require('../db');
 const User = require('./user');
 const Ad = require('./ad');
 const View = require('./view');
+const Advertiser = require ('./advertiser')
 
 // Form the associations
 View.belongsTo(User);
 View.belongsTo(Ad);
 
+Ad.belongsTo(Advertiser);
+Advertiser.hasMany(Ad);
 User.hasMany(View);
 Ad.hasMany(View);
 
@@ -22,5 +25,6 @@ Ad.hasMany(View);
 module.exports = {
   User,
   Ad,
-  View
+  View,
+  Advertiser
 };

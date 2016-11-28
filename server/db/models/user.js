@@ -26,9 +26,6 @@ const User = db.define('user', {
     petOwner: {
       type: Sequelize.BOOLEAN
     },
-    isAdvertiser: {
-      type: Sequelize.BOOLEAN
-    },
     // income: {
     //   type: Sequelize.ENUM(
     //     'Less than $25,000',

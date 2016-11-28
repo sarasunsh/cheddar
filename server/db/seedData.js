@@ -1,6 +1,7 @@
 const casual = require('casual');
 
 const NUMBER_OF_ADS = 20;
+const NUMBER_OF_ADVERTISERS = 5;
 const NUMBER_OF_USERS = 200;
 const NUMBER_OF_VIEWS = 500;
 
@@ -43,7 +44,6 @@ const userModel = casual.define('userModel', () => {
     age: casual.random_element(ages),
     gender: casual.random_element(gender),
     petOwner: casual.boolean,
-    isAdvertiser: casual.boolean,
     // income: casual.random_element(income),
     password: casual.password
   }
@@ -54,7 +54,8 @@ const adModel = casual.define('adModel', () => {
     title: casual.catch_phrase,
     url: casual.random_element(URLs),
     category: casual.random_element(categories),
-    cost: parseFloat(Math.round(casual.double(.5, 20) * 100) / 100).toFixed(2)
+    cost: parseFloat(Math.round(casual.double(.5, 20) * 100) / 100).toFixed(2),
+    advertiserId: casual.integer(1, NUMBER_OF_ADVERTISERS)
   }
 })
 
@@ -67,6 +68,13 @@ const viewModel = casual.define('viewModel', () => {
   }
 })
 
+const advertiserModel = casual.define('advertiserModel', () => {
+  return {
+    name: casual.title,
+    email: casual.email,
+    password: casual.password
+  }
+})
 
 const dataGenerator = (times, generator) => {
   let data = [];
@@ -80,3 +88,4 @@ const dataGenerator = (times, generator) => {
 exports.ads = dataGenerator(NUMBER_OF_ADS, casual._adModel);
 exports.users = dataGenerator(NUMBER_OF_USERS, casual._userModel);
 exports.views = dataGenerator(NUMBER_OF_VIEWS, casual._viewModel);
+exports.advertisers = dataGenerator(NUMBER_OF_VIEWS, casual._advertiserModel);
