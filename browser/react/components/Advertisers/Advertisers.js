@@ -22,8 +22,6 @@ export default class Advertisers extends React.Component {
     // HARD CODED THE ADVERTISER ID UNTIL AUTH FOR ADVERTISER BUILT; this.props.auth.id
     this.props.findAllAdsForAdvertiser(2);
     this.retrieveTotalDollarsSpent(2);
-
-
   }
 
   retrieveTotalDollarsSpent (advertiserId) {
@@ -38,9 +36,7 @@ export default class Advertisers extends React.Component {
   render() {
     let {user, selectAd, currentAds} = this.props;
     //user is an obect with .name, .email etc, selectAd is a function to put the selected ad obj on the store, current Ads is an array of two ad objects to render in the component.
-    let ads = currentAds;
-    //ads is a array of objects. Each object has a url, title, id. Its also represented on the global store.
-    // console.log("currentAds", currentAds);
+
 
   // CREATE THE VIDEO CARDS
 
