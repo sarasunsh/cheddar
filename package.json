@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Emotional engagement for brands",
   "main": "server/start.js",
+  "private": true,
   "engines" :{
     "node" : "6.7.0"
   },
@@ -10,8 +11,7 @@
     "start": "webpack -w & nodemon --watch server -e js,html server/start.js",
     "test": "./node_modules/.bin/mocha server/**/*.test.js --reporter spec",
     "db-init": "./db-init.sh",
-    "postinstall": "npm run db-init",
-    "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress",
+    "postinstall": "npm run db-init webpack --config ./webpack-prod.config.js --progress --colors",
     "build-watch": "check-node-version --node '>= 6.7.0' && bin/setup && webpack -w",
     "seed": "node server/db/seed.js"
   },
