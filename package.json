@@ -11,7 +11,7 @@
     "start": "webpack -w & nodemon --watch server -e js,html server/start.js",
     "test": "./node_modules/.bin/mocha server/**/*.test.js --reporter spec",
 
-    "postinstall": " webpack --config ./webpack-prod.config.js --progress --colors",
+    "postinstall": " webpack --config ./webpack.config.js --progress --colors",
     "build-watch": "check-node-version --node '>= 6.7.0' && bin/setup && webpack -w",
     "seed": "node server/db/seed.js"
   },
