@@ -3,7 +3,6 @@ import axios from 'axios';
 import { filterFunc } from './filterFunc';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
-
 export default class Analytics extends Component {
     constructor(props){
         super(props)
@@ -48,6 +47,12 @@ export default class Analytics extends Component {
     render(){
         console.log(this.state)
         const data = this.state.graphData
+
+        const fillDict = {
+            "Average": '#ad1457',
+            "gender:male": "#3f51b5",
+            'gender:female': "#8884d8"
+        }
         return (
             <div>
               <h5>{this.state.count} people have watched this ad.</h5>
@@ -92,7 +97,7 @@ export default class Analytics extends Component {
                         <Tooltip/>
                         <Legend />
                         {Object.keys(data[0]).filter(key => key !== 'name').map((label,idx) => (
-                            <Bar key={idx} dataKey={label} fill="#8884d8" />
+                            <Bar key={idx} dataKey={label} fill={fillDict[label]} />
                           )
                         )}
                     </BarChart>
@@ -118,3 +123,4 @@ export default class Analytics extends Component {
         );
     }
 }
+
