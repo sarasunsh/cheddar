@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { filterFunc, dataSplit } from './filterFunc';
+import { filterFunc } from './filterFunc';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
-const test= [
-      {name: 'Average', Average: 78}
-];
 
 export default class Analytics extends Component {
     constructor(props){
         super(props)
         this.state = {
-            data: [],
+            rawData: [],
             filters: {
                 'gender': false,
                 'age': false,
@@ -21,44 +18,36 @@ export default class Analytics extends Component {
             count: 0,
             graphData: []
         }
-        this.filterData = this.filterData.bind(this);
         this.toggleClick = this.toggleClick.bind(this);
     }
 
     componentDidMount(){
         // axios.get(`/api/ad/${this.props.currentAd.id}`)
         axios.get('/api/ad/2')
-        .then(res => this.setState({
+        .then(res => {
+            const filtered = filterFunc(res.data[2], this.state.filters)
+            this.setState({
                 total: res.data[0],
                 count: res.data[1],
-                data: res.data[2]
+                rawData: res.data[2],
+                graphData: filtered
             })
-        )
+        })
         .catch(err => console.log(err))
     }
 
-    filterData(){
-        if (this.state.data) {
-            const scores = filterFunc(this.state.data, this.state.filters)
-            if (Object.keys(scores).length > 1) {
-              const splits = dataSplit(scores)
-              this.setState({graphData: splits})
-            } else {
-              this.setState({graphData: scores[""].reduce((a,b)=>a+b, 0) / scores[""].length})
-            }
-        } else {
-            return 0
-        }
-    }
-
     toggleClick(fltr){
-        let newFilters = Object.assign(this.state.filters, {[fltr]: !this.state.filters[fltr]})
-        this.setState({filters: newFilters})
-        this.filterData()
+        let newFilters = Object.assign(this.state.filters, {[fltr]: !this.state.filters[fltr]});
+        const newData = filterFunc(this.state.rawData, newFilters);
+        this.setState({
+            filters: newFilters,
+            graphData: newData
+        });
     }
 
     render(){
-      console.log('state', this.state)
+        console.log(this.state)
+        const data = this.state.graphData
         return (
             <div>
               <h5>{this.state.count} people have watched this ad.</h5>
@@ -94,43 +83,35 @@ export default class Analytics extends Component {
                   </div>
               </div>
               <div className="col s4">
-                {this.state.graphData.length <= 1 ?
-                  <BarChart width={400} height={400} data={test}
-                        margin={{top: 40, right: 30, left: 20, bottom: 5}}>
-                   <XAxis dataKey="name"/>
-                   <YAxis />
-                   <CartesianGrid strokeDasharray="3 3"/>
-                   <Tooltip/>
-                   <Legend />
-                   <Bar dataKey='Average' fill='#504ac6' />
-                  </BarChart>
-                  :
-                  <div>
-                    <BarChart width={600} height={300} data={this.state.graphData[0]}
+                {data.length === 1 ?
+                     <BarChart width={600} height={300} data={data}
                         margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-                    <XAxis dataKey="name"/>
-                    <YAxis/>
-                    <CartesianGrid strokeDasharray="3 3"/>
-                    <Tooltip/>
-                    <Legend />
-                    {this.state.graphData[1].map((row,idx) => (
-                        <Bar key={idx} dataKey={row.name} fill="#8884d8" />
-                      )
-                    )}
-                  </BarChart>
-                   <BarChart width={600} height={300} data={this.state.graphData[1]}
-                        margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-                    <XAxis dataKey="name"/>
-                    <YAxis/>
-                    <CartesianGrid strokeDasharray="3 3"/>
-                    <Tooltip/>
-                    <Legend />
-                    {this.state.graphData[0].map((row,idx) => (
-                        <Bar key={idx} dataKey={row.name} fill="#8884d8" />
-                      )
-                    )}
-                  </BarChart>
-                  </div>
+                        <XAxis dataKey="name"/>
+                        <YAxis/>
+                        <CartesianGrid strokeDasharray="3 3"/>
+                        <Tooltip/>
+                        <Legend />
+                        {Object.keys(data[0]).filter(key => key !== 'name').map((label,idx) => (
+                            <Bar key={idx} dataKey={label} fill="#8884d8" />
+                          )
+                        )}
+                    </BarChart>
+                    :
+                    data.map(cut => (
+                            <BarChart width={600} height={300} data={cut}
+                            margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+                                <XAxis dataKey="name"/>
+                                <YAxis/>
+                                <CartesianGrid strokeDasharray="3 3"/>
+                                <Tooltip/>
+                                <Legend />
+                                {Object.keys(cut[0]).filter(key => key !== 'name').map((label,idx) => (
+                                    <Bar key={idx} dataKey={label} fill="#8884d8" />
+                                  )
+                                )}
+                            </BarChart>
+                        )
+                    )
                 }
               </div>
             </div>
