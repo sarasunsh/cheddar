@@ -49,9 +49,10 @@ export default class Analytics extends Component {
         const data = this.state.graphData
 
         const fillDict = {
-            "Average": '#ad1457',
+            "Average": '#8884d8',
             "gender:male": "#3f51b5",
-            'gender:female': "#8884d8"
+            'gender:female': "#ad1457",
+
         }
         return (
             <div>
