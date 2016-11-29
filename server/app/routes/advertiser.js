@@ -37,8 +37,8 @@ function sumSmilyScoreDollarsOfAd (adId) {
           return accumulator + curr.smilyScore;
         }, 0
       );
-      console.log("smilyScoreSum", smilyScoreSum);
-      console.log("adViewArray[0].ad.cost", adViewArray[0].ad.cost );
+      // console.log("smilyScoreSum", smilyScoreSum);
+      // console.log("adViewArray[0].ad.cost", adViewArray[0].ad.cost );
       return smilyScoreSum * adViewArray[0].ad.cost/100;
       // console.log("smilyScoreSum * ad.davaValues.cost", smilyScoreSum * +ad.dataValues.cost);
       // return smilyScoreSum * ad.dataValues.cost;  // total dollars spent for this ad
@@ -49,13 +49,17 @@ function sumSmilyScoreDollarsOfAd (adId) {
 advertisers.get('/ads', (req, res, next) => {
 
   // Use req.user.id in the search area
+  // console.log("***** /ads req.user.id", req.user.id);
 
-  Ad.findAll({
+  req.user.id && Ad.findAll({
     where: {
-      advertiserId: 2
+      advertiserId: req.user.id
     }
   })
-  .then( adArray => res.send(adArray))
+  .then( adArray => {
+    // console.log("******* adArray", adArray)
+    res.send(adArray);
+  })
   .catch(err => console.log(err));
 
 });
@@ -63,13 +67,13 @@ advertisers.get('/ads', (req, res, next) => {
 
 // Total dollars spent on ads for a specific advertiser
 advertisers.get('/totalspend/', (req, res, next) => {
-  console.log("req.params.advertiserId", req.params.advertiserId);
+  // console.log("****** /totalspend req.user.id ", req.user.id);
 
   // Use req.user.id in the search area
 
-  Ad.findAll({
+  req.user.id && Ad.findAll({
     where: {
-      advertiserId: 2
+      advertiserId: req.user.id
     }
   })
   .then( adArray =>  {
@@ -81,19 +85,19 @@ advertisers.get('/totalspend/', (req, res, next) => {
     });
 
 
-    console.log("******* promiseArray", promiseArray);
+    // console.log("******* promiseArray", promiseArray);
 
     return Promise.all(promiseArray)
     .then ( valueArray => {
 
-      console.log("******* valueArray", valueArray);
+      // console.log("******* valueArray", valueArray);
 
       return valueArray.reduce( (accumulator, curr) => accumulator + curr) ;
       });
 
   })
   .then( result => {
-    console.log("****** result", result);
+    // console.log("****** result", result);
     result += "";
     res.send(result);
 
@@ -102,51 +106,4 @@ advertisers.get('/totalspend/', (req, res, next) => {
 
 
 });
-
-
-
-
- // Ad.findAll({
- //    where: {
- //      advertiserId: req.params.advertiserId
- //    }
- //  })
- //  .then( adArray =>   //array list of ads for an advertiser
-
- //    {
- //      // console.log("adArray", adArray);
-
- //      var smilyScoreSum = 0;
-
- //      var smilyScoreArray = adArray.map( ad =>
- //        {
- //          return View.findAll({
- //            where: {
- //              adId: ad.id
- //            }
- //          })
- //          .then( adViewArray =>  // array of all views of a particular ad
- //            {
- //              // console.log("adViewArray", adViewArray);
- //              smilyScoreSum = adViewArray.reduce( (accumulator, curr) => {
- //                  console.log("accumulator", accumulator);
- //                  console.log("curr.dataValues.smilyScore", curr.dataValues.smilyScore);
- //                  return accumulator + curr.dataValues.smilyScore;
- //                }
- //              );
- //              console.log("smilyScoreSum", smilyScoreSum);
- //              console.log("smilyScoreSum * ad.davaValues.cost", smilyScoreSum * +ad.dataValues.cost);
- //              return smilyScoreSum * ad.dataValues.cost;  // total dollars spent for this ad
- //          });
- //        });
-
- //      return smilyScoreArray.reduce( (accumulator, curr) =>
- //          accumulator + curr);
-
- //    })
- //  .then(sum => {
- //    console.log("final sum", sum);
- //    res.json(sum);
- //  })
-// });
 

@@ -50,7 +50,7 @@ const advertiserModel = casual.define('advertiserModel', () => {
   return {
     name: casual.title,
     email: casual.email,
-    password: casual.password
+    password: "password"
   }
 })
 
