@@ -3,6 +3,8 @@ const ads = Express.Router();
 const User = require('../../db/models').User;
 const View = require('../../db/models').View;
 const Ad = require('../../db/models').Ad;
+const Advertiser = require('../../db/models').Advertiser;
+
 
 module.exports = ads;
 
