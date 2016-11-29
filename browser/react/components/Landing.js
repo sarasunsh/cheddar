@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { Image, Col, Carousel } from 'react-bootstrap';
+import { Button, Image, Col, Carousel } from 'react-bootstrap';
+
 
 
 export default class Landing extends Component {
-
     componentDidMount(){
         $('.carousel').carousel({});
     }
-    
+
     render(){
         return (
             <div>
@@ -22,6 +22,10 @@ export default class Landing extends Component {
                 <Link className="carousel-item" href="#five!"><img src="/img/smile/5.jpg" /></Link>
                 <Link className="carousel-item" href="#six!"><img src="/img/smile/6.jpg" /></Link>
                 <Link className="carousel-item" href="#seven!"><img src="/img/smile/7.jpg" /></Link>
+                </div>
+                <div style={{paddingTop:200,textAlign:"center"}}>
+                  <Link to='/adv_login' className="waves-effect waves-teal btn-flat">Advertiser Log In</Link>
+                  <Link to='/adv_signup' className="waves-effect waves-teal btn-flat">Advertiser Sign Up</Link>
                 </div>
             </div>
         );

@@ -12,3 +12,22 @@ views.post('/:userID/:adID', function (req, res, next) {
     .then(view => res.send(view))
     .catch(err => console.log(err))
 });
+
+views.get('/adHistory', (req,res,next) => {
+    if(req.user){
+        View.findAll({
+            order: [['updatedAt', 'DESC']],
+            where: {
+                userId: req.user.id
+            },
+            include: {
+                model: Ad
+            }
+        })
+        .then(adsWatched => res.send(adsWatched))
+        .catch(err => console.log(err))
+    } else {
+        res.sendStatus(404);
+    }
+    
+});

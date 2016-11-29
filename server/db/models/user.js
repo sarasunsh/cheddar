@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 const bcrypt = require('bcrypt');
+const constants = require('../constants');
 
 const Views = require('./view');
 const Ads = require('./ad');
@@ -18,23 +19,16 @@ const User = db.define('user', {
       }
     },
     age: {
-      type: Sequelize.ENUM('18-30', '31-40', '41-60', 'over 61')
+      type: Sequelize.ENUM(constants.age)
     },
     gender: {
-      type: Sequelize.ENUM('male', 'female')
+      type: Sequelize.ENUM(constants.gender)
     },
     petOwner: {
       type: Sequelize.BOOLEAN
     },
     // income: {
-    //   type: Sequelize.ENUM(
-    //     'Less than $25,000',
-    //     '$25,000 to $34,999',
-    //     '$35,000 to $49,999',
-    //     '$50,000 to $74,999',
-    //     '$75,000 to $99,999',
-    //     '$100,000 to $149,999',
-    //     '$150,000 or more')
+    //   type: Sequelize.ENUM(constants.income)
     // },
     password_digest: Sequelize.STRING,
     password: Sequelize.VIRTUAL,

@@ -1,10 +1,17 @@
 * {
   box-sizing: border-box; }
-
+.history {
+  margin-top: -0.9em;
+  padding: 5px 0;
+}
 .errorContainer {
   min-height: 5px;
   text-align: center;
   color: red;
+}
+.card-image img {
+  height: 230px;
+  object-fit: cover;
 }
 
 nav {

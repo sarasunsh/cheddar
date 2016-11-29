@@ -12,6 +12,9 @@ import App from './components/App';
 import VideoContainer from './components/Video/VideoContainer';
 import LoginContainer from './components/Login/LoginContainer';
 import SignupContainer from './components/Signup/SignupContainer';
+import AdvLoginContainer from './components/AdvLogin/LoginContainer';
+import AdvSignupContainer from './components/AdvSignup/SignupContainer';
+
 import AdvertisersContainer from './components/Advertisers/AdvertisersContainer';
 import Landing from './components/Landing';
 import Analytics from './components/Analytics';
@@ -39,8 +42,10 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path='/' component={App}>
         <Route path="login" component={LoginContainer} />
+        <Route path="adv_login" component={AdvLoginContainer} />
         <Route path="ads" component={AdsContainer} onEnter={requireAuth} />
         <Route path="signup" component={SignupContainer} />
+        <Route path="adv_signup" component={AdvSignupContainer} />
         <Route path="video" component={VideoContainer}  onEnter={requireAuth}/>
         <Route path="advertisers" component={AdvertisersContainer} onEnter={requireAuth}/>
         <Route path="metrics" component={Analytics}/>

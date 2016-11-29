@@ -46,7 +46,6 @@ export default class Video extends React.Component {
 
     componentDidMount(){
         let theAd = document.getElementById('theAd')
-
         const divRoot = $("#affdex_elements")[0];
         const width = 640,
         height = 480;
@@ -130,6 +129,7 @@ export default class Video extends React.Component {
     render() {
         return (
             <div style={{height:600}}>
+            {  console.log("The State",this.state)}
               <div id="logs">Click Play when ready . . .</div>
               <div style={{textAlign:"center"}}>
                 <i id="playButton" className="large material-icons" onClick={this.clickPlay}>play_circle_outline</i>

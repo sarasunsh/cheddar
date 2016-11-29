@@ -15,22 +15,26 @@ router.use('/ad', require('./ad'));
 router.use('/advertiser', require('./advertiser'));
 
 router.get('/videos', (req,res) => {
-  View.findAll({
-    where: {userId:req.user.id},
-    attributes: ['adId']
-  })
-  .then(viewedAds => {
-    if (!viewedAds.length)
-      viewedAds = [{adId:0}]
-    Ads.findAll({
-      order: [['cost', 'DESC']],
-      where: {
-          id: {$notIn: viewedAds.map(e => e.adId)}
-      },
-      limit: 2
+  if(req.user){
+    View.findAll({
+        where: {userId:req.user.id},
+        attributes: ['adId']
     })
-    .then(ads => res.json(ads))
-  })
+    .then(viewedAds => {
+      if (!viewedAds.length)
+        viewedAds = [{adId:0}]
+      Ads.findAll({
+        order: [['cost', 'DESC']],
+        where: {
+            id: {$notIn: viewedAds.map(e => e.adId)}
+        },
+        limit: 2
+      })
+      .then(ads => res.json(ads))
+    })
+  } else {
+    res.sendStatus(404)
+  }
 })
 
 // router.get('/advertisers/:advertiserId', (req,res) => {

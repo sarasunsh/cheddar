@@ -51,32 +51,6 @@ export default class Auth extends React.Component {
                       required
                     />
                 </div>
-                <div className="form-group">
-                    <label>Age</label>
-                    <input
-                      name="age"
-                      type="number"
-                      className="form-control"
-                    />
-                </div>
-                <div className="form-group">
-                  <p>
-                    <input className="group1" type="radio" name="gender" id="test1" />
-                    <label htmlFor="test1">Female</label>
-                  </p>
-                  <p>
-                    <input className="group1" type="radio" name="gender" id="test2" />
-                    <label htmlFor="test2">Male</label>
-                  </p>
-                </div>
-                <div className="form-group input-field">
-                  <select>
-                    <option defaultValue value="">Income</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                  </select>
-                </div>
                 <button type="submit" className="btn btn-block btn-primary">Signup</button>
             </form>
         </div>
