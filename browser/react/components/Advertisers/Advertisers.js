@@ -13,6 +13,8 @@ export default class Advertisers extends React.Component {
       totalDollarsSpent: 0
     }
     this.retrieveTotalDollarsSpent = this.retrieveTotalDollarsSpent.bind(this);
+    this.addUrl = this.addUrl.bind(this)
+    this.postAd = this.postAd.bind(this)
   }
 
   componentDidMount(){
@@ -22,7 +24,29 @@ export default class Advertisers extends React.Component {
     // HARD CODED THE ADVERTISER ID UNTIL AUTH FOR ADVERTISER BUILT; this.props.auth.id
     this.props.findAllAdsForAdvertiser(2);
     this.retrieveTotalDollarsSpent(2);
+     $('#addAd').modal();
 
+
+  }
+
+  postAd(event){
+    event.preventDefault();
+    console.log(event.target.url.value)
+  }
+
+  addUrl(event){
+    let iframe = document.getElementById('YTiframe');
+    let yturl = event.target.value;
+    //finds the match after ?v=, just alphanumerics. so it will stop matching it hits slashes, hashes, question marks etc.
+    yturl = yturl.match(/\?v=(\w*)/) ? yturl.match(/\?v=(\w*)/)[1] : '';
+    //so, it will only update if there was a match for v?=
+    if(yturl){
+      iframe.setAttribute('src', `https://www.youtube.com/embed/${yturl}`);
+      iframe.style.display = 'block';
+      console.log(yturl);
+    } else {
+      iframe.style.display = 'none';
+    }
 
   }
 
@@ -59,8 +83,21 @@ export default class Advertisers extends React.Component {
             </div>
           </li>
           <li><div className="divider"></div></li>
+          <li><a className="waves-effect modal-trigger" href="#addAd">Add New Advertisement</a></li>
         </ul>
-        <a href="#" data-activates="slide-out" className="button-collapse"><i className="material-icons">menu</i></a>
+        <div id="addAd" className="modal">
+          <form onSubmit={this.postAd}>
+            <div className="modal-content"> 
+              <div className="form-group">
+                <input onInput={this.addUrl} placeholder="YouTube URL" name='url' type='text' required/>
+              </div>
+              <iframe id="YTiframe" style={{display: "none",marginLeft: "Calc(50% - 278px)"}} width="560" height="315" frameBorder="0"></iframe>
+            </div>
+            <div className="modal-footer"> 
+              <button type='submit' href="#" className="btn modal-action modal-close">Add Ad!</button> 
+            </div>
+          </form>
+        </div>
         <div className="container videocards">
           <h2 className="center">Advertiser Campaign</h2>
           {
