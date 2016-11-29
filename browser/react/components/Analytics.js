@@ -11,11 +11,13 @@ export default class Analytics extends Component {
             filters: {
                 'gender': false,
                 'age': false,
-                'petOwner': false
+                'petOwner': false,
+                'income':false
             },
             total: 0,
             count: 0,
-            graphData: []
+            graphData: [],
+            disabled: false
         }
         this.toggleClick = this.toggleClick.bind(this);
     }
@@ -38,21 +40,37 @@ export default class Analytics extends Component {
     toggleClick(fltr){
         let newFilters = Object.assign(this.state.filters, {[fltr]: !this.state.filters[fltr]});
         const newData = filterFunc(this.state.rawData, newFilters);
-        this.setState({
-            filters: newFilters,
-            graphData: newData
-        });
+
+        if (Object.keys(newFilters).filter(key => newFilters[key]).length < 2) {
+            this.setState({
+                filters: newFilters,
+                graphData: newData,
+                disabled: false
+            });
+        } else {
+            this.setState({
+                filters: newFilters,
+                graphData: newData,
+                disabled: true
+            });
+        }
     }
 
     render(){
-        console.log(this.state)
         const data = this.state.graphData
+        const filters = Object.keys(this.state.filters)
 
+        const fillColors = ['#8884d8',"#3f51b5","#ad1457", '#e53935', '#9575cd', '#9fa8da', '#1a237e']
         const fillDict = {
             "Average": '#8884d8',
             "gender:male": "#3f51b5",
             'gender:female': "#ad1457",
-
+            "age:18-30": '#80cbc4',
+            "age:31-40": '#d1c4e9',
+            "age:41-60": '#9fa8da',
+            "age:over 61": '#1a237e',
+            "petOwner:true": '#66bb6a',
+            "petOwner:false": '#ffb74d'
         }
         return (
             <div>
@@ -60,33 +78,19 @@ export default class Analytics extends Component {
               <h5>{this.state.total} has been paid out to viewers for this ad.</h5>
               <div className="col s4">
                 <div className="card-panel teal lighten-4 z-depth-5">Select up to two filters. </div>
-                  <div className="switch" onChange={() => this.toggleClick('gender')}>
-                    <p> Gender </p>
-                    <label>
-                      Off
-                      <input type="checkbox"/>
-                      <span className="lever"></span>
-                      On
-                    </label>
-                  </div>
-                  <div className="switch" onChange={() => this.toggleClick('age')}>
-                    <p> Age </p>
-                    <label>
-                      Off
-                      <input type="checkbox"/>
-                      <span className="lever"></span>
-                      On
-                    </label>
-                  </div>
-                 <div className="switch" onChange={() => this.toggleClick('petOwner')}>
-                    <p> Pet ownership status </p>
-                    <label>
-                      Off
-                      <input type="checkbox"/>
-                      <span className="lever"></span>
-                      On
-                    </label>
-                  </div>
+                {filters.map((filterName, idx) => (
+                      <div key={idx} className="switch" onChange={() => this.toggleClick(filterName)}>
+                        <p> {filterName} </p>
+                        <label>
+                          Off
+                          <input disabled={this.state.disabled && !this.state.filters[filterName]} type="checkbox"/>
+                          <span className="lever"></span>
+                          On
+                        </label>
+                      </div>
+                    )
+                )}
+
               </div>
               <div className="col s4">
                 {data.length === 1 ?
@@ -103,8 +107,8 @@ export default class Analytics extends Component {
                         )}
                     </BarChart>
                     :
-                    data.map(cut => (
-                            <BarChart width={600} height={300} data={cut}
+                    data.map((cut, index) => (
+                            <BarChart key={index} width={600} height={300} data={cut}
                             margin={{top: 5, right: 30, left: 20, bottom: 5}}>
                                 <XAxis dataKey="name"/>
                                 <YAxis/>
@@ -112,7 +116,7 @@ export default class Analytics extends Component {
                                 <Tooltip/>
                                 <Legend />
                                 {Object.keys(cut[0]).filter(key => key !== 'name').map((label,idx) => (
-                                    <Bar key={idx} dataKey={label} fill="#8884d8" />
+                                    <Bar key={idx} dataKey={label} fill={fillDict[label]} />
                                   )
                                 )}
                             </BarChart>
