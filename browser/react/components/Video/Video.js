@@ -13,7 +13,8 @@ export default class Video extends React.Component {
         }
         this.clickPlay = this.clickPlay.bind(this);
         this.onPlayerStateChange = this.onPlayerStateChange.bind(this);
-
+        this.width = 640,
+        this.height = 480;
         this.url = `https://www.youtube.com/embed/${this.props.currentAd.url}?enablejsapi=1&controls=0&showinfo=0&iv_load_policy=3&rel=0`;
         //enablejsapi=1 must be appended to embed url so we can control play/pause
         //showinfo=0 and controls=0 will hide the youtube player controls
@@ -36,8 +37,8 @@ export default class Video extends React.Component {
             funcs.log('logs', `Congratulations! Your smilyScore was ${Math.trunc(finalSmile)}`);
             funcs.onStop();
             axios.post(`api/views/${this.props.user.id}/${this.props.currentAd.id}`, {smilyScore: finalSmile})
-                .catch(err => console.log(err));
-            setTimeout(()=>location.pathname = '/ads', 1000);
+                 .catch(err => console.log(err));
+            setTimeout(()=> browserHistory.push('/ads'), 1000);
             //that would be the reacty way to do it, but I'm having problems re-initializing the youtube API, so we'll clear the window when this is over.
             // location.pathname = '/ads'
 
@@ -45,12 +46,18 @@ export default class Video extends React.Component {
     }
 
     componentDidMount(){
-        let theAd = document.getElementById('theAd')
-        const divRoot = $("#affdex_elements")[0];
-        const width = 640,
-        height = 480;
+        //if there is not a url on the current ad, then this page was retrieved in error. 
+        //Like. the video component should ONLY be rendered as a result of setting 
+        //the store from the ads component. So. Redirect ill gotten requests.
+        if(!this.props.currentAd.url){
+            browserHistory.push('/ads')
+        }
+        //
+        let theAd = document.getElementById("theAd")
+        const affdexContainer = document.getElementById("affdex_elements");
+
         const faceMode = affdex.FaceDetectorMode.LARGE_FACES;
-        window.detector = new affdex.CameraDetector(divRoot, width, height, faceMode);
+        window.detector = new affdex.CameraDetector(affdexContainer, this.width, this.height, faceMode);
         // window.detector.detectAllEmotions();
         // window.detector.detectAllAppearance();
         window.detector.detectAllExpressions();
@@ -122,28 +129,34 @@ export default class Video extends React.Component {
 
     componentWillUnmount(){
         funcs.onStop();
+        // delete window.detector;
+        window.YT = null;
         let apiTag = document.getElementById('apiTag')
         apiTag.remove();
+        console.log('componentWillUnmount')
     }
 
     render() {
         return (
             <div style={{height:600}}>
-            {  console.log("The State",this.state)}
-              <div id="logs">Click Play when ready . . .</div>
-              <div style={{textAlign:"center"}}>
-                <i id="playButton" className="large material-icons" onClick={this.clickPlay}>play_circle_outline</i>
-              </div>
-              <div id="affdex_elements">
-                <iframe
-                    style={{display: 'none'}}
-                    src={this.url}
-                    width='640'
-                    height='480'
-                    frameBorder='0'
-                    id='theAd'>
-                </iframe>
-              </div>
+            <div id="logs"> Click Play when ready . . .</div>
+            <div style={{textAlign:"center"}}>
+                <i id="playButton" 
+                className="large material-icons" 
+                onClick={this.clickPlay}>
+                play_circle_outline
+                </i>
+            </div>
+            <div id="affdex_elements">
+            </div>
+            <iframe
+                style={{display: 'none'}}
+                src={this.url}
+                width={this.width}
+                height={this.height}
+                frameBorder='0'
+                id='theAd'>
+            </iframe>
               <div className="progress">
                 <div
                     id="logs_animation"
