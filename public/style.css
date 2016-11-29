@@ -104,3 +104,7 @@ color: #079eb4 !important;
   padding-top: 10px;
   font-family: 'Happy Monkey', cursive;
 }
+
+.progress {
+    height: 30px;
+}

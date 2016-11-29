@@ -92,7 +92,9 @@ export default class Video extends React.Component {
                     }
                 } else {
                     funcs.smilyScoreAvg(faces[0].expressions.smile);
-                    this.setState({determinate: true, progress: `${funcs.smilyScore[0]}%`});
+                    this.setState({determinate: true, progress: `${faces[0].expressions.smile}%`});
+                    // this.setState({determinate: true, progress: `${funcs.smilyScore[0]}%`});
+
                     // console.log("smilyScore!",funcs.smilyScore[0]);
                     // console.log(faces[0].emojis.dominantEmoji);
                 }
@@ -144,12 +146,15 @@ export default class Video extends React.Component {
                     id='theAd'>
                 </iframe>
               </div>
-              <div className="progress">
+              <div className={ (function () {return "progress green";})()      }style={{backgroundColor: red}}>
                 <div
                     id="logs_animation"
                     className={ this.state.determinate ? "determinate" : "indeterminate" }
-                    style={{width: this.state.progress}}>
+                    style={{width: this.state.progress, backgroundColor: "green"}}>
                 </div>
+              </div>
+              <div className="waves-effect waves-light btn disabled" style={{float: "right"}}>
+                SmileMeter
               </div>
             </div>
         )
