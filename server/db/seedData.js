@@ -7,12 +7,13 @@ const NUMBER_OF_USERS = 200;
 const NUMBER_OF_VIEWS = 500;
 
 const URLs = [
-    'Dfj3Ot9mtwA',
-    'glii-kazad8',
-    '9GbS40MT6ME',
-    'kCrIy93hU60',
-    'REM3sD7FatY',
-    '2_9FKYmR75g'
+  'HU80R7jGanE',
+  'fPwpymO1bs',
+  '2zfqw8nhUwA',
+  'VPKXAToDr-M',
+  'AQ2w9gV1yeM',
+  '8F4LiqYzBZY',
+  'XmQSRqxRIJw'
 ];
 
 const userModel = casual.define('userModel', () => {
