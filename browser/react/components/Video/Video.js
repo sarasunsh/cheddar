@@ -69,7 +69,7 @@ export default class Video extends React.Component {
 
         //Add a callback to notify when the detector is initialized and ready for running.
         window.detector.addEventListener("onInitializeSuccess", () => {
-            funcs.log('logs', "Smile to start the video!");  // Dots are first displayed
+            funcs.log('logs', "Smile to start the video!",true);
             //Display canvas instead of video feed because we want to draw the feature points on it
             $("#face_video_canvas").css("display", "block"); // this is the ID on the <canvas> that actually displays the video
             $("#face_video").css("display", "none");  // affdex creates a <video> tag with face_video to capture video from the webcam but this does not display the video
@@ -83,7 +83,7 @@ export default class Video extends React.Component {
         // faces is an array, always accessing the first element which is ONE face as opposed to many, first element is an object with the features of the face for ONE frame
         // image is unknown (can be checked out later)
         window.detector.addEventListener("onImageResultsSuccess", (faces, image, timestamp) => {
-            //checking the average Score, playing the video if its above 50 after 20 samples
+            //starts ad after 20 smiling samples and at least 1 detected face
             if(faces.length) {
                 if (!funcs.isPlaying){
                     funcs.drawFeaturePoints(image, faces[0].featurePoints);
@@ -97,7 +97,7 @@ export default class Video extends React.Component {
                     // console.log(faces[0].emojis.dominantEmoji);
                 }
             } else {
-                funcs.pauseVideo(theAd);
+                funcs.pauseVideo(theAd,timestamp);
             }
         });
 
@@ -105,7 +105,6 @@ export default class Video extends React.Component {
 
         // The API will call this function when the page has finished downloading the JavaScript for the player API, which enables you to then use the API on your page.
         window.onYouTubeIframeAPIReady = () => {
-            console.log('iframe has been connected')
             let theAd = document.getElementById("theAd");
             window.player = new YT.Player(theAd, {
                 events: {
@@ -129,7 +128,6 @@ export default class Video extends React.Component {
     render() {
         return (
             <div style={{height:600}}>
-            {  console.log("The State",this.state)}
               <div id="logs">Click Play when ready . . .</div>
               <div style={{textAlign:"center"}}>
                 <i id="playButton" className="large material-icons" onClick={this.clickPlay}>play_circle_outline</i>

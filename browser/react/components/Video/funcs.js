@@ -16,10 +16,15 @@ export const preSmilyScoreAvg = (lastSmilyScore) => {
     return 0;
 }
 
-export function log(node_name, msg) {
-    const logElement = document.getElementById(node_name);
-    logElement.textContent = msg;
-    // const logAnimation = document.getElementById("logs_animation");
+export function log(node_name, txt, speak = false) {
+  if (speak){
+    let msg = new SpeechSynthesisUtterance(txt);
+    window.speechSynthesis.speak(msg);
+  }
+
+  const logElement = document.getElementById(node_name);
+  logElement.textContent = txt;
+  // const logAnimation = document.getElementById("logs_animation");
 }
 //function executes when Start button is pushed.
 export function onStart() {
@@ -54,7 +59,6 @@ export function onReset() {
 //Faces object contains probabilities for all the different expressions, emotions and appearance metrics
 
 export const startVideo = (theAd) => {
-    console.log('called start video. hide webcam. show youtube')
     var theCanvas = document.getElementById('face_video_canvas');
     theCanvas && (theCanvas.style.display = 'none');
     theAd.style.display = 'block';
@@ -63,20 +67,31 @@ export const startVideo = (theAd) => {
     log('logs', "Keep smiling!");
 }
 
-export const pauseVideo = (theAd) => {
-    console.log('pause video fired')
+export const pauseVideo = (theAd, timestamp) => {
     var theCanvas = document.getElementById('face_video_canvas');
     theCanvas.style.display = 'block'
     if (isPlaying) {
         commandYT("pauseVideo",theAd);
         theAd.style.display = "none";
-        log('logs', "Keep watching and smiling!");
+        if (!window.detector.lastPause) {
+          window.detector.lastPause = timestamp;
+          log('logs', "Keep watching and smiling!", true);
+        } else {
+          if (timestamp - window.detector.lastPause > 8){
+            log('logs', "Keep watching and smiling!", true);
+            window.detector.lastPause = timestamp
+          }
+          else {
+            log('logs', "Keep watching and smiling!");
+          }
+        }
+
     }
     isPlaying = false;
 }
 
 const commandYT = (commandName, theIframe) => {
-    console.log(`commandYT called with ${commandName}`)
+    // console.log(`commandYT called with ${commandName}`)
     theIframe = theIframe.contentWindow;
     theIframe.postMessage(`{"event":"command","func":"${commandName}","args":""}`,'*');
 }
