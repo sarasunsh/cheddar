@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 export default class Advertisers extends React.Component {
 
@@ -8,11 +9,30 @@ export default class Advertisers extends React.Component {
     super(props);
     //the props handed down include a findAds function from reducers/adsFromDb
     //                         and a selectAd function from reducers/adsFromClick
-
+    this.state = {
+      totalDollarsSpent: 0
+    }
+    this.retrieveTotalDollarsSpent = this.retrieveTotalDollarsSpent.bind(this);
   }
 
   componentDidMount(){
-    this.props.findAllAdsForAdvertiser();
+    console.log("COMPONNNNEENENENT did mount")
+    // console.log("this.props.auth.id", this.props.auth.id);
+
+    // HARD CODED THE ADVERTISER ID UNTIL AUTH FOR ADVERTISER BUILT; this.props.auth.id
+    this.props.findAllAdsForAdvertiser(2);
+    this.retrieveTotalDollarsSpent(2);
+
+
+  }
+
+  retrieveTotalDollarsSpent (advertiserId) {
+    axios.get(`api/advertiser/totalspend`)
+    .then( totalDollarsSpent => {
+      console.log("totalDollarsSpent", totalDollarsSpent);
+      this.setState({totalDollarsSpent: totalDollarsSpent.data});
+    })
+    .catch( err => console.error(err));
   }
 
   render() {
@@ -20,7 +40,7 @@ export default class Advertisers extends React.Component {
     //user is an obect with .name, .email etc, selectAd is a function to put the selected ad obj on the store, current Ads is an array of two ad objects to render in the component.
     let ads = currentAds;
     //ads is a array of objects. Each object has a url, title, id. Its also represented on the global store.
-    console.log("currentAds", currentAds);
+    // console.log("currentAds", currentAds);
 
   // CREATE THE VIDEO CARDS
 
@@ -34,16 +54,11 @@ export default class Advertisers extends React.Component {
               <a href="#!user"><img className="circle" src="img/smile/2.jpg"/></a>
               <a href="#!name"><span className="black-text name">{user ? user.name : 'Props didnt happen'} </span></a>
               <a href="#!email"><span className="black-text email">{user ? user.email : "Props didnt happen"}</span></a>
-              <a href="#!email"><span className="black-text"># Ads</span></a>
-              <a href="#!email"><span className="black-text">$ Ad Budget</span></a>
-              <a href="#!email"><span className="black-text">$ Ad Budget Spent</span></a>
+              <a href="#!email"><span className="black-text">{currentAds.length} Ads</span></a>
+              <a href="#!email"><span className="black-text">${Math.round(this.state.totalDollarsSpent)} Ad Budget Spent</span></a>
             </div>
           </li>
-          <li><a href="#!"><i className="material-icons">cloud</i>First Link With Icon</a></li>
-          <li><a href="#!">Second Link</a></li>
           <li><div className="divider"></div></li>
-          <li><a className="subheader">Subheader</a></li>
-          <li><a className="waves-effect" href="#!">Third Link With Waves</a></li>
         </ul>
         <a href="#" data-activates="slide-out" className="button-collapse"><i className="material-icons">menu</i></a>
         <div className="container videocards">

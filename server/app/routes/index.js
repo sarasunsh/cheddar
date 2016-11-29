@@ -5,13 +5,14 @@ const router = require('express').Router();
 var Ads = require('../../db/models').Ad;
 var User = require('../../db/models').User;
 const View = require('../../db/models').View;
-
+const Advertiser = require('../../db/models').Advertiser;
 
 module.exports = router;
 
 router.use('/auth', require('./auth'));
 router.use('/views', require('./views'));
 router.use('/ad', require('./ad'));
+router.use('/advertiser', require('./advertiser'));
 
 router.get('/videos', (req,res) => {
   if(req.user){
@@ -36,15 +37,15 @@ router.get('/videos', (req,res) => {
   }
 })
 
-router.get('/advertisers/:advertiserId', (req,res) => {
+// router.get('/advertisers/:advertiserId', (req,res) => {
 
-  // Right now, we are not using the advertiserId
-  Ads.findAll({
-    // limit: 2,
-    order: [['id', 'DESC']]
-  })
-  .then(ads => res.json(ads))
-})
+//   // Right now, we are not using the advertiserId
+//   Ads.findAll({
+//     // limit: 2,
+//     order: [['id', 'DESC']]
+//   })
+//   .then(ads => res.json(ads))
+// })
 
 
 // Make sure this is after all of
