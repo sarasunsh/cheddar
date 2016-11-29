@@ -17,7 +17,7 @@ module.exports = {
         'Cars',
         'Beauty'
     ],
-    ages : ['18-30', '31-40', '41-60', 'over 61'],
+    age : ['18-30', '31-40', '41-60', 'over 61'],
     'petOwner': [true, false],
 }
 ;

@@ -1,6 +1,13 @@
 const constants = require('../../../server/db/constants');
 
+
 export function filterFunc(dataArr, filters){
+    // const constants = {
+    //     'gender': ['male', 'female'],
+    //     'petOwner': [true, false],
+    //     'age': ['18-30', '31-40', '41-60', 'over 61']
+    // };
+
     const toggledFilters = Object.keys(filters).filter(key => filters[key])
 
     if (toggledFilters.length === 0){
