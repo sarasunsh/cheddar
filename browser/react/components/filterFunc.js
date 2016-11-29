@@ -1,13 +1,16 @@
 const constants = require('../../../server/db/constants');
 
 
+// filterFunc takes in the raw data on an ad's views and a filters object which will look like this:
+// {
+//     'gender': false,
+//     'age': false,
+//     'petOwner': false
+// }
+// It will then iteratively filter the data according to those filters that had been marked as true
+// and calculate average smile score for each category
+// Most of the code below is devoted to reformatting the data so it matches what the Recharts data viz library expects
 export function filterFunc(dataArr, filters){
-    // const constants = {
-    //     'gender': ['male', 'female'],
-    //     'petOwner': [true, false],
-    //     'age': ['18-30', '31-40', '41-60', 'over 61']
-    // };
-
     const toggledFilters = Object.keys(filters).filter(key => filters[key])
 
     if (toggledFilters.length === 0){
@@ -45,6 +48,8 @@ export function filterFunc(dataArr, filters){
         }
 
         // We only want to keep the rows that had all the correct filter applied to them
+        // e.g. because of the iterative nature of how the data is plit, if both gender and petOwnership
+        // were chosen as filters, there will be a row that only had gender-filter applied to it, and that is screened out here based on filterCount, which was calculated above
         const realResult = {};
         const resultKeys = Object.keys(result);
         for (var i = 0; i < resultKeys.length; i++) {
