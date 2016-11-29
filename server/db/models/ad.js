@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
+const constants = require('../constants');
 
 const Views = require('./view');
 
@@ -17,7 +18,7 @@ const Ad = db.define('ad', {
       allowNull: false
     },
     category: {
-        type: Sequelize.STRING
+        type: Sequelize.ENUM(constants.categories)
     }
 });
 

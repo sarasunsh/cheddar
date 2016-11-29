@@ -1,11 +1,10 @@
 const casual = require('casual');
+const constants = require('./constants');
 
 const NUMBER_OF_ADS = 20;
 const NUMBER_OF_ADVERTISERS = 5;
 const NUMBER_OF_USERS = 200;
 const NUMBER_OF_VIEWS = 500;
-
-const gender = ['male', 'female'];
 
 const URLs = [
     'Dfj3Ot9mtwA',
@@ -16,33 +15,12 @@ const URLs = [
     '2_9FKYmR75g'
 ];
 
-// const income = [
-//     'Less than $25,000',
-//     '$25,000 to $34,999',
-//     '$35,000 to $49,999',
-//     '$50,000 to $74,999',
-//     '$75,000 to $99,999',
-//     '$100,000 to $149,999',
-//     '$150,000 or more'
-// ];
-
-const categories = [
-    'Pets',
-    'Health & Fitness',
-    'Household Goods',
-    'Sports',
-    'Cars',
-    'Beauty'
-];
-
-const ages = ['18-30', '31-40', '41-60', 'over 61']
-
 const userModel = casual.define('userModel', () => {
   return {
     name: casual.full_name,
     email: casual.email,
-    age: casual.random_element(ages),
-    gender: casual.random_element(gender),
+    age: casual.random_element(constants.ages),
+    gender: casual.random_element(constants.gender),
     petOwner: casual.boolean,
     // income: casual.random_element(income),
     password: casual.password
@@ -53,7 +31,7 @@ const adModel = casual.define('adModel', () => {
   return {
     title: casual.catch_phrase,
     url: casual.random_element(URLs),
-    category: casual.random_element(categories),
+    category: casual.random_element(constants.categories),
     cost: parseFloat(Math.round(casual.double(.5, 20) * 100) / 100).toFixed(2),
     advertiserId: casual.integer(1, NUMBER_OF_ADVERTISERS)
   }

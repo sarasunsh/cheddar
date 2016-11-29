@@ -1,10 +1,6 @@
-export function filterFunc(dataArr, filters){
-    const filterVals = {
-        'gender': ['male', 'female'],
-        'petOwner': [true, false],
-        'age': ['18-30', '31-40', '41-60', 'over 61']
-    };
+const constants = require('../../../server/db/constants');
 
+export function filterFunc(dataArr, filters){
     const toggledFilters = Object.keys(filters).filter(key => filters[key])
 
     if (toggledFilters.length === 0){
@@ -21,7 +17,7 @@ export function filterFunc(dataArr, filters){
             if (filters[category]){ // check if filter category is marked as true
                 filterCount += 1;
                 // If the filter has been marked as true, pull out the "bins" for that specific filter (e.g. male/female for gender)
-                const valsToTest = filterVals[filterKeys[i]];
+                const valsToTest = constants[filterKeys[i]];
 
                 // Apply each filter bin to the data
                 for (let j = 0; j < valsToTest.length; j++) {
