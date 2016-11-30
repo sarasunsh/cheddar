@@ -13,6 +13,8 @@ export default class Video extends React.Component {
         }
         this.clickPlay = this.clickPlay.bind(this);
         this.onPlayerStateChange = this.onPlayerStateChange.bind(this);
+
+        this.progressBar = this.progressBar.bind(this);
         this.width = 640,
         this.height = 480;
         this.url = `https://www.youtube.com/embed/${this.props.currentAd.url}?enablejsapi=1&controls=0&showinfo=0&iv_load_policy=3&rel=0`;
@@ -40,7 +42,7 @@ export default class Video extends React.Component {
             funcs.onStop();
             axios.post(`api/views/${this.props.user.id}/${this.props.currentAd.id}`, {smilyScore: finalSmile})
                  .catch(err => console.log(err));
-            setTimeout(() => browserHistory.push('/ads'), 1000);
+            setTimeout(() => browserHistory.push('/ads'), 3000);
             //that would be the reacty way to do it, but I'm having problems re-initializing the youtube API, so we'll clear the window when this is over.
             // location.pathname = '/ads'
 
@@ -48,8 +50,8 @@ export default class Video extends React.Component {
     }
 
     componentDidMount(){
-        //if there is not a url on the current ad, then this page was retrieved in error. 
-        //Like. the video component should ONLY be rendered as a result of setting 
+        //if there is not a url on the current ad, then this page was retrieved in error.
+        //Like. the video component should ONLY be rendered as a result of setting
         //the store from the ads component. So. Redirect ill gotten requests.
         if(!this.props.currentAd.url){
             browserHistory.push('/ads')
@@ -78,7 +80,7 @@ export default class Video extends React.Component {
 
         //Add a callback to notify when the detector is initialized and ready for running.
         window.detector.addEventListener("onInitializeSuccess", () => {
-            funcs.log('logs', "Smile to start the video!");  // Dots are first displayed
+            funcs.log('logs', "Smile to start the video!",true);
             //Display canvas instead of video feed because we want to draw the feature points on it
             $("#face_video_canvas").css("display", "block"); // this is the ID on the <canvas> that actually displays the video
             $("#face_video").css("display", "none");  // affdex creates a <video> tag with face_video to capture video from the webcam but this does not display the video
@@ -92,21 +94,23 @@ export default class Video extends React.Component {
         // faces is an array, always accessing the first element which is ONE face as opposed to many, first element is an object with the features of the face for ONE frame
         // image is unknown (can be checked out later)
         window.detector.addEventListener("onImageResultsSuccess", (faces, image, timestamp) => {
-            //checking the average Score, playing the video if its above 50 after 20 samples
+            //starts ad after 20 smiling samples and at least 1 detected face
             if(faces.length) {
                 if (!funcs.isPlaying){
                     funcs.drawFeaturePoints(image, faces[0].featurePoints);
-                    if (funcs.preSmilyScoreAvg(faces[0].expressions.smile) > 20){
+                    if (funcs.preSmilyScoreAvg(faces[0].expressions.smile) > 10){
                         funcs.startVideo(theAd);
                     }
                 } else {
                     funcs.smilyScoreAvg(faces[0].expressions.smile);
-                    this.setState({determinate: true, progress: `${funcs.smilyScore[0]}%`});
+                    this.setState({determinate: true, progress: `${funcs.preSmilyScoreAvg(faces[0].expressions.smile)}%`});
+                    // this.setState({determinate: true, progress: `${funcs.smilyScore[0]}%`});
+
                     // console.log("smilyScore!",funcs.smilyScore[0]);
                     // console.log(faces[0].emojis.dominantEmoji);
                 }
             } else {
-                funcs.pauseVideo(theAd);
+                funcs.pauseVideo(theAd,timestamp);
             }
         });
 
@@ -114,7 +118,6 @@ export default class Video extends React.Component {
 
         // The API will call this function when the page has finished downloading the JavaScript for the player API, which enables you to then use the API on your page.
         window.onYouTubeIframeAPIReady = () => {
-            console.log('iframe has been connected')
             let theAd = document.getElementById("theAd");
             window.player = new YT.Player(theAd, {
                 events: {
@@ -138,35 +141,65 @@ export default class Video extends React.Component {
         console.log('componentWillUnmount')
     }
 
+    progressBar(){
+
+        if(this.state.determinate) {
+
+            if(+this.state.progress.slice(0,-1) > 66) {
+                return "determinate green";
+            }
+            else if (+this.state.progress.slice(0,-1) > 33) {
+                return "determinate yellow";
+            }
+            else {
+                return "determinate red";
+            }
+        } else {
+            return "indeterminate";
+
+        }
+
+    }
+
     render() {
         return (
             <div style={{height: this.height}}>
-            <div id="logs"> Click Play when ready . . .</div>
-            <div style={{textAlign:"center"}}>
-                <i id="playButton" 
-                className="large material-icons" 
-                onClick={this.clickPlay}>
-                play_circle_outline
-                </i>
-            </div>
-            <div id="affdex_elements">
-            </div>
-            <iframe
-                style={{display: 'none'}}
-                src={this.url}
-                width={this.width}
-                height={this.height}
-                frameBorder='0'
-                id='theAd'>
-            </iframe>
-              <div className="progress">
+              <div id="logs"> Click Play when ready . . .</div>
+              <div style={{textAlign:"center"}}>
+                  <i id="playButton"
+                  className="large material-icons"
+                  onClick={this.clickPlay}>
+                  play_circle_outline
+                  </i>
+              </div>
+              <div id="affdex_elements">
+              </div>
+
+              <iframe
+                  style={{display: 'none'}}
+                  src={this.url}
+                  width={this.width}
+                  height={this.height}
+                  frameBorder='0'
+                  id='theAd'>
+              </iframe>
+
+              <div className="progress grey lighten-2" >
                 <div
                     id="logs_animation"
-                    className={ this.state.determinate ? "determinate" : "indeterminate" }
+                    className={ this.progressBar()    }
                     style={{width: this.state.progress}}>
                 </div>
+              </div>
+              <div className={this.state.determinate && this.state.progress != "0px" ? "btn green" : "btn disabled"} style={{float: "right"}}>
+                SmileMeter
               </div>
             </div>
         )
     }
 }
+
+
+/*
+(function () {  return "progress green";})()
+*/

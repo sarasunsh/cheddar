@@ -12,9 +12,9 @@ module.exports = {
     categories : [
         'Pets',
         'Health & Fitness',
-        'Household Goods',
-        'Sports',
-        'Cars',
+        'Food & Drink',
+        'Technology',
+        'Entertainment',
         'Beauty'
     ],
     age : ['18-30', '31-40', '41-60', 'over 61'],

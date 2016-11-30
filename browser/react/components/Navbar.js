@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
@@ -16,13 +14,13 @@ class Navbar extends React.Component {
                   <ul className="right hide-on-med-and-down">
                     {this.props.user ?
                     <div>
-                      <li><Link to='/ads'>{this.props.user.name}</Link></li>
-                      <li><Link to='/' className='btn' onClick={this.props.logoutClick}>Log out</Link></li>
+                      <li><Link to='/ads'>{this.props.user.name || this.props.user.email}</Link></li>
+                      <li><Link to='/' className='btn green lighten-1' onClick={this.props.logoutClick}>Log out</Link></li>
                     </div>
                     :
                     <div>
-                      <li><Link className='btn' to="/login">Log in</Link></li>
-                      <li><Link className='btn' to="/signup">Sign Up</Link></li>
+                      <li><Link className='btn green lighten-1' to="/login">Log in</Link></li>
+                      <li><Link className='btn green lighten-1' to="/signup">Sign Up</Link></li>
                     </div>
                     }
                   </ul>

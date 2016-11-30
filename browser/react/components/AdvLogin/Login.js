@@ -42,7 +42,7 @@ export default class Login extends React.Component {
                       required
                     />
                 </div>
-                <button type="submit" className="btn btn-block btn-primary">Login</button>
+                <button type="submit" className="btn btn-block btn-primary green lighten-1">Login</button>
             </form>
         </div>
 
