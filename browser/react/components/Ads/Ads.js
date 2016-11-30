@@ -68,7 +68,7 @@ export default class Ads extends React.Component {
             <div className="col s6">
               <div className="card">
                 <div className="card-image">
-                  <img src={`http://img.youtube.com/vi/${urlA}/maxresdefault.jpg`}/>
+                  <img src={`//img.youtube.com/vi/${urlA}/0.jpg`}/>
                   <span className="card-title">Ad 1</span>
                 </div>
                 <div className="card-content">
@@ -82,7 +82,7 @@ export default class Ads extends React.Component {
             <div className="col s6">
               <div className="card">
                 <div className="card-image">
-                  <img src={`http://img.youtube.com/vi/${urlB}/maxresdefault.jpg`}/>
+                  <img src={`//img.youtube.com/vi/${urlB}/0.jpg`}/>
                   <span className="card-title">Ad 2</span>
                 </div>
                 <div className="card-content">

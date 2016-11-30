@@ -55,8 +55,8 @@ export function onReset() {
 
 export const startVideo = (theAd) => {
     console.log('called start video. hide webcam. show youtube')
-    var theCanvas = document.getElementById('face_video_canvas');
-    theCanvas && (theCanvas.style.display = 'none');
+    var theAffdex = document.getElementById('affdex_elements');
+    theAffdex && (theAffdex.style.display = 'none');
     theAd.style.display = 'block';
     commandYT('playVideo',theAd)
     isPlaying = true;
@@ -65,8 +65,8 @@ export const startVideo = (theAd) => {
 
 export const pauseVideo = (theAd) => {
     console.log('pause video fired')
-    var theCanvas = document.getElementById('face_video_canvas');
-    theCanvas.style.display = 'block'
+    var theAffdex = document.getElementById('affdex_elements');
+    theAffdex && (theAffdex.style.display = 'block');
     if (isPlaying) {
         commandYT("pauseVideo",theAd);
         theAd.style.display = "none";

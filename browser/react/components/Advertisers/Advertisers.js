@@ -25,8 +25,6 @@ export default class Advertisers extends React.Component {
     this.props.findAllAdsForAdvertiser(2);
     this.retrieveTotalDollarsSpent(2);
      $('#addAd').modal();
-
-
   }
 
   postAd(event){
@@ -62,9 +60,7 @@ export default class Advertisers extends React.Component {
   render() {
     let {user, selectAd, currentAds} = this.props;
     //user is an obect with .name, .email etc, selectAd is a function to put the selected ad obj on the store, current Ads is an array of two ad objects to render in the component.
-    let ads = currentAds;
-    //ads is a array of objects. Each object has a url, title, id. Its also represented on the global store.
-    // console.log("currentAds", currentAds);
+
 
   // CREATE THE VIDEO CARDS
 
@@ -113,7 +109,7 @@ export default class Advertisers extends React.Component {
                     <p>Cost: ${ad.cost}</p>
                   </div>
                   <div className="card-action">
-                    <Link  onClick={() => selectAd(ad)} to="/metrics" >See Analytics</Link>
+                    <Link  onClick={() => selectAd(ad)} to={`/advertisers/${ad.id}`} >See Analytics</Link>
                   </div>
                 </div>
               )

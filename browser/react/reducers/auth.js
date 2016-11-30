@@ -48,7 +48,7 @@ export const adv_login = credentials => dispatch => {
         return res.data;
       })
       .then(redirect => browserHistory.push(redirect))
-     .catch(err => browserHistory.push('/login#failed'));
+     .catch(err => browserHistory.push('/adv_login#failed'));
 }
 
 export const signup = credentials => dispatch => {
@@ -81,7 +81,7 @@ export const adv_signup = credentials => dispatch => {
       })
      .catch(err => {
        console.error(err)
-       browserHistory.push('/signup#failed')
+       browserHistory.push('/adv_signup#failed')
      })
 }
 

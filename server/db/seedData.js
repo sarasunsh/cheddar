@@ -1,18 +1,19 @@
 const casual = require('casual');
 const constants = require('./constants');
 
-const NUMBER_OF_ADS = 20;
-const NUMBER_OF_ADVERTISERS = 5;
+const NUMBER_OF_ADS = 6;
+const NUMBER_OF_ADVERTISERS = 3;
 const NUMBER_OF_USERS = 200;
 const NUMBER_OF_VIEWS = 500;
 
 const URLs = [
-    'Dfj3Ot9mtwA',
-    'glii-kazad8',
-    '9GbS40MT6ME',
-    'kCrIy93hU60',
-    'REM3sD7FatY',
-    '2_9FKYmR75g'
+  'HU80R7jGanE',
+  '-fPwpymO1bs',
+  '2zfqw8nhUwA',
+  'VPKXAToDr-M',
+  'AQ2w9gV1yeM',
+  '8F4LiqYzBZY',
+  'XmQSRqxRIJw'
 ];
 
 const userModel = casual.define('userModel', () => {
@@ -32,7 +33,7 @@ const adModel = casual.define('adModel', () => {
     title: casual.catch_phrase,
     url: casual.random_element(URLs),
     category: casual.random_element(constants.categories),
-    cost: parseFloat(Math.round(casual.double(.5, 20) * 100) / 100).toFixed(2),
+    cost: parseFloat(Math.round(casual.double(.5, 5) * 100) / 100).toFixed(2),
     advertiserId: casual.integer(1, NUMBER_OF_ADVERTISERS)
   }
 })
@@ -50,7 +51,7 @@ const advertiserModel = casual.define('advertiserModel', () => {
   return {
     name: casual.title,
     email: casual.email,
-    password: casual.password
+    password: "password"
   }
 })
 
@@ -66,4 +67,4 @@ const dataGenerator = (times, generator) => {
 exports.ads = dataGenerator(NUMBER_OF_ADS, casual._adModel);
 exports.users = dataGenerator(NUMBER_OF_USERS, casual._userModel);
 exports.views = dataGenerator(NUMBER_OF_VIEWS, casual._viewModel);
-exports.advertisers = dataGenerator(NUMBER_OF_VIEWS, casual._advertiserModel);
+exports.advertisers = dataGenerator(NUMBER_OF_ADVERTISERS, casual._advertiserModel);
