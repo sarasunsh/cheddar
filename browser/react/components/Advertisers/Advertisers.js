@@ -30,6 +30,13 @@ export default class Advertisers extends React.Component {
   postAd(event){
     event.preventDefault();
     console.log(event.target.url.value)
+    let videoId = /\?v=(\w*)/
+    try{
+      console.log(event.target.url.value.match(videoId)[1])
+    }catch(err){
+      console.log(err)
+      alert('the url wasn\'t what I expected')
+    }
   }
 
   addUrl(event){
@@ -46,6 +53,9 @@ export default class Advertisers extends React.Component {
     } else {
       iframe.style.display = 'none';
     }
+
+
+
   }
 
   formatCost(event){
