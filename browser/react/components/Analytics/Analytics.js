@@ -13,18 +13,21 @@ export default class Analytics extends Component {
                 'gender': false,
                 'age': false,
                 'petOwner': false,
-                'income':false
+                'income':false,
+                maritalStatus: false,
+                'education': false
             },
             total: 0,
             count: 0,
-            graphData: [ [ ['Overall'], [ {name: 'Average', data: [0] } ] ] ],
+            graphData: [ [ ['Overall'], [ { data: [] } ] ] ],
             disabled: false
         }
         this.toggleClick = this.toggleClick.bind(this);
     }
 
     componentDidMount(){
-        axios.get(`/api/ad/2`)
+        axios.get(`/api/ad/${this.props.adChoice.id}`)
+        // axios.get(`/api/ad/2`)
         .then(res => {
             const filtered = filterFunc(res.data[2], this.state.filters)
             this.setState({
@@ -38,21 +41,17 @@ export default class Analytics extends Component {
     }
 
     toggleClick(fltr){
-        let newFilters = Object.assign(this.state.filters, {[fltr]: !this.state.filters[fltr]});
+        const newFilters = Object.assign(this.state.filters, {[fltr]: !this.state.filters[fltr]});
         const newData = filterFunc(this.state.rawData, newFilters);
+        const bool = (Object.keys(newFilters).filter(key => newFilters[key]).length < 2) ? false: true;
+        this.setState({
+            filters: newFilters,
+            graphData: newData,
+            disabled: bool
+        });
 
-        if (Object.keys(newFilters).filter(key => newFilters[key]).length < 2) {
-            this.setState({
-                filters: newFilters,
-                graphData: newData,
-                disabled: false
-            });
-        } else {
-            this.setState({
-                filters: newFilters,
-                graphData: newData,
-                disabled: true
-            });
+        if (bool) {
+            Materialize.toast('You can only select up to two filters. If you would like to add another filter, please first remove one of the current selections.', 3000, 'rounded')
         }
     }
 
@@ -60,36 +59,65 @@ export default class Analytics extends Component {
         const filters = Object.keys(this.state.filters)
         const configArr = this.state.graphData.map(set => generateConfig(set[0], set[1]))
         if (configArr.length < 2) {
-            configArr.map(config => config['legend'] = {enabled:false})
+            configArr.map(config => config['legend'] = {enabled:false}) // generate config objects for chart
         }
 
-        return (
-            <div>
-              <h5>{this.state.count} people have watched this ad.</h5>
-              <h5>{this.state.total} has been paid out to viewers for this ad.</h5>
-              <div className="col s4">
-                <div style={this.state.disabled ? {visibility:"visible"} : {visibility:"hidden"}} className="card-panel teal lighten-4 z-depth-5">You can only select up to two filters. Please unselect one filter in order to add another.</div>
+    return (
+      <div id="ads">
+        <ul id="slide-out" className="side-nav fixed">
+            <div className="userView">
+              {/*    <table>
+                    <thead>
+                      <tr>
+                          <th data-field="id">Views</th>
+                          <th data-field="name">Cost Per View</th>
+                          <th data-field="price">Total Spend</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr>
+                        <td>{this.state.count}</td>
+                        <td>{this.props.adChoice.cost}</td>
+                        <td>{this.state.total}</td>
+                      </tr>
+                    </tbody>
+                  </table> */}
+                 <div className="card-panel teal lighten-4 z-depth-3">
+                    <li>Views: {this.state.count}</li>
+                    <li>Cost Per View: {`$${this.props.adChoice.cost}`}</li>
+                    <li>Total Spend: {this.state.total}</li>
+                 </div>
+
+                  <h6>Filter by demographic:</h6>
                 {filters.map((filterName, idx) => (
-                      <div key={idx} className="switch" onChange={() => this.toggleClick(filterName)}>
-                        <p> {filterName} </p>
-                        <label>
-                          Off
-                          <input disabled={this.state.disabled && !this.state.filters[filterName]} type="checkbox"/>
-                          <span className="lever"></span>
-                          On
-                        </label>
-                      </div>
+                      <li key={idx} className="switch" onChange={() => this.toggleClick(filterName)}>
+                        <div className="col s5">{filterName}</div>
+
+                        <div className="col s7">
+
+                            <label>
+                              Off
+                              <input disabled={this.state.disabled && !this.state.filters[filterName]} type="checkbox"/>
+                              <span className="lever"></span>
+                              On
+                            </label>
+                        </div>
+                      </li>
                     )
                 )}
-              </div>
-              <div className="col s4">
-                {configArr.map((config, idx) => (
-                        <ReactHighcharts key={idx} config={config}></ReactHighcharts>
-                    )
-                )}
-              </div>
             </div>
-        )
-    }
+        </ul>
+        <a href="#" data-activates="slide-out" className="button-collapse"><i className="material-icons">menu</i></a>
+        <div className="container videocards">
+           {configArr.map((config, idx) => (
+                  <ReactHighcharts class="center-align" key={idx} config={config}></ReactHighcharts>
+              )
+          )}
+        </div>
+      </div>
+    )
+  }
 }
+
 

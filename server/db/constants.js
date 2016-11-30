@@ -18,6 +18,17 @@ module.exports = {
         'Beauty'
     ],
     age : ['18-30', '31-40', '41-60', 'over 61'],
-    'petOwner': [true, false],
+    'petOwner': ['Dog', 'Cat', 'Both', 'Neither'],
+    'maritalStatus' : ['Married', 'Widowed', 'Divorced', 'Single'],
+    'education':
+        ["Less than high school",
+        "High school graduate (includes equivalency)",
+        "Some college, no degree",
+        "Associate degree",
+        "Bachelor degree",
+        "Ph.D.",
+        "Graduate or professional degree"]
 }
 ;
+
+

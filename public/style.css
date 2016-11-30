@@ -38,6 +38,10 @@ nav {
   margin: 20px auto 0 auto;
 }
 
+.videotitle {
+  margin-left: 275px;
+}
+
 #theAd {
   width: 640px;
   height: 480px;
