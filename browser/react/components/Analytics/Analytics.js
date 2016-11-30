@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { filterFunc } from './filterFunc';
+import { filterFunc, generateConfig } from './filterFunc';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import ReactHighcharts from 'react-highcharts'; // Expects that Highcharts was loaded in the code.
+
 
 export default class Analytics extends Component {
     constructor(props){
@@ -16,15 +18,14 @@ export default class Analytics extends Component {
             },
             total: 0,
             count: 0,
-            graphData: [],
+            graphData: [ [ ['Overall'], [ {name: 'Average', data: [0] } ] ] ],
             disabled: false
         }
         this.toggleClick = this.toggleClick.bind(this);
     }
 
     componentDidMount(){
-        // axios.get(`/api/ad/${this.props.currentAd.id}`)
-        axios.get('/api/ad/2')
+        axios.get(`/api/ad/2`)
         .then(res => {
             const filtered = filterFunc(res.data[2], this.state.filters)
             this.setState({
@@ -57,27 +58,15 @@ export default class Analytics extends Component {
     }
 
     render(){
-        const data = this.state.graphData
         const filters = Object.keys(this.state.filters)
+        const configArr = this.state.graphData.map(set => generateConfig(set[0], set[1]))
 
-        const fillColors = ['#8884d8',"#3f51b5","#ad1457", '#e53935', '#9575cd', '#9fa8da', '#1a237e']
-        const fillDict = {
-            "Average": '#8884d8',
-            "gender:male": "#3f51b5",
-            'gender:female': "#ad1457",
-            "age:18-30": '#80cbc4',
-            "age:31-40": '#d1c4e9',
-            "age:41-60": '#9fa8da',
-            "age:over 61": '#1a237e',
-            "petOwner:true": '#66bb6a',
-            "petOwner:false": '#ffb74d'
-        }
         return (
             <div>
               <h5>{this.state.count} people have watched this ad.</h5>
               <h5>{this.state.total} has been paid out to viewers for this ad.</h5>
               <div className="col s4">
-                <div className="card-panel teal lighten-4 z-depth-5">Select up to two filters. </div>
+                <div style={this.state.disabled ? {visibility:"visible"} : {visibility:"hidden"}} className="card-panel teal lighten-4 z-depth-5">You can only select up to two filters. Please unselect one filter in order to add another.</div>
                 {filters.map((filterName, idx) => (
                       <div key={idx} className="switch" onChange={() => this.toggleClick(filterName)}>
                         <p> {filterName} </p>
@@ -90,42 +79,15 @@ export default class Analytics extends Component {
                       </div>
                     )
                 )}
-
               </div>
               <div className="col s4">
-                {data.length === 1 ?
-                     <BarChart width={600} height={300} data={data}
-                        margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-                        <XAxis dataKey="name"/>
-                        <YAxis/>
-                        <CartesianGrid strokeDasharray="3 3"/>
-                        <Tooltip/>
-                        <Legend />
-                        {Object.keys(data[0]).filter(key => key !== 'name').map((label,idx) => (
-                            <Bar key={idx} dataKey={label} fill={fillDict[label]} />
-                          )
-                        )}
-                    </BarChart>
-                    :
-                    data.map((cut, index) => (
-                            <BarChart key={index} width={600} height={300} data={cut}
-                            margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-                                <XAxis dataKey="name"/>
-                                <YAxis/>
-                                <CartesianGrid strokeDasharray="3 3"/>
-                                <Tooltip/>
-                                <Legend />
-                                {Object.keys(cut[0]).filter(key => key !== 'name').map((label,idx) => (
-                                    <Bar key={idx} dataKey={label} fill={fillDict[label]} />
-                                  )
-                                )}
-                            </BarChart>
-                        )
+                {configArr.map((config, idx) => (
+                        <ReactHighcharts key={idx} config={config}></ReactHighcharts>
                     )
-                }
+                )}
               </div>
             </div>
-        );
+        )
     }
 }
 
