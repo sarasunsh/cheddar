@@ -25,3 +25,7 @@ ads.get('/:adID', function (req, res, next) {
     .catch(err => console.log(err))
 });
 
+ads.post('/', (req,res,next)=>{
+    console.log(req.body)
+    res.sendStatus(200)
+})

@@ -20,22 +20,31 @@ export default class Advertisers extends React.Component {
 
   componentDidMount(){
     //Something better could go here. findAllAds might be refactored. Pull data for number 2 if user id doesnt happen just so it doesnt throw errors. Like I said. something better, later.
-    this.props.findAllAdsForAdvertiser(this.props.user ? this.props.user.id : 2);
-    this.retrieveTotalDollarsSpent(this.props.user ? this.props.user.id : 2);
+    this.props.findAllAdsForAdvertiser(2); //this.props.user ? this.props.user.id : 2);
+    this.retrieveTotalDollarsSpent(2); //this.props.user ? this.props.user.id : 2);
     $('#addAd').modal();
     $('select').material_select();
 
   }
 
   postAd(event){
-    event.preventDefault();
-    console.log(event.target.url.value)
+    event.preventDefault(); //don't reload the page, default submit action.
     let videoId = /\?v=(\w*)/
     try{
-      console.log(event.target.url.value.match(videoId)[1])
+      let url4db = event.target.url.value.match(videoId)[1]
+      let advertiserId = this.props.user.id;
+      let cost = +event.target.cost.value.slice(1) //This would look something like "$3.00", the database expects a float. So I'm dropping the dollar sign and coercing to a number with unary +
+      let category = event.target.category.value
+      console.log(url4db)
+      axios.post('/api/ad/', {
+        url: url4db,
+        advertiserId,
+        cost,
+        category
+      }).catch(err, console.log.bind(console))
     }catch(err){
       console.log(err)
-      alert('the url wasn\'t what I expected')
+      alert('the url wasn\'t what I expected and I didn\'t post it')
     }
   }
 
@@ -111,12 +120,13 @@ export default class Advertisers extends React.Component {
               <iframe id="YTiframe" style={{display: "none",marginLeft: "Calc(50% - 278px)"}} width="560" height="315" frameBorder="0"></iframe>
               <div className='row'>
                 <div className="input-field col s6">
-                  <select>
-                    <option value="" disabled defaultValue>Select One</option>
-                    <option value="1">Cars</option>
-                    <option value="2">Health & Fitness</option>
-                    <option value="3">Beauty</option>
-                    <option value="4">Household Goods</option>
+                  <select name='category'>
+                    <option disabled defaultValue>Select One</option>
+                    <option value="Cars">Cars</option>
+                    <option value="Health & Fitness">Health & Fitness</option>
+                    <option value="Beauty">Beauty</option>
+                    <option value="Household Goods">Household Goods</option>
+                    <option value="Entertainment">Entertainment</option>
                   </select>
                   <label>Category</label>
                 </div>
