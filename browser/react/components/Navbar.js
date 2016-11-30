@@ -14,7 +14,7 @@ class Navbar extends React.Component {
                   <ul className="right hide-on-med-and-down">
                     {this.props.user ?
                     <div>
-                      <li><Link to='/ads'>{this.props.user.name}</Link></li>
+                      <li><Link to='/ads'>{this.props.user.name || this.props.user.email}</Link></li>
                       <li><Link to='/' className='btn green lighten-1' onClick={this.props.logoutClick}>Log out</Link></li>
                     </div>
                     :
