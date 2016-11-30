@@ -15,13 +15,16 @@ export default class Advertisers extends React.Component {
     this.retrieveTotalDollarsSpent = this.retrieveTotalDollarsSpent.bind(this);
     this.addUrl = this.addUrl.bind(this)
     this.postAd = this.postAd.bind(this)
+    this.formatCost = this.formatCost.bind(this)
   }
 
   componentDidMount(){
     //Something better could go here. findAllAds might be refactored. Pull data for number 2 if user id doesnt happen just so it doesnt throw errors. Like I said. something better, later.
     this.props.findAllAdsForAdvertiser(this.props.user ? this.props.user.id : 2);
     this.retrieveTotalDollarsSpent(this.props.user ? this.props.user.id : 2);
-     $('#addAd').modal();
+    $('#addAd').modal();
+    $('select').material_select();
+
   }
 
   postAd(event){
@@ -45,6 +48,16 @@ export default class Advertisers extends React.Component {
     }
   }
 
+  formatCost(event){
+    //this is run on blur, so after entering a number, if they click outside of that form, 
+    //the number will be formatted to look like currency
+    let val = event.target.value;
+    if(val[0] === '$')  val = val.slice(1)
+    val = '$' + Number(val).toFixed(2);
+    if (val === '$NaN') val = '';
+    event.target.value = val;
+  }
+
   retrieveTotalDollarsSpent (advertiserId) {
     axios.get(`api/advertiser/totalspend`)
     .then( totalDollarsSpent => {
@@ -57,9 +70,6 @@ export default class Advertisers extends React.Component {
   render() {
     let {user, selectAd, currentAds} = this.props;
     //user is an obect with .name, .email etc, selectAd is a function to put the selected ad obj on the store, current Ads is an array of two ad objects to render in the component.
-
-
-  // CREATE THE VIDEO CARDS
 
     return (
       <div id="ads">
@@ -80,13 +90,33 @@ export default class Advertisers extends React.Component {
           <li><a className="waves-effect modal-trigger" href="#addAd">Add New Advertisement</a></li>
         </ul>
         {/* This is a modal popup that allows advertisers to add video to database */}
-        <div id="addAd" className="modal">
+        {/* Overflow: visible so that the dropdown select menu breaks out of the modal popup box  */}
+        <div id="addAd" className="modal" style={{overflow: "visible"}}>
           <form onSubmit={this.postAd}>
             <div className="modal-content"> 
-              <div className="form-group">
-                <input onInput={this.addUrl} placeholder="YouTube URL" name='url' type='text' required/>
+              <div className="input-field">
+                <input onInput={this.addUrl} id="youtubeurl"  name='url' type='text' required/>
+                <label htmlFor="youtubeurl">YouTube URL</label>
               </div>
               <iframe id="YTiframe" style={{display: "none",marginLeft: "Calc(50% - 278px)"}} width="560" height="315" frameBorder="0"></iframe>
+              <div className='row'>
+                <div className="input-field col s6">
+                  <select>
+                    <option value="" disabled defaultValue>Select One</option>
+                    <option value="1">Cars</option>
+                    <option value="2">Health & Fitness</option>
+                    <option value="3">Beauty</option>
+                    <option value="4">Household Goods</option>
+                  </select>
+                  <label>Category</label>
+                </div>
+                <div className="col s6">
+                  <div className="input-field">
+                    <input onBlur={this.formatCost} id="cost"  name='cost' type='text' required/>
+                    <label htmlFor="cost">Pay per 100% smile</label>
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="modal-footer"> 
               <button type='submit' href="#" className="btn modal-action modal-close">Add Ad!</button> 
@@ -99,7 +129,6 @@ export default class Advertisers extends React.Component {
           {
             currentAds && currentAds.map( ad => {
               return (
-
                 <div className="card small" key={ad.id}>
                   <div className="card-image">
                     <img src={`http://img.youtube.com/vi/${ad.url}/maxresdefault.jpg`}/>
