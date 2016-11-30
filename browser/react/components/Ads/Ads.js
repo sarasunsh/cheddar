@@ -66,32 +66,36 @@ export default class Ads extends React.Component {
         <div className="container videocards">
           <div className="row">
             <div className="col s6">
-              <div className="card">
-                <div className="card-image">
-                  <img src={`//img.youtube.com/vi/${urlA}/0.jpg`}/>
-                  <span className="card-title">Ad 1</span>
+              <Link  onClick={() => selectAd(ads[0])} to="/video" >
+                <div className="card">
+                  <div className="card-image">
+                    <img src={`//img.youtube.com/vi/${urlA}/0.jpg`}/>
+                    <span className="card-title">Ad 1</span>
+                  </div>
+                  <div className="card-content">
+                    <p>{titleA}</p>
+                  </div>
+                  <div className="card-action">
+                    Watch!
+                  </div>
                 </div>
-                <div className="card-content">
-                  <p>{titleA}</p>
-                </div>
-                <div className="card-action">
-                  <Link  onClick={() => selectAd(ads[0])} to="/video" >Watch Option A</Link>
-                </div>
-              </div>
+              </Link>
             </div>
             <div className="col s6">
-              <div className="card">
-                <div className="card-image">
-                  <img src={`//img.youtube.com/vi/${urlB}/0.jpg`}/>
-                  <span className="card-title">Ad 2</span>
+              <Link onClick={() => selectAd(ads[1])} to="/video" >
+                <div className="card">
+                  <div className="card-image">
+                    <img src={`//img.youtube.com/vi/${urlB}/0.jpg`}/>
+                    <span className="card-title">Ad 2</span>
+                  </div>
+                  <div className="card-content">
+                    <p>{titleB}</p>
+                  </div>
+                  <div className="card-action">
+                    Watch!
+                  </div>
                 </div>
-                <div className="card-content">
-                  <p>{titleB}</p>
-                </div>
-                <div className="card-action">
-                  <Link onClick={() => selectAd(ads[1])} to="/video" >Watch Option B</Link>
-                </div>
-              </div>
+              </Link>
             </div>
           </div>
           <div className="row">

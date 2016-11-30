@@ -18,6 +18,17 @@
   object-fit: cover;
 }
 
+.card-content {
+  text-align: center;
+  color: #000;
+}
+
+.card-action {
+  text-align: center;
+  text-transform: capitalize;
+  color: #ffb74d;
+}
+
 nav {
   padding: 0 10px;
   background-color: #ffb74d;
