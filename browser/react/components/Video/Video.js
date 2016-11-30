@@ -80,7 +80,7 @@ export default class Video extends React.Component {
 
         //Add a callback to notify when the detector is initialized and ready for running.
         window.detector.addEventListener("onInitializeSuccess", () => {
-            funcs.log('logs', "Smile to start the video!",true);
+            funcs.log('logs', "Say Cheeeeeese!",true);
             //Display canvas instead of video feed because we want to draw the feature points on it
             $("#face_video_canvas").css("display", "block"); // this is the ID on the <canvas> that actually displays the video
             $("#face_video").css("display", "none");  // affdex creates a <video> tag with face_video to capture video from the webcam but this does not display the video
