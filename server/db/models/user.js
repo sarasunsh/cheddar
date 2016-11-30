@@ -25,11 +25,17 @@ const User = db.define('user', {
       type: Sequelize.ENUM(constants.gender)
     },
     petOwner: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.ENUM(constants.petOwner)
     },
-    // income: {
-    //   type: Sequelize.ENUM(constants.income)
-    // },
+    income: {
+      type: Sequelize.ENUM(constants.income)
+    },
+    education: {
+      type: Sequelize.ENUM(constants.education)
+    },
+    maritalStatus: {
+      type: Sequelize.ENUM(constants.maritalStatus)
+    },
     password_digest: Sequelize.STRING,
     password: Sequelize.VIRTUAL,
     earnedPay: Sequelize.STRING

@@ -8,7 +8,15 @@ export function generateConfig(categories, series) {
             type: 'column'
         },
         title: {
-            text: 'Average Smile Score'
+            text: 'Average Smile Score (%)'
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                }
+            }
         },
         xAxis: {
             categories: categories,
@@ -18,7 +26,7 @@ export function generateConfig(categories, series) {
             min: 0,
             max: 100,
             title: {
-                text: '% of ad spent smiling'
+                text: 'Percent of ad spent smiling'
             }
         },
         series: series
@@ -36,7 +44,7 @@ function applyFilter(dataArr, filterVal, filterName){
 // Output: a float representing the average smile score of those Views
 function calcAvg(filteredData){
     const result = filteredData.map(obj => obj.smilyScore);
-    return result.reduce((a,b) => a+b, 0) / result.length;
+    return Math.round((result.reduce((a,b) => a+b, 0) / result.length)*100)/100;
 }
 
 // Input: raw View data for an ad and two filter categories
@@ -79,7 +87,7 @@ export function filterFunc(dataArr, filters){
     } else if (toggledFilters.length === 1){
         const valsToTest = constants[toggledFilters[0]];
         const result = valsToTest.map(val => applyFilter(dataArr, val, toggledFilters[0])).map(result => calcAvg(result))
-        return [ [ valsToTest, [ {name: toggledFilters[0], data: result} ] ] ];
+        return [ [ valsToTest, [ {name: toggledFilters[0], colorByPoint: true, data: result} ] ] ];
 
     // If two filters are selected, apply the filters in both possible orders to generate two "cuts" of data -- e.g. gender broken out by age, age broken out by gender
     } else {
