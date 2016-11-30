@@ -31,14 +31,16 @@ export default class Video extends React.Component {
     }
 
     onPlayerStateChange(state){
+        console.log('player state is ', state)
         if(state.data === YT.PlayerState.ENDED ) {
+            console.log(funcs.smilyScore)
             let finalSmile = funcs.smilyScore[0];
             document.getElementById("theAd").style.display = "none";
             funcs.log('logs', `Congratulations! Your smilyScore was ${Math.trunc(finalSmile)}`);
             funcs.onStop();
             axios.post(`api/views/${this.props.user.id}/${this.props.currentAd.id}`, {smilyScore: finalSmile})
                  .catch(err => console.log(err));
-            setTimeout(()=> browserHistory.push('/ads'), 1000);
+            setTimeout(() => browserHistory.push('/ads'), 1000);
             //that would be the reacty way to do it, but I'm having problems re-initializing the youtube API, so we'll clear the window when this is over.
             // location.pathname = '/ads'
 
@@ -138,7 +140,7 @@ export default class Video extends React.Component {
 
     render() {
         return (
-            <div style={{height:600}}>
+            <div style={{height: this.height}}>
             <div id="logs"> Click Play when ready . . .</div>
             <div style={{textAlign:"center"}}>
                 <i id="playButton" 
