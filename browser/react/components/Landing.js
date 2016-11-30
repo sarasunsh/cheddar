@@ -23,8 +23,8 @@ export default class Landing extends Component {
                   <Link className="carousel-item" href="#six!"><img src="/img/smile/6.jpg" /></Link>
                   <Link className="carousel-item" href="#seven!"><img src="/img/smile/7.jpg" /></Link>
                 </div>
-                <h5>Enhancing emotional engagement for brands.</h5>
-                <div style={{paddingTop:200,textAlign:"center"}}>
+                <h5 className="center">Enhancing emotional engagement for brands.</h5>
+                <div style={{paddingTop:150,textAlign:"center"}}>
                   <Link to='/adv_login' className="waves-effect waves-teal btn-flat">Advertiser Log In</Link>
                   <Link to='/adv_signup' className="waves-effect waves-teal btn-flat">Advertiser Sign Up</Link>
                 </div>
