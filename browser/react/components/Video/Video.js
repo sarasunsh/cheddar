@@ -42,7 +42,7 @@ export default class Video extends React.Component {
             funcs.onStop();
             axios.post(`api/views/${this.props.user.id}/${this.props.currentAd.id}`, {smilyScore: finalSmile})
                  .catch(err => console.log(err));
-            setTimeout(() => browserHistory.push('/ads'), 1000);
+            setTimeout(() => browserHistory.push('/ads'), 3000);
             //that would be the reacty way to do it, but I'm having problems re-initializing the youtube API, so we'll clear the window when this is over.
             // location.pathname = '/ads'
 
