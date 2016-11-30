@@ -4,7 +4,6 @@ import { filterFunc, generateConfig } from './filterFunc';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import ReactHighcharts from 'react-highcharts'; // Expects that Highcharts was loaded in the code.
 
-
 export default class Analytics extends Component {
     constructor(props){
         super(props)
@@ -60,6 +59,9 @@ export default class Analytics extends Component {
     render(){
         const filters = Object.keys(this.state.filters)
         const configArr = this.state.graphData.map(set => generateConfig(set[0], set[1]))
+        if (configArr.length < 2) {
+            configArr.map(config => config['legend'] = {enabled:false})
+        }
 
         return (
             <div>
