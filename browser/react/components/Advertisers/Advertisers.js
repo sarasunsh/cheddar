@@ -72,7 +72,7 @@ export default class Advertisers extends React.Component {
                     <p>Cost: ${ad.cost}</p>
                   </div>
                   <div className="card-action">
-                    <Link  onClick={() => selectAd(ad)} to="/metrics" >See Analytics</Link>
+                    <Link  onClick={() => selectAd(ad)} to={`/advertisers/${ad.id}`} >See Analytics</Link>
                   </div>
                 </div>
               )
