@@ -13,7 +13,7 @@ export default class Video extends React.Component {
         }
         this.clickPlay = this.clickPlay.bind(this);
         this.onPlayerStateChange = this.onPlayerStateChange.bind(this);
-
+        this.progressBar = this.progressBar.bind(this);
         this.url = `https://www.youtube.com/embed/${this.props.currentAd.url}?enablejsapi=1&controls=0&showinfo=0&iv_load_policy=3&rel=0`;
         //enablejsapi=1 must be appended to embed url so we can control play/pause
         //showinfo=0 and controls=0 will hide the youtube player controls
@@ -87,12 +87,12 @@ export default class Video extends React.Component {
             if(faces.length) {
                 if (!funcs.isPlaying){
                     funcs.drawFeaturePoints(image, faces[0].featurePoints);
-                    if (funcs.preSmilyScoreAvg(faces[0].expressions.smile) > 20){
+                    if (funcs.preSmilyScoreAvg(faces[0].expressions.smile) > 10){
                         funcs.startVideo(theAd);
                     }
                 } else {
                     funcs.smilyScoreAvg(faces[0].expressions.smile);
-                    this.setState({determinate: true, progress: `${faces[0].expressions.smile}%`});
+                    this.setState({determinate: true, progress: `${funcs.preSmilyScoreAvg(faces[0].expressions.smile)}%`});
                     // this.setState({determinate: true, progress: `${funcs.smilyScore[0]}%`});
 
                     // console.log("smilyScore!",funcs.smilyScore[0]);
@@ -128,6 +128,26 @@ export default class Video extends React.Component {
         apiTag.remove();
     }
 
+    progressBar(){
+
+        if(this.state.determinate) {
+
+            if(+this.state.progress.slice(0,-1) > 66) {
+                return "determinate green";
+            }
+            else if (+this.state.progress.slice(0,-1) > 33) {
+                return "determinate yellow";
+            }
+            else {
+                return "determinate red";
+            }
+        } else {
+            return "indeterminate";
+
+        }
+
+    }
+
     render() {
         return (
             <div style={{height:600}}>
@@ -146,17 +166,22 @@ export default class Video extends React.Component {
                     id='theAd'>
                 </iframe>
               </div>
-              <div className={ (function () {return "progress green";})()      }style={{backgroundColor: red}}>
+              <div className="progress grey lighten-2" >
                 <div
                     id="logs_animation"
-                    className={ this.state.determinate ? "determinate" : "indeterminate" }
-                    style={{width: this.state.progress, backgroundColor: "green"}}>
+                    className={ this.progressBar()    }
+                    style={{width: this.state.progress}}>
                 </div>
               </div>
-              <div className="waves-effect waves-light btn disabled" style={{float: "right"}}>
+              <div className={this.state.determinate && this.state.progress != "0px" ? "waves-effect waves-light btn green" : "waves-effect waves-light btn disabled"} style={{float: "right"}}>
                 SmileMeter
               </div>
             </div>
         )
     }
 }
+
+
+/*
+(function () {  return "progress green";})()
+*/
