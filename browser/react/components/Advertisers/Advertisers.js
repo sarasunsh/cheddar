@@ -18,12 +18,9 @@ export default class Advertisers extends React.Component {
   }
 
   componentDidMount(){
-    console.log("COMPONNNNEENENENT did mount")
-    // console.log("this.props.auth.id", this.props.auth.id);
-
-    // HARD CODED THE ADVERTISER ID UNTIL AUTH FOR ADVERTISER BUILT; this.props.auth.id
-    this.props.findAllAdsForAdvertiser(2);
-    this.retrieveTotalDollarsSpent(2);
+    //Something better could go here. findAllAds might be refactored. Pull data for number 2 if user id doesnt happen just so it doesnt throw errors. Like I said. something better, later.
+    this.props.findAllAdsForAdvertiser(this.props.user ? this.props.user.id : 2);
+    this.retrieveTotalDollarsSpent(this.props.user ? this.props.user.id : 2);
      $('#addAd').modal();
   }
 
@@ -36,16 +33,16 @@ export default class Advertisers extends React.Component {
     let iframe = document.getElementById('YTiframe');
     let yturl = event.target.value;
     //finds the match after ?v=, just alphanumerics. so it will stop matching it hits slashes, hashes, question marks etc.
-    yturl = yturl.match(/\?v=(\w*)/) ? yturl.match(/\?v=(\w*)/)[1] : '';
+    let videoId = /\?v=(\w*)/
+    //match returns an array. I'm capturing the part I want. But I can only return [1] if it exists... if there's no match, match returns null
+    yturl = yturl.match(videoId) ? yturl.match(videoId)[1] : '';
     //so, it will only update if there was a match for v?=
     if(yturl){
       iframe.setAttribute('src', `https://www.youtube.com/embed/${yturl}`);
       iframe.style.display = 'block';
-      console.log(yturl);
     } else {
       iframe.style.display = 'none';
     }
-
   }
 
   retrieveTotalDollarsSpent (advertiserId) {
@@ -66,6 +63,7 @@ export default class Advertisers extends React.Component {
 
     return (
       <div id="ads">
+      {/* This is the sidebar that displays user information and contains a button to activate the modal */}
         <ul id="slide-out" className="side-nav fixed">
           <li>
             <div className="userView">
@@ -81,6 +79,7 @@ export default class Advertisers extends React.Component {
           <li><div className="divider"></div></li>
           <li><a className="waves-effect modal-trigger" href="#addAd">Add New Advertisement</a></li>
         </ul>
+        {/* This is a modal popup that allows advertisers to add video to database */}
         <div id="addAd" className="modal">
           <form onSubmit={this.postAd}>
             <div className="modal-content"> 
@@ -94,6 +93,7 @@ export default class Advertisers extends React.Component {
             </div>
           </form>
         </div>
+        {/* This section will contain a list of 'video cards', one for each result pulled from database */}
         <div className="container videocards">
           <h2 className="center">Advertiser Campaign</h2>
           {
