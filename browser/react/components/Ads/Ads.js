@@ -53,7 +53,7 @@ export default class Ads extends React.Component {
               <a href=""><span className="black-text email">{user ? user.email : "Props didnt happen"}</span></a>
               <a href=""><span className="black-text">Watched {this.state.adHistory.length} ads</span></a>
               <a href=""><span className="black-text">Earned {smilyPoints} smilyPoints</span></a>
-              <a href=""><span className="btn">Cash Out</span></a>
+              <a href=""><span className="btn green lighten-1">Cash Out</span></a>
             </div>
           </li>
 {/*          <li><a href="#!"><i className="material-icons">cloud</i>First Link With Icon</a></li>

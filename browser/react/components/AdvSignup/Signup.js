@@ -51,7 +51,7 @@ export default class Auth extends React.Component {
                       required
                     />
                 </div>
-                <button type="submit" className="btn btn-block btn-primary">Signup</button>
+                <button type="submit" className="btn btn-block btn-primary green lighten-1">Signup</button>
             </form>
         </div>
       </div>
