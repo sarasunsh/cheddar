@@ -1,20 +1,45 @@
 const casual = require('casual');
 const constants = require('./constants');
 
-const NUMBER_OF_ADS = 6;
+const ads_list = {
+  "Nintendo":
+  {
+    url:'HU80R7jGanE',
+    cat:'Entertainment'
+  },
+  "Winston":
+  {
+    url:'-fPwpymO1bs',
+    cat:'Health & Fitness'
+  },
+  "Apple":{
+    url:'2zfqw8nhUwA',
+    cat:'Technology'
+  },
+  "Budweiser": {
+    url:'VPKXAToDr-M',
+    cat:'Food & Drink'
+  },
+  "Pets.com 1":{
+    url: 'AQ2w9gV1yeM',
+    cat: 'Pets'
+  },
+  "Pets.com 2":{
+    url:'8F4LiqYzBZY',
+    cat: 'Pets'
+  },
+  "Qualcomm":{
+    url:'XmQSRqxRIJw',
+    cat: 'Technology'
+  }
+};
+
+const NUMBER_OF_ADS = Object.keys(ads_list).length;
 const NUMBER_OF_ADVERTISERS = 3;
 const NUMBER_OF_USERS = 200;
 const NUMBER_OF_VIEWS = 500;
 
-const URLs = [
-  'HU80R7jGanE',
-  '-fPwpymO1bs',
-  '2zfqw8nhUwA',
-  'VPKXAToDr-M',
-  'AQ2w9gV1yeM',
-  '8F4LiqYzBZY',
-  'XmQSRqxRIJw'
-];
+
 
 const userModel = casual.define('userModel', () => {
   return {
@@ -28,11 +53,11 @@ const userModel = casual.define('userModel', () => {
   }
 })
 
-const adModel = casual.define('adModel', () => {
+const adModel = casual.define('adModel', (tmp) => {
   return {
-    title: casual.catch_phrase,
-    url: casual.random_element(URLs),
-    category: casual.random_element(constants.categories),
+    title: tmp,
+    url: ads_list[tmp].url,
+    category: ads_list[tmp].cat,
     cost: parseFloat(Math.round(casual.double(.5, 5) * 100) / 100).toFixed(2),
     advertiserId: casual.integer(1, NUMBER_OF_ADVERTISERS)
   }
@@ -64,7 +89,16 @@ const dataGenerator = (times, generator) => {
   return data;
 }
 
-exports.ads = dataGenerator(NUMBER_OF_ADS, casual._adModel);
+const adGenerator = (ads_list, generator) => {
+  let data = [];
+  for (i in ads_list) {
+    data.push(generator(i));
+  }
+
+  return data;
+}
+
+exports.ads = adGenerator(ads_list, casual._adModel);
 exports.users = dataGenerator(NUMBER_OF_USERS, casual._userModel);
 exports.views = dataGenerator(NUMBER_OF_VIEWS, casual._viewModel);
 exports.advertisers = dataGenerator(NUMBER_OF_ADVERTISERS, casual._advertiserModel);
