@@ -31,7 +31,6 @@ nav {
 }
 
 #affdex_elements {
-  display: none;
   width: 640px;
   height: 480px;
   text-align: center;
@@ -41,6 +40,8 @@ nav {
 #theAd {
   width: 640px;
   height: 480px;
+  text-align: center;
+  margin: 20px auto 0 auto;
 }
 
 #playButton {
