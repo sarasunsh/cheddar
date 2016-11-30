@@ -13,6 +13,8 @@ export default class Video extends React.Component {
         }
         this.clickPlay = this.clickPlay.bind(this);
         this.onPlayerStateChange = this.onPlayerStateChange.bind(this);
+
+        this.progressBar = this.progressBar.bind(this);
         this.width = 640,
         this.height = 480;
         this.url = `https://www.youtube.com/embed/${this.props.currentAd.url}?enablejsapi=1&controls=0&showinfo=0&iv_load_policy=3&rel=0`;
@@ -96,12 +98,14 @@ export default class Video extends React.Component {
             if(faces.length) {
                 if (!funcs.isPlaying){
                     funcs.drawFeaturePoints(image, faces[0].featurePoints);
-                    if (funcs.preSmilyScoreAvg(faces[0].expressions.smile) > 20){
+                    if (funcs.preSmilyScoreAvg(faces[0].expressions.smile) > 10){
                         funcs.startVideo(theAd);
                     }
                 } else {
                     funcs.smilyScoreAvg(faces[0].expressions.smile);
-                    this.setState({determinate: true, progress: `${funcs.smilyScore[0]}%`});
+                    this.setState({determinate: true, progress: `${funcs.preSmilyScoreAvg(faces[0].expressions.smile)}%`});
+                    // this.setState({determinate: true, progress: `${funcs.smilyScore[0]}%`});
+
                     // console.log("smilyScore!",funcs.smilyScore[0]);
                     // console.log(faces[0].emojis.dominantEmoji);
                 }
@@ -137,6 +141,26 @@ export default class Video extends React.Component {
         console.log('componentWillUnmount')
     }
 
+    progressBar(){
+
+        if(this.state.determinate) {
+
+            if(+this.state.progress.slice(0,-1) > 66) {
+                return "determinate green";
+            }
+            else if (+this.state.progress.slice(0,-1) > 33) {
+                return "determinate yellow";
+            }
+            else {
+                return "determinate red";
+            }
+        } else {
+            return "indeterminate";
+
+        }
+
+    }
+
     render() {
         return (
             <div style={{height: this.height}}>
@@ -150,6 +174,7 @@ export default class Video extends React.Component {
               </div>
               <div id="affdex_elements">
               </div>
+
               <iframe
                   style={{display: 'none'}}
                   src={this.url}
@@ -158,14 +183,23 @@ export default class Video extends React.Component {
                   frameBorder='0'
                   id='theAd'>
               </iframe>
-              <div className="progress">
+
+              <div className="progress grey lighten-2" >
                 <div
                     id="logs_animation"
-                    className={ this.state.determinate ? "determinate" : "indeterminate" }
+                    className={ this.progressBar()    }
                     style={{width: this.state.progress}}>
                 </div>
+              </div>
+              <div className={this.state.determinate && this.state.progress != "0px" ? "btn green" : "btn disabled"} style={{float: "right"}}>
+                SmileMeter
               </div>
             </div>
         )
     }
 }
+
+
+/*
+(function () {  return "progress green";})()
+*/
