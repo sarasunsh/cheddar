@@ -49,7 +49,7 @@ ReactDOM.render(
         <Route path="adv_signup" component={AdvSignupContainer} />
         <Route path="video" component={VideoContainer}  onEnter={requireAuth}/>
         <Route path="advertisers" component={AdvertisersContainer} onEnter={requireAuth}/>
-        <Route path="metrics" component={Analytics}/>
+        <Route path="advertisers/:adID" component={AnalyticsContainer} onEnter={requireAuth}/>
         <IndexRoute component={Landing}/>
       </Route>
     </Router>
