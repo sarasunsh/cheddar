@@ -41,7 +41,7 @@ export default class Advertisers extends React.Component {
         advertiserId,
         cost,
         category
-      }).catch(err, console.log.bind(console))
+      }).catch(err => console.log.bind(console))
     }catch(err){
       console.log(err)
       alert('the url wasn\'t what I expected and I didn\'t post it')

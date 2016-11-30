@@ -27,5 +27,11 @@ ads.get('/:adID', function (req, res, next) {
 
 ads.post('/', (req,res,next)=>{
     console.log(req.body)
+    Advertiser.findById(req.body.advertiserId)
+        .then(anAdvertiser => {
+            Ad.create(Object.assign({title: 'Ad by ' + (anAdvertiser.advertiser_name || 'Ad by an advertiser')}, req.body))
+        })
+        .then(result => console.log.bind(console))
+
     res.sendStatus(200)
 })
