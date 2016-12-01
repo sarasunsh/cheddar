@@ -20,15 +20,15 @@ export default class Advertisers extends React.Component {
 
   componentDidMount(){
     //Something better could go here. findAllAds might be refactored. Pull data for number 2 if user id doesnt happen just so it doesnt throw errors. Like I said. something better, later.
-    this.props.findAllAdsForAdvertiser(2); //this.props.user ? this.props.user.id : 2);
-    this.retrieveTotalDollarsSpent(2); //this.props.user ? this.props.user.id : 2);
+    this.props.findAllAdsForAdvertiser(this.props.user ? this.props.user.id : 2);
+    this.retrieveTotalDollarsSpent(this.props.user ? this.props.user.id : 2);
     $('#addAd').modal();
     $('select').material_select();
 
   }
 
   postAd(event){
-    event.preventDefault(); //don't reload the page, default submit action.
+    event.preventDefault(); //don't reload the page, which is the default submit action.
     let videoId = /\?v=(\w*)/
     try{
       let url4db = event.target.url.value.match(videoId)[1]
@@ -41,7 +41,10 @@ export default class Advertisers extends React.Component {
         advertiserId,
         cost,
         category
-      }).catch(err => console.log.bind(console))
+      }).then(()=>{
+        this.props.findAllAdsForAdvertiser(this.props.user ? this.props.user.id : 2);
+      })
+      .catch(err => console.log.bind(console))
     }catch(err){
       console.log(err)
       alert('the url wasn\'t what I expected and I didn\'t post it')
@@ -122,11 +125,11 @@ export default class Advertisers extends React.Component {
                 <div className="input-field col s6">
                   <select name='category'>
                     <option disabled defaultValue>Select One</option>
-                    <option value="Cars">Cars</option>
+                    <option value="Pets">Pets</option>
                     <option value="Health & Fitness">Health & Fitness</option>
-                    <option value="Beauty">Beauty</option>
-                    <option value="Household Goods">Household Goods</option>
+                    <option value="Food & Drink">Food & Drink</option>
                     <option value="Entertainment">Entertainment</option>
+                    <option value="Beauty">Beauty</option>
                   </select>
                   <label>Category</label>
                 </div>
@@ -151,7 +154,7 @@ export default class Advertisers extends React.Component {
               return (
                 <div className="card small" key={ad.id}>
                   <div className="card-image">
-                    <img src={`http://img.youtube.com/vi/${ad.url}/maxresdefault.jpg`}/>
+                    <img src={`http://img.youtube.com/vi/${ad.url}/0.jpg`}/>
                     <span className="card-title">{ad.title}</span>
                   </div>
                   <div className="card-content">
