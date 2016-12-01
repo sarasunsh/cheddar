@@ -112,9 +112,9 @@ color: #079eb4 !important;
 }
 
 .smile {
-  background-image: url('/img/smile/woman.jpeg');
-  background-repeat: no-repeat;
-  background-size: 100%;
+  /*Funny workaround. You can't just stack a color ontop of an image. Colors aren't rasters. linear gradients are rasters, and can be mixed with images. Like they're the same TYPE of thing. 50% transparent black on top, image on bottom.*/
+  background: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('/img/smile/woman.jpeg');
+  background-size: cover;
   padding-bottom:40%;
   height:0;
   /*overflow:hidden;*/
