@@ -12,22 +12,69 @@ export default class Landing extends Component {
     render(){
         return (
             <div>
-            <h3 className="center"> Welcome to Cheddar! </h3>
-                <h4 className="center"> A platform for people to monetize their face.<br />Say cheese to make cheddar.</h4>
-                <div className="carousel">
-                  <Link className="carousel-item" href="#one!"><img src="/img/smile/1.jpg" /></Link>
-                  <Link className="carousel-item" href="#two!"><img src="/img/smile/2.jpg" /></Link>
-                  <Link className="carousel-item" href="#three!"><img src="/img/smile/3.jpg" /></Link>
-                  <Link className="carousel-item" href="#four!"><img src="/img/smile/4.jpg" /></Link>
-                  <Link className="carousel-item" href="#five!"><img src="/img/smile/5.jpg" /></Link>
-                  <Link className="carousel-item" href="#six!"><img src="/img/smile/6.jpg" /></Link>
-                  <Link className="carousel-item" href="#seven!"><img src="/img/smile/7.jpg" /></Link>
-                </div>
-                <h5 className="center">Enhancing emotional engagement for brands.</h5>
-                <div style={{paddingTop:150,textAlign:"center"}}>
+
+               <div className="section smile">
+                    <div className="container">
+                        <div className="row">
+                           <div className="card transparent z-depth-5 welcome">
+                                <div className="card-content">
+                                    <span className="card-title welcome-title">Say cheese, get cash.</span>
+                                    <p className='welcome-text'>A new kind of ad platform, built on <br></br>consumer smiles and customer satisfaction.</p>
+                                </div>
+                                <div className="card-action">
+                                    <a href="#" className="landing-box">For Viewers</a>
+                                    <a href="#" className="landing-box">For Advertisers</a>
+                                </div>
+                           </div>
+                       </div>
+                    </div>
+               </div>
+
+              <div className="section text-center">
+                    <div className="container landing">
+                        <h5>ABOUT CHEDDAR</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus iaculis augue et ex pellentesque vestibulum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed commodo ligula quis ex dignissim mollis. Fusce ac mi vitae ipsum ornare vestibulum ac ut mauris. Aliquam ut sollicitudin lacus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc mattis ante risus, nec volutpat nibh blandit et.</p>
+                    </div>
+               </div>
+
+               <div className="section text-center blue">
+                    <div className="container landing">
+                        <h5>ABOUT US</h5>
+                            <div className="row">
+                                <div className="col s3">
+                                    <div className="bio">
+                                        Ben is beatific.
+                                    </div>
+                                </div>
+                                <div className="col s3">
+                                    <div className="bio">
+                                       Sara is sassy.
+                                    </div>
+                                </div>
+                                <div className="col s3">
+                                    <div className="bio">
+                                       Jackson is jazzy.
+                                    </div>
+                                </div>
+                                <div className="col s3">
+                                    <div className="bio">
+                                        David is dope.
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+               </div>
+               <div className="section text-center" style={{textAlign:"center"}}>
                   <Link to='/adv_login' className="waves-effect waves-teal btn-flat">Advertiser Log In</Link>
                   <Link to='/adv_signup' className="waves-effect waves-teal btn-flat">Advertiser Sign Up</Link>
                 </div>
+               <div className="section text-center green">
+                    <div className="container footer">
+                        <h5>DISCLAIMER</h5>
+                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus iaculis augue et ex pellentesque vestibulum. </p>
+                    </div>
+               </div>
+
             </div>
         );
     }

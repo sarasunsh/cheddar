@@ -13,22 +13,6 @@
   color: red;
 }
 
-.card-image img {
-  height: 230px;
-  object-fit: cover;
-}
-
-.card-content {
-  text-align: center;
-  color: #000;
-}
-
-.card-action {
-  text-align: center;
-  text-transform: capitalize;
-  color: #ffb74d;
-}
-
 nav {
   padding: 0 10px;
   background-color: #ffb74d;
@@ -104,4 +88,81 @@ color: #079eb4 !important;
 
 .progress {
     height: 30px;
+}
+
+
+.card-image img {
+  height: 230px;
+  object-fit: cover;
+}
+
+.card-content {
+  text-align: center;
+  color: #000;
+}
+
+.card-action {
+  text-align: center;
+  text-transform: capitalize;
+  color: #ffb74d;
+}
+
+.card-action.welcome {
+  font-size: 24px;
+}
+
+.smile {
+  background-image: url('/img/smile/woman.jpeg');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  padding-bottom:40%;
+  height:0;
+  /*overflow:hidden;*/
+}
+
+.card-content.welcome {
+  position: absolute;
+}
+
+.welcome {
+  width: 60%;
+  text-align: center;
+  left: 15%;
+
+}
+
+.blue {
+  background-color: #4d95ff;
+}
+
+.green {
+  background-color: #4dffb7;
+}
+
+.bio {
+  margin-top:10px;
+  border: #cdcdcd medium solid;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+.card-title.welcome-title {
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+}
+
+.landing {
+  padding: 60px;
+}
+
+.footer {
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.welcome-text {
+  color: white !important;
+  font-size: 18px;
 }
