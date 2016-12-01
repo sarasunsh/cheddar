@@ -34,6 +34,15 @@ export function generateConfig(categories, series) {
     return config;
 }
 
+export function formatFilter(str){
+    var re = /[A-Z]/g
+    if (re.exec(str)) {
+      let cap = re.exec(str)[0]
+      str = str.replace(cap, ' '+cap)
+    }
+    return str[0].toUpperCase()+str.slice(1);
+}
+
 // Input: raw View data for an ad, a filter category, a specific value for that filter
 // Output: an array of View objects that passed through filter
 function applyFilter(dataArr, filterVal, filterName){

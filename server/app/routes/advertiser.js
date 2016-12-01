@@ -29,7 +29,6 @@ function sumSmilyScoreDollarsOfAd (adId) {
   })
   .then( adViewArray =>  // array of all views of a particular ad
     {
-
       // console.log("adViewArray", adViewArray);
       var smilyScoreSum = adViewArray.reduce( (accumulator, curr) => {
           // console.log("accumulator", accumulator);
