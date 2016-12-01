@@ -10,7 +10,7 @@
 
 const request = require('supertest-as-promised')
 const {expect} = require('chai')
-const {app} = require('./index.js')
+const app = require('./index.js')
 
 describe('the home page', () =>{
     describe('when you go to the website', () => {
