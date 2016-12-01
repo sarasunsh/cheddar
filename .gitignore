@@ -3,3 +3,4 @@ node_modules
 public/bundle*
 public/js/af
 npm-debug.log
+server/app/routes/secrets.js
