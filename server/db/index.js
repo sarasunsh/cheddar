@@ -17,3 +17,4 @@ syncedDbPromise.then(function () {
 });
 
 module.exports = syncedDbPromise;
+
