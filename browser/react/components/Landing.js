@@ -72,7 +72,10 @@ export default class Landing extends Component {
                             </div>
                     </div>
                </div>
-
+               <div className="section text-center" style={{textAlign:"center"}}>
+                  <Link to='/adv_login' className="waves-effect waves-teal btn-flat">Advertiser Log In</Link>
+                  <Link to='/adv_signup' className="waves-effect waves-teal btn-flat">Advertiser Sign Up</Link>
+                </div>
                <div className="section text-center green">
                     <div className="container footer">
                         <h5>DISCLAIMER</h5>

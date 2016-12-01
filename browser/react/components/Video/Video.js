@@ -42,9 +42,13 @@ export default class Video extends React.Component {
             canvas.style.paddingTop = "20px";
             const ctx = canvas.getContext('2d');
             ctx.putImageData(window.top_smile[1], 0, 0);
+            ctx.font = "48px Happy Monkey";
+            ctx.textAlign="center";
+            ctx.strokeText(this.props.currentAd.title.split(" ")[0] + " makes me smile!", 320, 60, 600);
 
             funcs.log('logs', `Congratulations! Your smilyScore was ${Math.trunc(finalSmile)}`);
             funcs.onStop();
+            funcs.saveSmile(canvas,this.props.user.id + "_" + this.props.currentAd.id);
             axios.post(`api/views/${this.props.user.id}/${this.props.currentAd.id}`, {smilyScore: finalSmile})
                  .catch(err => console.log(err))
                  .then(() => setTimeout(() => location.pathname='/ads', 5000));
@@ -61,7 +65,7 @@ export default class Video extends React.Component {
         if(!this.props.currentAd.url){
             browserHistory.push('/ads')
         }
-        //
+
         let theAd = document.getElementById("theAd")
         const affdexContainer = document.getElementById("affdex_elements");
         window.top_smile = [0,null];
