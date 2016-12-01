@@ -1,6 +1,7 @@
 'use strict';
 
 var webpack = require('webpack');
+var babel = require('babel-register');    
 
 module.exports = {
   entry: './browser/react/app.js',
