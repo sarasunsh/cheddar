@@ -90,6 +90,11 @@ color: #d3e3ea !important;
 color: #079eb4 !important;
 }
 
+#best_smile {
+  text-align: center;
+  margin: 0 auto 0 auto;
+}
+
 #logs {
   text-align: center;
   font-size: 2em;

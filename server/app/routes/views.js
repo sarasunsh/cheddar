@@ -29,5 +29,5 @@ views.get('/adHistory', (req,res,next) => {
     } else {
         res.sendStatus(404);
     }
-    
+
 });
