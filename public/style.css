@@ -140,11 +140,32 @@ color: #079eb4 !important;
 }
 
 .bio {
-  margin-top:10px;
+  margin: 12px auto;
   border: #cdcdcd medium solid;
-  border-radius: 10px;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
+  border-radius: 10vw;
+  width: 10vw;
+  height: 10vw;
+}
+
+.bio.ben {
+  background: url('/img/ben.png');
+  background-size: cover;
+}
+.bio.sara {
+  background:url('/img/sara.jpg');
+  background-size: cover;
+}
+.bio.david {
+  background:url('/img/david.jpg');
+  background-size: cover;
+}
+.bio.jackson {
+  background:url('/img/jackson.jpg');
+  background-size: cover;
+}
+/* .bio + span means spans which are direct siblings of nodes of class bio*/
+.bio + span {
+  text-align: center;
 }
 
 .card-title.welcome-title {

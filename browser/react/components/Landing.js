@@ -13,8 +13,8 @@ export default class Landing extends Component {
         return (
             <div>
 
-               <div className="section smile">
-                    <div className="container">
+               <div className="section smile" style={{position: "relative"}}>
+                    <div className="container" style={{position: "absolute", bottom: "0"}}>
                         <div className="row">
                            <div className="card transparent z-depth-5 welcome">
                                 <div className="card-content">
@@ -42,24 +42,32 @@ export default class Landing extends Component {
                         <h5>ABOUT US</h5>
                             <div className="row">
                                 <div className="col s3">
-                                    <div className="bio">
+                                    <div className="bio ben">
+                                    </div>
+                                    <span>
                                         Ben is beatific.
-                                    </div>
+                                    </span>
                                 </div>
                                 <div className="col s3">
-                                    <div className="bio">
+                                    <div className="bio sara">
+                                    </div>
+                                    <span>                                    
                                        Sara is sassy.
-                                    </div>
+                                    </span>                                       
                                 </div>
                                 <div className="col s3">
-                                    <div className="bio">
+                                    <div className="bio jackson">
+                                    </div>
+                                    <span>
                                        Jackson is jazzy.
-                                    </div>
+                                    </span>
                                 </div>
                                 <div className="col s3">
-                                    <div className="bio">
-                                        David is dope.
+                                    <div className="bio david">
                                     </div>
+                                    <span>
+                                        David is dope.
+                                    </span>
                                 </div>
                             </div>
                     </div>
