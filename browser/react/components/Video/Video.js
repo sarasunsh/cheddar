@@ -50,12 +50,13 @@ export default class Video extends React.Component {
             funcs.onStop();
             funcs.saveSmile(canvas,this.props.user.id + "_" + this.props.currentAd.id, this.props.currentAd.title.split(" ")[0] + " makes me smile!");
             axios.post(`api/views/${this.props.user.id}/${this.props.currentAd.id}`, {smilyScore: finalSmile})
-                 .catch(err => console.log(err))
-                 .then( () =>{
-                   axios.post(`api/tweet/`, {text: this.props.currentAd.title.split(" ")[0] + " makes me smile!", smile: canvas.toDataURL("image/png")})
-                   .then(() => setTimeout(() => location.pathname='/ads', 5000))
-                   .catch(err => console.log(err))
-                 })
+                .catch(err => console.log(err))
+                .then( () =>{
+                  axios.post(`api/tweet/`, {text: this.props.currentAd.title.split(" ")[0] + " makes me smile!", smile: canvas.toDataURL("image/png").replace(/^data:image\/(png|jpg);base64,/, "")})
+                    .then(() => setTimeout(() => location.pathname='/ads', 5000))
+                    .catch(err => console.log(err))
+                })
+
 
             //that would be the reacty way to do it, but I'm having problems re-initializing the youtube API, so we'll clear the window when this is over.
             // location.pathname = '/ads'

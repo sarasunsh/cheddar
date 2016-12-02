@@ -41,7 +41,11 @@ function requireAuth (nextRouterState, replace){
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path='/' component={App}>
+      <Route path='/' component={App} onChange={(prevState, nextState) => {
+        if (nextState.location.action !== "POP") {
+          window.scrollTo(0, 0);
+        }
+      }}>
         <Route path="login" component={LoginContainer} />
         <Route path="adv_login" component={AdvLoginContainer} />
         <Route path="ads" component={AdsContainer} onEnter={requireAuth} />
