@@ -18,7 +18,7 @@ app.use(logMiddleware);
 
 // Parsing middleware
 import bodyParser from 'body-parser';
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '1mb'}));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Static middleware

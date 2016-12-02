@@ -1,13 +1,9 @@
-'use strict';
-
 import React, { Component } from 'react';
-
 import Navbar from './Navbar';
 
 export default class App extends Component {
 
   render () {
-    console.log(this.props.children.props.location.pathname === '/')
     return (
       <div>
           <Navbar/>
