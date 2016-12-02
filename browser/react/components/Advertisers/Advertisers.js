@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import Payment from '../Payment/Payment';
 
 export default class Advertisers extends React.Component {
 
@@ -23,6 +24,7 @@ export default class Advertisers extends React.Component {
     this.props.findAllAdsForAdvertiser(this.props.user ? this.props.user.id : 2);
     this.retrieveTotalDollarsSpent(this.props.user ? this.props.user.id : 2);
     $('#addAd').modal();
+    $('#addMoney').modal();
     $('select').material_select();
 
   }
@@ -63,7 +65,7 @@ export default class Advertisers extends React.Component {
 
     //so, it will only update if there was a match for v?=
     if(yturl){
-      console.log("The youtube ID as far as I can tell is: ", yturl) 
+      console.log("The youtube ID as far as I can tell is: ", yturl)
       iframe.setAttribute('src', `https://www.youtube.com/embed/${yturl}`);
       iframe.parentElement.style.display = 'block';
     } else {
@@ -75,7 +77,7 @@ export default class Advertisers extends React.Component {
   }
 
   formatCost(event){
-    //this is run on blur, so after entering a number, if they click outside of that form, 
+    //this is run on blur, so after entering a number, if they click outside of that form,
     //the number will be formatted to look like currency
     let val = event.target.value;
     if(val[0] === '$')  val = val.slice(1)
@@ -92,6 +94,7 @@ export default class Advertisers extends React.Component {
     })
     .catch( err => console.error(err));
   }
+
 
   render() {
     let {user, selectAd, currentAds} = this.props;
@@ -110,16 +113,28 @@ export default class Advertisers extends React.Component {
               <a href="#!email"><span className="black-text email">{user ? user.email : "Props didnt happen"}</span></a>
               <a href="#!email"><span className="black-text">{currentAds.length} Ads</span></a>
               <a href="#!email"><span className="black-text">${Math.round(this.state.totalDollarsSpent)} Ad Budget Spent</span></a>
+            {/*<a href="#!email"><span className="black-text">${this.props.user && Math.round(this.props.user.totalCharged)} Ad Dollars Deposited</span></a>*/}
             </div>
           </li>
           <li><div className="divider"></div></li>
+
+          <li><a type="button" className="waves-effect modal-trigger" href="#addMoney">Add Money</a></li>
           <li><a className="waves-effect modal-trigger" href="#addAd">Add New Advertisement</a></li>
         </ul>
         {/* This is a modal popup that allows advertisers to add video to database */}
         {/* Overflow: visible so that the dropdown select menu breaks out of the modal popup box  */}
+        <div id="addMoney" className="modal">
+          <div className="modal-content">
+            <Payment/>
+          </div>
+          <div className="modal-footer">
+            <button type='submit' href="#" className="btn modal-action modal-close">Close</button>
+            </div>
+        </div>
+
         <div id="addAd" className="modal">
           <form onSubmit={this.postAd}>
-            <div className="modal-content"> 
+            <div className="modal-content">
               <div className="input-field">
                 <input onInput={this.addUrl} id="youtubeurl"  name='url' type='text' required/>
                 <label htmlFor="youtubeurl">YouTube URL</label>
@@ -155,16 +170,26 @@ export default class Advertisers extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="modal-footer"> 
-              <button type='submit' href="#" className="btn modal-action modal-close">Add Ad!</button> 
+            <div className="modal-footer">
+              <button type='submit' href="#" className="btn modal-action modal-close">Add Ad!</button>
             </div>
           </form>
         </div>
         {/* This section will contain a list of 'video cards', one for each result pulled from database */}
         <div className="container videocards">
           <h2 className="center">Advertiser Campaign</h2>
+
+          { this.state.payment &&
+            <div className="card large">
+              <div className="card-content">
+                <Payment/>
+              </div>
+            </div>
+          }
+
+
           {
-            currentAds && currentAds.map( ad => {
+            !this.state.payment && currentAds && currentAds.map( ad => {
               return (
                 <div className="card small" key={ad.id}>
                   <div className="card-image">

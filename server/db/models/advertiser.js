@@ -14,6 +14,12 @@ const Advertiser = db.define('advertiser', {
           notEmpty: true
       }
     },
+    token: {
+      type: Sequelize.STRING
+    },
+    totalCharged: {
+      type: Sequelize.FLOAT
+    },
     password_digest: Sequelize.STRING,
     password: Sequelize.VIRTUAL,
 }, {
