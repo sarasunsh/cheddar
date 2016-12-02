@@ -66,14 +66,6 @@ nav {
   padding-left: 0;
 }
 
-.carousel-caption h3 {
-color: #d3e3ea !important;
-}
-
-.carousel-caption p {
-color: #079eb4 !important;
-}
-
 #best_smile {
   text-align: center;
   margin: 0 auto 0 auto;
@@ -186,4 +178,47 @@ color: #079eb4 !important;
 .welcome-text {
   color: white !important;
   font-size: 18px;
+}
+
+.filter-name {
+  font-size: 16px;
+  text-transform: capitalize;
+}
+
+.stat-box {
+  background-color: #ffeacc;
+}
+
+.turqoise {
+  background-color: #c8e6c9;
+}
+
+.stats {
+  padding-top: 60px;
+  padding-bottom: 30px;
+}
+
+.font-18 {
+  font-size: 18px;
+}
+
+
+.font-16 {
+  font-size: 16px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.gap {
+  line-height: 200%
+}
+
+.red-font {
+  color: #e57373;
+}
+
+toast {
+  background-color: red;
 }

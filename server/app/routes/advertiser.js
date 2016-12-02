@@ -6,20 +6,6 @@ const Ad = require('../../db/models').Ad;
 
 module.exports = advertisers;
 
-// Adding a new view
-/*
-
-advertisers.get('/:adID', function (req, res, next) {
-    View.findAll({
-        where: { adId: req.params.adID},
-        include: [User, Ad]
-    })
-    .then(viewData => res.send(viewData))
-    .catch(err => console.log(err))
-});
-
-*/
-
 function sumSmilyScoreDollarsOfAd (adId) {
   return View.findAll({
     where: {

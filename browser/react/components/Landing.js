@@ -51,9 +51,9 @@ export default class Landing extends Component {
                                 <div className="col s3">
                                     <div className="bio sara">
                                     </div>
-                                    <span>                                    
+                                    <span>
                                        Sara is sassy.
-                                    </span>                                       
+                                    </span>
                                 </div>
                                 <div className="col s3">
                                     <div className="bio jackson">
