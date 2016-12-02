@@ -27,7 +27,7 @@ payment.put('/token', (req, res, next) => {
   .then( advertiser =>   {
     // console.log("***** msg after updating", msg);
     advertiserHold = advertiser;
-    var amountToCharge = req.body.amount * 100;
+    var amountToCharge = +req.body.amount * 100;
     return stripe.charges.create({
       amount: amountToCharge,
       currency: "usd",
@@ -35,17 +35,24 @@ payment.put('/token', (req, res, next) => {
       description: "Example charge"
     }, function(err, charge) {
       if (err && err.type === 'StripeCardError') {
-      console.log("Note: Testing environment demo; Card has been declined and no charges made")
+      console.log("Note: Testing environment demo; Card has been declined and no charges made");
+      var newTotalCharged = +advertiserHold.totalCharged + +req.body.amount;
+      advertiser.update({totalCharged: newTotalCharged});
       // res.send(err, err.type, "Card declined");      // The card has been declined
       }
     });
   })
   .then( ignoringRightNow => {
-    var newTotalCharged = advertiserHold.totalCharged + req.body.amount;
+
+    var newTotalCharged = +advertiserHold.totalCharged + +req.body.amount;
     return advertiserHold.update({totalCharged: newTotalCharged});
 
   })
   .then( info => res.send(info))
-  .catch(err => console.log(err));
+  .catch(err => {
+
+    console.log(err)
+
+  });
 
 });
