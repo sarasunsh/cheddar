@@ -66,7 +66,7 @@ export default class Advertisers extends React.Component {
               <a href="#!email"><span className="black-text email">{user ? user.email : "Props didnt happen"}</span></a>
               <a href="#!email"><span className="black-text">{currentAds.length} Ads</span></a>
               <a href="#!email"><span className="black-text">${Math.round(this.state.totalDollarsSpent)} Ad Budget Spent</span></a>
-              <a type="button" className="btn" onClick={this.openPayment} >Add Money</a>
+              <a type="button" className="btn" onClick={this.openPayment} >{this.state.payment ? "Back to Ads" : "Add Money"}</a>
             </div>
           </li>
           <li><div className="divider"></div></li>

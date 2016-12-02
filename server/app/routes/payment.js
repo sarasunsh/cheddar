@@ -14,7 +14,7 @@ payment.put('/token', (req, res, next) => {
   // Use req.user.id in the search area
   // console.log("***** /ads req.user.id", req.user.id);
 
-  req.user.id && Advertiser.findOne({
+  req.user && Advertiser.findOne({
     where: {
       id: req.user.id
     }
@@ -32,7 +32,7 @@ payment.put('/token', (req, res, next) => {
       description: "Example charge"
     }, function(err, charge) {
       if (err && err.type === 'StripeCardError') {
-      console.log("Card has been declined")
+      console.log("Note: Testing environment demo; Card has been declined and no charges made")
       // res.send(err, err.type, "Card declined");      // The card has been declined
       }
     });

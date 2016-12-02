@@ -68,7 +68,7 @@ var PaymentForm = React.createClass({
       return <div>Error</div>;
     }
     else if (this.state.paymentComplete) {
-      return <div>Payment Complete! Your money...is MINE! Suckah...Whu-hahahahaha</div>;
+      return <div>Payment Complete!</div>;
     }
     else {
       return (<form onSubmit={this.onSubmit} >
@@ -77,7 +77,7 @@ var PaymentForm = React.createClass({
         <input type='text' name='amount' placeholder='Dollars to Add' /><br />
         <input type='text' data-stripe='number' placeholder='credit card number' maxLength='12' /><br />
         <input type='text' data-stripe='exp-month' placeholder='expiration month' maxLength='2'/><br />
-        <input type='text' data-stripe='exp-year' placeholder='expiration year' maxLength='2'/><br />
+        <input type='text' data-stripe='exp-year' placeholder='expiration year' maxLength='4'/><br />
         <input type='text' data-stripe='cvc' placeholder='cvc' maxLength='3'/><br />
         <input disabled={this.state.submitDisabled} type='submit' value='Purchase' />
       </form>);
