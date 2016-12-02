@@ -113,7 +113,7 @@ export default class Advertisers extends React.Component {
               <a href="#!email"><span className="black-text email">{user ? user.email : "Props didnt happen"}</span></a>
               <a href="#!email"><span className="black-text">{currentAds.length} Ads</span></a>
               <a href="#!email"><span className="black-text">${Math.round(this.state.totalDollarsSpent)} Ad Budget Spent</span></a>
-            <a href="#!email"><span className="black-text">${this.props.user && Math.round(this.props.user.totalCharged)} Ad Dollars Deposited</span></a>
+            {/*<a href="#!email"><span className="black-text">${this.props.user && Math.round(this.props.user.totalCharged)} Ad Dollars Deposited</span></a>*/}
             </div>
           </li>
           <li><div className="divider"></div></li>

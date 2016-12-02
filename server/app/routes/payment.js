@@ -36,10 +36,10 @@ payment.put('/token', (req, res, next) => {
     }, function(err, charge) {
       if (err && err.type === 'StripeCardError') {
       console.log("Note: Testing environment demo; Card has been declined and no charges made");
-      var newTotalCharged = +advertiserHold.totalCharged + +req.body.amount;
-      advertiser.update({totalCharged: newTotalCharged});
       // res.send(err, err.type, "Card declined");      // The card has been declined
       }
+      var newTotalCharged = +advertiserHold.totalCharged + +req.body.amount;
+      advertiser.update({totalCharged: newTotalCharged});
     });
   })
   .then( ignoringRightNow => {
