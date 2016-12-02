@@ -1,4 +1,3 @@
-'use strict';
 import path, {resolve} from 'path';
 import express from 'express';
 
@@ -13,8 +12,7 @@ var forceSsl = function (req, res, next) {
    return next();
 };
 
-let env = process.env.NODE_ENV || 'development';
-if (env === 'production') {
+if (process.env.NODE_ENV === 'production') {
      app.use(forceSsl);
 }
 // const env = require('path.join(rootPath, './server/env'));

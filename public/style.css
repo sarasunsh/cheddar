@@ -4,9 +4,9 @@
 /*
   So this iframe situation
   to make it response
-  it has to fill a container - which is size 0 until its 75% padding bottom is added. 
+  it has to fill a container - which is size 0 until its 75% padding bottom is added.
   padding bottom stretched the container to desired aspect ratio (4:3 here)
-  and the iframe without width/height attributes has no choice but to fill it (iframeContainer) 
+  and the iframe without width/height attributes has no choice but to fill it (iframeContainer)
   and that container has to be pushed around by padding around it (evenMoreIframeContainer)
  */
 .evenMoreIframeContainer {
@@ -185,6 +185,10 @@ nav {
   text-align: center;
 }
 
+.bio-text{
+  text-align: center;
+}
+
 .card-title.welcome-title {
   font-size: 48px;
   font-weight: bold;
@@ -198,6 +202,7 @@ nav {
 .footer {
   padding-left: 60px;
   padding-right: 60px;
+  color: #90caf9;
 }
 
 .welcome-text {
