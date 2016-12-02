@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { filterFunc, generateConfig, formatFilter } from './filterFunc';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import ReactHighcharts from 'react-highcharts'; // Expects that Highcharts was loaded in the code.
 
 export default class Analytics extends Component {
@@ -51,42 +50,53 @@ export default class Analytics extends Component {
         });
 
         if (bool) {
-            Materialize.toast('You can only select up to two filters. If you would like to add another filter, please first remove one of the current selections.', 2500, 'rounded')
+            Materialize.toast('You can only select two filters. If you would like to add another, please first remove one of the current selections.', 1000, 'rounded')
         }
     }
 
     render(){
+        console.log(this.state)
         const filters = Object.keys(this.state.filters)
         const configArr = this.state.graphData.map(set => generateConfig(set[0], set[1]))
         if (configArr.length < 2) {
             configArr.map(config => config['legend'] = {enabled:false}) // generate config objects for chart
         }
 
+        console.log('configArr', configArr)
+        const test = {
+            0: "trending_up",
+            1: "trending_down"
+        }
         return (
             <div id="ads">
                 <ul id="slide-out" className="side-nav fixed">
-                    <div className="userView">
-                    <div className="card-panel teal lighten-4 z-depth-3">
-                        <li>Views: {this.state.count}</li>
-                        <li>Cost Per View: {`$${this.props.adChoice.cost}`}</li>
-                        <li>Total Spend: {this.state.total}</li>
+                    <div className="stat-box z-depth-1">
+                        <div className="container stats ">
+                            <div className="font-18 bold gap red-font" >{this.props.adChoice.title}</div>
+                            <span className="font-16 bold">Total Views:</span> {this.state.count}<br></br>
+                            <span className="font-16 bold">Cost Per View:</span> {`$${this.props.adChoice.cost}`}<br></br>
+                            <span className="font-16 bold">Total Spend:</span> {this.state.total}
+                        </div>
                     </div>
+                    <div>
+                    <div className="userView">
+                            <div className="font-18 bold ">Filter by demographic</div>
+                            <hr></hr>
+                            {filters.map((filterName, idx) => (
+                                <li key={idx} className="switch" onChange={() => this.toggleClick(filterName)}>
+                                    <div className="col s7 filter-name">{formatFilter(filterName)}</div>
+                                    <div className="col s5">
+                                        <label>
 
-                    <h6>Filter by demographic:</h6>
-                    {filters.map((filterName, idx) => (
-                        <li key={idx} className="switch" onChange={() => this.toggleClick(filterName)}>
-                            <div className="col s5">{filterName}</div>
-                            <div className="col s7">
-                                <label>
-                                    Off
-                                    <input disabled={this.state.disabled && !this.state.filters[filterName]} type="checkbox"/>
-                                    <span className="lever"></span>
-                                    On
-                                </label>
-                            </div>
-                        </li>
-                        )
-                    )}
+                                            <input disabled={this.state.disabled && !this.state.filters[filterName]} type="checkbox"/>
+                                            <span className="lever"></span>
+
+                                        </label>
+                                    </div>
+                                </li>
+                                )
+                            )}
+                        </div>
                     </div>
                 </ul>
                 <a href="#" data-activates="slide-out" className="button-collapse"><i className="material-icons">menu</i></a>
@@ -104,5 +114,3 @@ export default class Analytics extends Component {
         )
     }
 }
-
-

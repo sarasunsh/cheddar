@@ -12,7 +12,7 @@ export default class Auth extends React.Component {
 
   componentDidMount(){
     if(localStorage.token) {
-      // browserHistory.push('/video')
+      // browserHistory.push('////')
     }
     $('select').material_select();
   }
@@ -46,7 +46,7 @@ export default class Auth extends React.Component {
                     <label>password</label>
                     <input
                       name="password"
-                      type="text"
+                      type="password"
                       className="form-control"
                       required
                     />
@@ -71,25 +71,3 @@ export default class Auth extends React.Component {
 
   }
 }
-
-
-/* OAuth code that was inside Render which can be put back
-
-<div className="or buffer">
-          <div className="back-line">
-            <span>OR</span>
-          </div>
-        </div>
-        <div className="buffer oauth">
-          <p>
-            <a target="_self"
-               href="/auth/google"
-               className="btn btn-social btn-google">
-            <i className="fa fa-google"></i>
-            <span>{message} with Google</span>
-            </a>
-          </p>
-        </div>
-
-
-*/

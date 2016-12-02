@@ -1,7 +1,32 @@
 * {
   box-sizing: border-box;
 }
+/*
+  So this iframe situation
+  to make it response
+  it has to fill a container - which is size 0 until its 75% padding bottom is added. 
+  padding bottom stretched the container to desired aspect ratio (4:3 here)
+  and the iframe without width/height attributes has no choice but to fill it (iframeContainer) 
+  and that container has to be pushed around by padding around it (evenMoreIframeContainer)
+ */
+.evenMoreIframeContainer {
+  padding: 0 20%;
+}
 
+.YTiframeContainer {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  padding-bottom: 75%;
+}
+.YTiframeContainer iframe {
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+/*    end  iframe situation     */
 .history {
   margin-top: -0.9em;
   padding: 5px 0;
@@ -11,22 +36,6 @@
   min-height: 5px;
   text-align: center;
   color: red;
-}
-
-.card-image img {
-  height: 230px;
-  object-fit: cover;
-}
-
-.card-content {
-  text-align: center;
-  color: #000;
-}
-
-.card-action {
-  text-align: center;
-  text-transform: capitalize;
-  color: #ffb74d;
 }
 
 nav {
@@ -82,12 +91,9 @@ nav {
   padding-left: 0;
 }
 
-.carousel-caption h3 {
-color: #d3e3ea !important;
-}
-
-.carousel-caption p {
-color: #079eb4 !important;
+#best_smile {
+  text-align: center;
+  margin: 0 auto 0 auto;
 }
 
 #logs {
@@ -99,4 +105,145 @@ color: #079eb4 !important;
 
 .progress {
     height: 30px;
+}
+
+
+.card-image img {
+  height: 230px;
+  object-fit: cover;
+}
+
+.card-content {
+  text-align: center;
+  color: #000;
+}
+
+.card-action {
+  text-align: center;
+  text-transform: capitalize;
+  color: #ffb74d;
+}
+
+.card-action.welcome {
+  font-size: 24px;
+}
+
+.smile {
+  /*Funny workaround. You can't just stack a color ontop of an image. Colors aren't rasters. linear gradients are rasters, and can be mixed with images. Like they're the same TYPE of thing. 50% transparent black on top, image on bottom.*/
+  background: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('/img/smile/woman.jpeg');
+  background-size: cover;
+  padding-bottom:40%;
+  height:0;
+  /*overflow:hidden;*/
+}
+
+.card-content.welcome {
+  position: absolute;
+}
+
+.welcome {
+  width: 60%;
+  text-align: center;
+  left: 15%;
+
+}
+
+.blue {
+  background-color: #4d95ff;
+}
+
+.green {
+  background-color: #4dffb7;
+}
+
+.bio {
+  margin: 12px auto;
+  border: #cdcdcd medium solid;
+  border-radius: 10vw;
+  width: 10vw;
+  height: 10vw;
+}
+
+.bio.ben {
+  background: url('/img/ben.png');
+  background-size: cover;
+}
+.bio.sara {
+  background:url('/img/sara.jpg');
+  background-size: cover;
+}
+.bio.david {
+  background:url('/img/david.jpg');
+  background-size: cover;
+}
+.bio.jackson {
+  background:url('/img/jackson.jpg');
+  background-size: cover;
+}
+/* .bio + span means spans which are direct siblings of nodes of class bio*/
+.bio + span {
+  text-align: center;
+}
+
+.card-title.welcome-title {
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+}
+
+.landing {
+  padding: 60px;
+}
+
+.footer {
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.welcome-text {
+  color: white !important;
+  font-size: 18px;
+}
+
+.filter-name {
+  font-size: 16px;
+  text-transform: capitalize;
+}
+
+.stat-box {
+  background-color: #ffeacc;
+}
+
+.turqoise {
+  background-color: #c8e6c9;
+}
+
+.stats {
+  padding-top: 60px;
+  padding-bottom: 30px;
+}
+
+.font-18 {
+  font-size: 18px;
+}
+
+
+.font-16 {
+  font-size: 16px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.gap {
+  line-height: 200%
+}
+
+.red-font {
+  color: #e57373;
+}
+
+toast {
+  background-color: red;
 }

@@ -2,13 +2,26 @@ const constants = require('../../../../server/db/constants');
 
 // Helper function that will return a config object for a HighCharts bar chart
 export function generateConfig(categories, series) {
+    const capCat = categories.map(cat => formatFilter(cat));
     const config =
     {
         chart: {
-            type: 'column'
+            type: 'column',
+            // borderWidth: 1,
+            plotBorderWidth: 1,
+            marginRight: 100,
+            plotBackgroundColor: '#FFFFFF',
+            plotShadow: true
         },
         title: {
-            text: 'Average Smile Score (%)'
+            text: 'Average Smile Score',
+            style: {
+                color: '#e57373',
+                fontWeight: 'bold'
+            }
+        },
+        subtitle: {
+            text: 'Percentage of the Ad Spent Smiling'
         },
         plotOptions: {
             series: {
@@ -18,16 +31,35 @@ export function generateConfig(categories, series) {
                 }
             }
         },
+        legend: {
+            align: 'right',
+            verticalAlign: 'right',
+            layout: 'vertical',
+            itemMarginTop: 10,
+            x: 0,
+            y: 100
+        },
         xAxis: {
-            categories: categories,
-            crosshair: true
+            categories: capCat,
+            labels: {
+                style: {
+                    "fontSize": "16px"
+                }
+            }
         },
         yAxis: {
             min: 0,
-            max: 100,
+            labels: {
+                format: '{value}%',
+                style: {
+                    "fontSize": "13px"
+                }
+            },
             title: {
-                text: 'Percent of ad spent smiling'
-            }
+                text: 'Time spent smiling',
+                margin: 20
+            },
+            crosshair: true
         },
         series: series
     }
@@ -35,12 +67,8 @@ export function generateConfig(categories, series) {
 }
 
 export function formatFilter(str){
-    var re = /[A-Z]/g
-    if (re.exec(str)) {
-      let cap = re.exec(str)[0]
-      str = str.replace(cap, ' '+cap)
-    }
-    return str[0].toUpperCase()+str.slice(1);
+    const result = str.replace( /([A-Z])/g, " $1" );
+    return result.charAt(0).toUpperCase() + result.slice(1); // capitalize the first letter
 }
 
 // Input: raw View data for an ad, a filter category, a specific value for that filter

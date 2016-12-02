@@ -14,6 +14,17 @@ describe('the home page', (done) =>{
         )
     })
 })
+
+//minimum viable test. get and post things to app.
+describe('fake page', () =>{
+    describe('when you go to the website', () => {
+        it('does not exist', () =>
+          request(app)
+            .get('/kitties')
+            .expect(401)
+        )
+    })
+})
 //you can log into the advertisers page with our admin account
 //so this would work by 'posting' to /adv_login with credentials and seeing that we get in OK
 //should probably test that we get denied and redirected with bad credentials.

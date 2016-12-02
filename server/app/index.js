@@ -6,7 +6,17 @@ var User = require('../db/models').User;
 import passport from 'passport';
 
 const app = express();
+var forceSsl = function (req, res, next) {
+   if (req.headers['x-forwarded-proto'] !== 'https') {
+       return res.redirect(['https://', req.get('Host'), req.url].join(''));
+   }
+   return next();
+};
 
+let env = process.env.NODE_ENV || 'development';
+if (env === 'production') {
+     app.use(forceSsl);
+}
 // const env = require('path.join(rootPath, './server/env'));
 
 // Export app
@@ -18,7 +28,7 @@ app.use(logMiddleware);
 
 // Parsing middleware
 import bodyParser from 'body-parser';
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '2mb'}));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Static middleware

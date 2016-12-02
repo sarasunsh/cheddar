@@ -12,7 +12,7 @@ export default class Auth extends React.Component {
 
   componentDidMount(){
     if(localStorage.token) {
-      // browserHistory.push('/video')
+      // browserHistory.push('////')
     }
     $('select').material_select();
   }
@@ -46,7 +46,7 @@ export default class Auth extends React.Component {
                     <label>password</label>
                     <input
                       name="password"
-                      type="text"
+                      type="password"
                       className="form-control"
                       required
                     />

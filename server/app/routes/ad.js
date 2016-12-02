@@ -30,14 +30,10 @@ ads.get('/:adID', function (req, res, next) {
 //before creating a record for the new ad, it attempts to find the name of the advertiser using the advertiser id
 //but that might be null, so it has placeholder text in that case. "Ad by an advertiser"
 ads.post('/', (req,res,next)=>{
-  Advertiser.findById(req.body.advertiserId)
-            .then(anAdvertiser => {
-                Ad.create(Object.assign({title: 'Ad by ' + (anAdvertiser.advertiser_name || 'an advertiser')}, req.body))
-            })
-            // .then(result => console.log.bind(console))
-            .then(()=>res.sendStatus(200))
-            .catch((err)=>{
-                console.log(err);
-                res.sendStats(204)
-            })
+    Ad.create(req.body)
+      .then(()=>res.sendStatus(201)) //201 CREATED
+      .catch((err)=>{
+          console.log(err)
+          res.sendStatus(406)
+      }) //406 Not Acceptable
 })

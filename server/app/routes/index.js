@@ -21,6 +21,8 @@ router.use('/ad', require('./ad'));
 router.use('/advertiser', require('./advertiser'));
 // includes GET to /ads, /totalspend
 
+router.use('/tweet', require('./tweet'));
+
 router.get('/videos', (req,res) => {
   if(req.user){
     View.findAll({

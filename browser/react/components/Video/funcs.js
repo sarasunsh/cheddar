@@ -1,3 +1,6 @@
+var FileSaver = require('file-saver');
+
+
 const preSmilyScore = [];
 export let isPlaying = false;
 export const smilyScore = [0,0]; // first element is the score, second is amount of elements
@@ -26,6 +29,13 @@ export function log(node_name, txt, speak = false) {
   logElement.textContent = txt;
   // const logAnimation = document.getElementById("logs_animation");
 }
+
+export function saveSmile(canvas,id,txt) {
+  canvas.toBlob(function(blob) {
+    FileSaver.saveAs(blob, id + ".png");
+  });
+}
+
 //function executes when Start button is pushed.
 export function onStart() {
     if (window.detector && !window.detector.isRunning) {

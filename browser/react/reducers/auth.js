@@ -32,7 +32,7 @@ export default function reducer (currentUser = null, action) {
 export const login = credentials => dispatch => {
   axios.post('/api/auth/login', credentials)
       .then((res) => {
-        localStorage.setItem('token', JSON.stringify(credentials.email))
+        localStorage.setItem('token', "user")
         dispatch(retrieveLoggedInUser());
         return res.data;
       })
@@ -43,7 +43,7 @@ export const login = credentials => dispatch => {
 export const adv_login = credentials => dispatch => {
   axios.post('/api/auth/adv_login', credentials)
       .then((res) => {
-        localStorage.setItem('token', JSON.stringify(credentials.email))
+        localStorage.setItem('token', "adv")
         dispatch(retrieveLoggedInUser());
         return res.data;
       })
@@ -54,7 +54,7 @@ export const adv_login = credentials => dispatch => {
 export const signup = credentials => dispatch => {
   axios.post('/api/auth/signup', credentials)
       .then(res => {
-        localStorage.setItem('token', JSON.stringify(credentials.email))
+        localStorage.setItem('token', "user")
         if(res.status === 200) dispatch(retrieveLoggedInUser());
         //res.data will be the redirect url path
         return res.data;
@@ -71,7 +71,7 @@ export const signup = credentials => dispatch => {
 export const adv_signup = credentials => dispatch => {
   axios.post('/api/auth/adv_signup', credentials)
       .then(res => {
-        localStorage.setItem('token', JSON.stringify(credentials.email))
+        localStorage.setItem('token', "adv")
         if(res.status === 200) dispatch(retrieveLoggedInUser());
         //res.data will be the redirect url path
         return res.data;
@@ -85,14 +85,18 @@ export const adv_signup = credentials => dispatch => {
      })
 }
 
-export const retrieveLoggedInUser = () => dispatch => {
+export const retrieveLoggedInUser = (type) => dispatch => {
   axios.get('/api/auth/me')
       .then(res => {
         dispatch(set(res.data))
       })
       .catch(err => {
         localStorage.removeItem('token');
-        browserHistory.push('/login');
+        if (type === "user"){
+          browserHistory.push('/login');
+        } else {
+          browserHistory.push('/adv_login');
+        }
         console.error('retrieveLoggedInUser unsuccessful', err)
       });
 }
@@ -102,6 +106,6 @@ export const logout = () => dispatch => {
     dispatch(remove())
     localStorage.removeItem('token');
     axios.get('api/auth/logout')
-    .then(res => browserHistory.push('/login'))
+    .then(res => browserHistory.push('/'))
     .catch(err => console.error('logout unsuccessful', err));
 }
