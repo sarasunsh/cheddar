@@ -29,7 +29,7 @@ function fetchInitialData (type) {
 
 function requireUserAuth (nextRouterState, replace){
   fetchInitialData("user");
-  if (!localStorage.token) {
+  if (!localStorage.token || localStorage.token === "adv") {
     replace({
       pathname: '/login',
       state: { nextPathname: nextRouterState.location.pathname }
@@ -39,7 +39,7 @@ function requireUserAuth (nextRouterState, replace){
 
 function requireAdvAuth (nextRouterState, replace){
   fetchInitialData("adv");
-  if (!localStorage.token) {
+  if (!localStorage.token || localStorage.token === "user") {
     replace({
       pathname: '/adv_login',
       state: { nextPathname: nextRouterState.location.pathname }

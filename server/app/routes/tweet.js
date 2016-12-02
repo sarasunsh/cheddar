@@ -1,10 +1,10 @@
 const tweet = require('express').Router();
-
 module.exports = tweet;
+const Twit = require('twit')
 
-var Twit = require('twit')
 import {ConsumerSecret, AccessToken, AccessTokenSecret} from './secrets'
-var T = new Twit({
+
+const T = new Twit({
   consumer_key: 'TV3YMBpYLAc0OkVnkribGBx8B',
   consumer_secret: ConsumerSecret,
   access_token: AccessToken,
