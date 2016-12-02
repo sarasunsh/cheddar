@@ -117,6 +117,7 @@ export default class Analytics extends Component {
     }
 }
 
+
 //                     <ul className="collapsible" data-collapsible="accordion">
 //                         {configArr.map((config, idx) => (
 //                             <li key={idx}>
