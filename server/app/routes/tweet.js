@@ -2,8 +2,13 @@ const tweet = require('express').Router();
 module.exports = tweet;
 const Twit = require('twit')
 
-import {ConsumerSecret, AccessToken, AccessTokenSecret} from './secrets'
-
+if (process.env.NODE_ENV === 'production') {
+  var ConsumerSecret = process.env.twit_ConsumerSecret;
+  var AccessToken = process.env.twit_AccessToken;
+  var AccessTokenSecret = process.env.twit_AccessTokenSecret;
+} else {
+  var {ConsumerSecret, AccessToken, AccessTokenSecret} = require('./secrets')
+}
 const T = new Twit({
   consumer_key: 'TV3YMBpYLAc0OkVnkribGBx8B',
   consumer_secret: ConsumerSecret,
