@@ -115,16 +115,20 @@ export default class Advertisers extends React.Component {
         </ul>
         {/* This is a modal popup that allows advertisers to add video to database */}
         {/* Overflow: visible so that the dropdown select menu breaks out of the modal popup box  */}
-        <div id="addAd" className="modal" style={{overflow: "visible"}}>
+        <div id="addAd" className="modal">
           <form onSubmit={this.postAd}>
             <div className="modal-content"> 
               <div className="input-field">
                 <input onInput={this.addUrl} id="youtubeurl"  name='url' type='text' required/>
                 <label htmlFor="youtubeurl">YouTube URL</label>
               </div>
-              <iframe id="YTiframe" style={{display: "none",marginLeft: "Calc(50% - 278px)"}} width="560" height="315" frameBorder="0"></iframe>
+              <div className="evenMoreIframeContainer">
+                <div className="YTiframeContainer">
+                  <iframe id="YTiframe" style={{display: "none"}}></iframe>
+                </div>
+              </div>
               <div className='row'>
-                <div className="input-field col s6">
+                <div className="input-field col s4">
                   <select name='category'>
                     <option disabled defaultValue>Select One</option>
                     <option value="Pets">Pets</option>
@@ -135,10 +139,16 @@ export default class Advertisers extends React.Component {
                   </select>
                   <label>Category</label>
                 </div>
-                <div className="col s6">
+                <div className="col s4">
                   <div className="input-field">
                     <input onBlur={this.formatCost} id="cost"  name='cost' type='text' required/>
                     <label htmlFor="cost">Pay per 100% smile</label>
+                  </div>
+                </div>
+                <div className="col s4">
+                  <div className="input-field">
+                    <input  id="title"  name='title' type='text' required/>
+                    <label htmlFor="title">Advertiser's Name</label>
                   </div>
                 </div>
               </div>

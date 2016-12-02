@@ -1,7 +1,32 @@
 * {
   box-sizing: border-box;
 }
+/*
+  So this iframe situation
+  to make it response
+  it has to fill a container - which is size 0 until its 75% padding bottom is added. 
+  padding bottom stretched the container to desired aspect ratio (4:3 here)
+  and the iframe without width/height attributes has no choice but to fill it (iframeContainer) 
+  and that container has to be pushed around by padding around it (evenMoreIframeContainer)
+ */
+.evenMoreIframeContainer {
+  padding: 0 20%;
+}
 
+.YTiframeContainer {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  padding-bottom: 75%;
+}
+.YTiframeContainer iframe {
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+/*    end  iframe situation     */
 .history {
   margin-top: -0.9em;
   padding: 5px 0;
