@@ -35,6 +35,7 @@ advertisers.get('/ads', (req, res, next) => {
 
   // Use req.user.id in the search area
   // console.log("***** /ads req.user.id", req.user.id);
+  // console.log("**** at /ads req.user", req.user)
 
   req.user && Ad.findAll({
     where: {
@@ -55,6 +56,7 @@ advertisers.get('/totalspend/', (req, res, next) => {
   // console.log("****** /totalspend req.user.id ", req.user.id);
 
   // Use req.user.id in the search area
+  // console.log("**** at /totalspend req.user", req.user)
 
   req.user && Ad.findAll({
     where: {

@@ -19,9 +19,12 @@ router.use('/ad', require('./ad'));
 // ad includes a POST to '/' which creates a new ad
 //           and GET  to  '/:adID' which returns metrics on a particular ad.
 router.use('/advertiser', require('./advertiser'));
+router.use('/payment', require('./payment'));
+
 // includes GET to /ads, /totalspend
 
 router.use('/tweet', require('./tweet'));
+
 
 router.get('/videos', (req,res) => {
   if(req.user){
