@@ -85,14 +85,18 @@ export const adv_signup = credentials => dispatch => {
      })
 }
 
-export const retrieveLoggedInUser = () => dispatch => {
+export const retrieveLoggedInUser = (type) => dispatch => {
   axios.get('/api/auth/me')
       .then(res => {
         dispatch(set(res.data))
       })
       .catch(err => {
         localStorage.removeItem('token');
-        browserHistory.push('/login');
+        if (type === "user"){
+          browserHistory.push('/login');
+        } else {
+          browserHistory.push('/adv_login');
+        }
         console.error('retrieveLoggedInUser unsuccessful', err)
       });
 }

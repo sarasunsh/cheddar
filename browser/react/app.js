@@ -23,15 +23,25 @@ import Landing from './components/Landing';
 import {retrieveLoggedInUser} from './reducers/auth';
 
 // onEnter prompts ----------------------------------------------------
-function fetchInitialData () {
-  store.dispatch(retrieveLoggedInUser());
+function fetchInitialData (type) {
+  store.dispatch(retrieveLoggedInUser(type));
 }
 
-function requireAuth (nextRouterState, replace){
-  fetchInitialData();
+function requireUserAuth (nextRouterState, replace){
+  fetchInitialData("user");
   if (!localStorage.token) {
     replace({
       pathname: '/login',
+      state: { nextPathname: nextRouterState.location.pathname }
+    })
+  }
+}
+
+function requireAdvAuth (nextRouterState, replace){
+  fetchInitialData("adv");
+  if (!localStorage.token) {
+    replace({
+      pathname: '/adv_login',
       state: { nextPathname: nextRouterState.location.pathname }
     })
   }
@@ -48,12 +58,12 @@ ReactDOM.render(
       }}>
         <Route path="login" component={LoginContainer} />
         <Route path="adv_login" component={AdvLoginContainer} />
-        <Route path="ads" component={AdsContainer} onEnter={requireAuth} />
+        <Route path="ads" component={AdsContainer} onEnter={requireUserAuth} />
         <Route path="signup" component={SignupContainer} />
         <Route path="adv_signup" component={AdvSignupContainer} />
-        <Route path="video" component={VideoContainer}  onEnter={requireAuth}/>
-        <Route path="advertisers" component={AdvertisersContainer} onEnter={requireAuth}/>
-        <Route path="advertisers/:adID" component={AnalyticsContainer} onEnter={requireAuth}/>
+        <Route path="video" component={VideoContainer}  onEnter={requireUserAuth}/>
+        <Route path="advertisers" component={AdvertisersContainer} onEnter={requireAdvAuth}/>
+        <Route path="advertisers/:adID" component={AnalyticsContainer} onEnter={requireAdvAuth}/>
         <IndexRoute component={Landing}/>
       </Route>
     </Router>

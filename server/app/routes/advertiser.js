@@ -50,7 +50,7 @@ advertisers.get('/ads', (req, res, next) => {
   // Use req.user.id in the search area
   // console.log("***** /ads req.user.id", req.user.id);
 
-  req.user.id && Ad.findAll({
+  req.user && Ad.findAll({
     where: {
       advertiserId: req.user.id
     }
@@ -70,7 +70,7 @@ advertisers.get('/totalspend/', (req, res, next) => {
 
   // Use req.user.id in the search area
 
-  req.user.id && Ad.findAll({
+  req.user && Ad.findAll({
     where: {
       advertiserId: req.user.id
     }
@@ -88,10 +88,11 @@ advertisers.get('/totalspend/', (req, res, next) => {
 
     return Promise.all(promiseArray)
     .then ( valueArray => {
-
-      // console.log("******* valueArray", valueArray);
-
-      return valueArray.reduce( (accumulator, curr) => accumulator + curr) ;
+      if (valueArray.length)
+        return valueArray.reduce( (accumulator, curr) => accumulator + curr);
+      else {
+        return [];
+      }
       });
 
   })
@@ -105,4 +106,3 @@ advertisers.get('/totalspend/', (req, res, next) => {
 
 
 });
-
