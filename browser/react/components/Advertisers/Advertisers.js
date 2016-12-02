@@ -35,12 +35,14 @@ export default class Advertisers extends React.Component {
       let advertiserId = this.props.user.id;
       let cost = +event.target.cost.value.slice(1) //This would look something like "$3.00", the database expects a float. So I'm dropping the dollar sign and coercing to a number with unary +
       let category = event.target.category.value
+      let title = event.target.title.value
       console.log(url4db)
       axios.post('/api/ad/', {
         url: url4db,
         advertiserId,
         cost,
-        category
+        category,
+        title
       }).then(()=>{
         this.props.findAllAdsForAdvertiser(this.props.user ? this.props.user.id : 2);
       })
@@ -63,9 +65,9 @@ export default class Advertisers extends React.Component {
     if(yturl){
       console.log("The youtube ID as far as I can tell is: ", yturl) 
       iframe.setAttribute('src', `https://www.youtube.com/embed/${yturl}`);
-      iframe.style.display = 'block';
+      iframe.parentElement.style.display = 'block';
     } else {
-      iframe.style.display = 'none';
+      iframe.parentElement.style.display = 'none';
     }
 
 
@@ -123,8 +125,8 @@ export default class Advertisers extends React.Component {
                 <label htmlFor="youtubeurl">YouTube URL</label>
               </div>
               <div className="evenMoreIframeContainer">
-                <div className="YTiframeContainer">
-                  <iframe id="YTiframe" style={{display: "none"}}></iframe>
+                <div className="YTiframeContainer" style={{display: "none"}}>
+                  <iframe id="YTiframe"></iframe>
                 </div>
               </div>
               <div className='row'>
