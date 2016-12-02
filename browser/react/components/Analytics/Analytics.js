@@ -25,8 +25,8 @@ export default class Analytics extends Component {
     }
 
     componentDidMount(){
-        // axios.get(`/api/ad/${this.props.adChoice.id}`)
-        axios.get(`/api/ad/2`)
+        axios.get(`/api/ad/${this.props.adChoice.id}`)
+        // axios.get(`/api/ad/2`)
         .then(res => {
             const filtered = filterFunc(res.data[2], this.state.filters)
             this.setState({
@@ -55,12 +55,14 @@ export default class Analytics extends Component {
     }
 
     render(){
+        console.log(this.state)
         const filters = Object.keys(this.state.filters)
         const configArr = this.state.graphData.map(set => generateConfig(set[0], set[1]))
         if (configArr.length < 2) {
             configArr.map(config => config['legend'] = {enabled:false}) // generate config objects for chart
         }
 
+        console.log('configArr', configArr)
         const test = {
             0: "trending_up",
             1: "trending_down"
@@ -101,22 +103,31 @@ export default class Analytics extends Component {
                 </ul>
                 <a href="#" data-activates="slide-out" className="button-collapse"><i className="material-icons">menu</i></a>
                 <div className="container videocards">
-                    <ul className="collapsible" data-collapsible="accordion">
-                        {configArr.map((config, idx) => (
-                            <li key={idx}>
-                                <div className="collapsible-header turqoise active"><i className="material-icons">{test[idx]}</i>{`Graph ${idx+1}`}</div>
-                                <div className="collapsible-body">
-                                    <ReactHighcharts
-                                        class="center-align"
-                                        config={config}>
-                                    </ReactHighcharts>
-                                </div>
-                            </li>
-                            )
-                        )}
-                    </ul>
+                    {configArr.map((config, idx) => (
+                            <ReactHighcharts
+                                class="center-align"
+                                key={idx}
+                                config={config}>
+                            </ReactHighcharts>
+                        )
+                    )}
                 </div>
             </div>
         )
     }
 }
+
+//                     <ul className="collapsible" data-collapsible="accordion">
+//                         {configArr.map((config, idx) => (
+//                             <li key={idx}>
+//                                 <div className="collapsible-header turqoise active"><i className="material-icons">{test[idx]}</i>{`Graph ${idx+1}`}</div>
+//                                 <div className="collapsible-body">
+//                                     <ReactHighcharts
+//                                         class="center-align"
+//                                         config={config}>
+//                                     </ReactHighcharts>
+//                                 </div>
+//                             </li>
+//                             )
+//                         )}
+//                     </ul>
