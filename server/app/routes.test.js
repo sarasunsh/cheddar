@@ -3,13 +3,24 @@ const request = require('supertest-as-promised')
 const {expect} = require('chai')
 const app = require('./index.js')
 
-//minimum viable test. get and post things to app. 
+//minimum viable test. get and post things to app.
 describe('the home page', () =>{
     describe('when you go to the website', () => {
-        it('exists', () => 
+        it('exists', () =>
           request(app)
             .get('/')
             .expect(200)
+        )
+    })
+})
+
+//minimum viable test. get and post things to app.
+describe('fake page', () =>{
+    describe('when you go to the website', () => {
+        it('does not exist', () =>
+          request(app)
+            .get('/kitties')
+            .expect(401)
         )
     })
 })
