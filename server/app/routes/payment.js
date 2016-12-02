@@ -13,6 +13,7 @@ payment.put('/token', (req, res, next) => {
 
   // Use req.user.id in the search area
   // console.log("***** /ads req.user.id", req.user.id);
+  var advertiserHold;
 
   req.user && Advertiser.findOne({
     where: {
@@ -25,8 +26,10 @@ payment.put('/token', (req, res, next) => {
   })
   .then( advertiser =>   {
     // console.log("***** msg after updating", msg);
+    advertiserHold = advertiser;
+    var amountToCharge = req.body.amount * 100;
     return stripe.charges.create({
-      amount: req.body.amount,
+      amount: amountToCharge,
       currency: "usd",
       source: advertiser.token,
       description: "Example charge"
@@ -36,6 +39,11 @@ payment.put('/token', (req, res, next) => {
       // res.send(err, err.type, "Card declined");      // The card has been declined
       }
     });
+  })
+  .then( ignoringRightNow => {
+    var newTotalCharged = advertiserHold.totalCharged + req.body.amount;
+    return advertiserHold.update({totalCharged: newTotalCharged});
+
   })
   .then( info => res.send(info))
   .catch(err => console.log(err));

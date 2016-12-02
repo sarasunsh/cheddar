@@ -35,14 +35,33 @@ export default class Video extends React.Component {
     onPlayerStateChange(state){
         console.log('player state is ', state)
         if(state.data === YT.PlayerState.ENDED ) {
-            console.log(funcs.smilyScore)
             let finalSmile = funcs.smilyScore[0];
             document.getElementById("theAd").style.display = "none";
+            const canvas = document.getElementById('best_smile');
+            canvas.height = 480;
+            canvas.style.paddingTop = "20px";
+            const ctx = canvas.getContext('2d');
+            ctx.putImageData(window.top_smile[1], 0, 0);
+            ctx.font = "48px Happy Monkey";
+            ctx.textAlign="center";
+            ctx.shadowColor = '#FFF';
+            ctx.shadowOffsetX = 3;
+            ctx.shadowOffsetY = 2;
+            ctx.shadowBlur    = 3;
+            ctx.fillText(this.props.currentAd.title.split(" ")[0] + " makes me smile!", 320, 60, 600);
+
             funcs.log('logs', `Congratulations! Your smilyScore was ${Math.trunc(finalSmile)}`);
             funcs.onStop();
+            funcs.saveSmile(canvas,this.props.user.id + "_" + this.props.currentAd.id, this.props.currentAd.title.split(" ")[0] + " makes me smile!");
             axios.post(`api/views/${this.props.user.id}/${this.props.currentAd.id}`, {smilyScore: finalSmile})
-                 .catch(err => console.log(err));
-            setTimeout(() => browserHistory.push('/ads'), 3000);
+                .catch(err => console.log(err))
+                .then( () =>{
+                  axios.post(`api/tweet/`, {text: this.props.currentAd.title.split(" ")[0] + " makes me smile! 😀 #smile", smile: canvas.toDataURL("image/png").replace(/^data:image\/(png|jpg);base64,/, "")})
+                    .then(() => setTimeout(() => location.pathname='/ads', 5000))
+                    .catch(err => console.log(err))
+                })
+
+
             //that would be the reacty way to do it, but I'm having problems re-initializing the youtube API, so we'll clear the window when this is over.
             // location.pathname = '/ads'
 
@@ -56,9 +75,10 @@ export default class Video extends React.Component {
         if(!this.props.currentAd.url){
             browserHistory.push('/ads')
         }
-        //
+
         let theAd = document.getElementById("theAd")
         const affdexContainer = document.getElementById("affdex_elements");
+        window.top_smile = [0,null];
 
         const faceMode = affdex.FaceDetectorMode.LARGE_FACES;
         window.detector = new affdex.CameraDetector(affdexContainer, this.width, this.height, faceMode);
@@ -95,6 +115,7 @@ export default class Video extends React.Component {
         // image is unknown (can be checked out later)
         window.detector.addEventListener("onImageResultsSuccess", (faces, image, timestamp) => {
             //starts ad after 20 smiling samples and at least 1 detected face
+
             if(faces.length) {
                 if (!funcs.isPlaying){
                     funcs.drawFeaturePoints(image, faces[0].featurePoints);
@@ -108,6 +129,10 @@ export default class Video extends React.Component {
 
                     // console.log("smilyScore!",funcs.smilyScore[0]);
                     // console.log(faces[0].emojis.dominantEmoji);
+                    if(window.top_smile[0] <  faces[0].expressions.smile){
+                      window.top_smile[0] = faces[0].expressions.smile;
+                      window.top_smile[1] = image;
+                    }
                 }
             } else {
                 funcs.pauseVideo(theAd,timestamp);
@@ -134,8 +159,6 @@ export default class Video extends React.Component {
 
     componentWillUnmount(){
         funcs.onStop();
-        // delete window.detector;
-        window.YT = null;
         let apiTag = document.getElementById('apiTag')
         apiTag.remove();
         console.log('componentWillUnmount')
@@ -164,6 +187,9 @@ export default class Video extends React.Component {
     render() {
         return (
             <div style={{height: this.height}}>
+              <div style={{textAlign:"center"}}>
+                <canvas id="best_smile" height="1px" width={this.width}></canvas>
+              </div>
               <div id="logs"> Click Play when ready . . .</div>
               <div style={{textAlign:"center"}}>
                   <i id="playButton"

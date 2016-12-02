@@ -25,3 +25,15 @@ ads.get('/:adID', function (req, res, next) {
     .catch(err => console.log(err))
 });
 
+//This route is hit by the Advertisers component when a user clicks the 'Add ad' button
+//it receives an object containing advertiserId, a URL, a cost, and a category
+//before creating a record for the new ad, it attempts to find the name of the advertiser using the advertiser id
+//but that might be null, so it has placeholder text in that case. "Ad by an advertiser"
+ads.post('/', (req,res,next)=>{
+    Ad.create(req.body)
+      .then(()=>res.sendStatus(201)) //201 CREATED
+      .catch((err)=>{
+          console.log(err)
+          res.sendStatus(406)
+      }) //406 Not Acceptable
+})

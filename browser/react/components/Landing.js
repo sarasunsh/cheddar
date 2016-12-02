@@ -12,22 +12,80 @@ export default class Landing extends Component {
     render(){
         return (
             <div>
-            <h3 className="center"> Welcome to Cheddar! </h3>
-                <h4 className="center"> A platform for people to monetize their face.<br />Say cheese to make cheddar.</h4>
-                <div className="carousel">
-                  <Link className="carousel-item" href="#one!"><img src="/img/smile/1.jpg" /></Link>
-                  <Link className="carousel-item" href="#two!"><img src="/img/smile/2.jpg" /></Link>
-                  <Link className="carousel-item" href="#three!"><img src="/img/smile/3.jpg" /></Link>
-                  <Link className="carousel-item" href="#four!"><img src="/img/smile/4.jpg" /></Link>
-                  <Link className="carousel-item" href="#five!"><img src="/img/smile/5.jpg" /></Link>
-                  <Link className="carousel-item" href="#six!"><img src="/img/smile/6.jpg" /></Link>
-                  <Link className="carousel-item" href="#seven!"><img src="/img/smile/7.jpg" /></Link>
-                </div>
-                <h5 className="center">Enhancing emotional engagement for brands.</h5>
-                <div style={{paddingTop:150,textAlign:"center"}}>
+
+               <div className="section smile" style={{position: "relative"}}>
+                    <div className="container" style={{position: "absolute", bottom: "0"}}>
+                        <div className="row">
+                           <div className="card transparent z-depth-5 welcome">
+                                <div className="card-content">
+                                    <span className="card-title welcome-title">Say cheese, get cash.</span>
+                                    <p className='welcome-text'>A new kind of ad platform, built on <br></br>consumer smiles and customer satisfaction.</p>
+                                </div>
+                                <div className="card-action">
+                                    <a href="#" className="landing-box">For Viewers</a>
+                                    <a href="#" className="landing-box">For Advertisers</a>
+                                </div>
+                           </div>
+                       </div>
+                    </div>
+               </div>
+
+              <div className="section text-center">
+                    <div className="container landing">
+                        <h5>ABOUT CHEDDAR</h5>
+                        <p>We believe the prevailing model of online advertising is broken for both companies and consumers. In the current landscape, the advertisement viewing experience can feel like an inconvenience to the same people who otherwise would be very interested in a product. It should not be that way! </p>
+                        <img src="img/smile/computer-worker.png" height="100"></img>
+                        <p>With the Cheddar platform, watching branded content becomes a joyful experience. A well-crafted, creative ad should bring a smile to your face. We make sure that happens.
+                        </p>
+                    </div>
+               </div>
+
+               <div className="section text-center blue">
+                    <div className="container landing">
+                        <h5>ABOUT US</h5>
+                            <div className="row">
+                                <div className="col s3">
+                                    <div className="bio ben">
+                                    </div>
+                                    <span>
+                                        Ben is beatific.
+                                    </span>
+                                </div>
+                                <div className="col s3">
+                                    <div className="bio sara">
+                                    </div>
+                                    <span>
+                                       Sara is sassy.
+                                    </span>
+                                </div>
+                                <div className="col s3">
+                                    <div className="bio jackson">
+                                    </div>
+                                    <span>
+                                       Jackson is jazzy.
+                                    </span>
+                                </div>
+                                <div className="col s3">
+                                    <div className="bio david">
+                                    </div>
+                                    <span>
+                                        David is dope.
+                                    </span>
+                                </div>
+                            </div>
+                    </div>
+               </div>
+               <div className="section text-center" style={{textAlign:"center"}}>
                   <Link to='/adv_login' className="waves-effect waves-teal btn-flat">Advertiser Log In</Link>
                   <Link to='/adv_signup' className="waves-effect waves-teal btn-flat">Advertiser Sign Up</Link>
                 </div>
+               <div className="section text-center green">
+                    <div className="container footer">
+                        <h5>DISCLAIMER</h5>
+                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus iaculis augue et ex pellentesque vestibulum. </p>
+                    </div>
+               </div>
+
             </div>
         );
     }

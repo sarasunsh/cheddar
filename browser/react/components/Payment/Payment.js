@@ -79,7 +79,7 @@ var PaymentForm = React.createClass({
         <input type='text' data-stripe='exp-month' placeholder='expiration month' maxLength='2'/><br />
         <input type='text' data-stripe='exp-year' placeholder='expiration year' maxLength='4'/><br />
         <input type='text' data-stripe='cvc' placeholder='cvc' maxLength='3'/><br />
-        <input disabled={this.state.submitDisabled} type='submit' value='Purchase' />
+        <input disabled={this.state.submitDisabled} type='submit' className="btn submit" value='Add Money' />
       </form>);
     }
   }
