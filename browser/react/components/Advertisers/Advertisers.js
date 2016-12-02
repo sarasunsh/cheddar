@@ -35,12 +35,14 @@ export default class Advertisers extends React.Component {
       let advertiserId = this.props.user.id;
       let cost = +event.target.cost.value.slice(1) //This would look something like "$3.00", the database expects a float. So I'm dropping the dollar sign and coercing to a number with unary +
       let category = event.target.category.value
+      let title = event.target.title.value
       console.log(url4db)
       axios.post('/api/ad/', {
         url: url4db,
         advertiserId,
         cost,
-        category
+        category,
+        title
       }).then(()=>{
         this.props.findAllAdsForAdvertiser(this.props.user ? this.props.user.id : 2);
       })
@@ -63,9 +65,9 @@ export default class Advertisers extends React.Component {
     if(yturl){
       console.log("The youtube ID as far as I can tell is: ", yturl) 
       iframe.setAttribute('src', `https://www.youtube.com/embed/${yturl}`);
-      iframe.style.display = 'block';
+      iframe.parentElement.style.display = 'block';
     } else {
-      iframe.style.display = 'none';
+      iframe.parentElement.style.display = 'none';
     }
 
 
@@ -115,16 +117,20 @@ export default class Advertisers extends React.Component {
         </ul>
         {/* This is a modal popup that allows advertisers to add video to database */}
         {/* Overflow: visible so that the dropdown select menu breaks out of the modal popup box  */}
-        <div id="addAd" className="modal" style={{overflow: "visible"}}>
+        <div id="addAd" className="modal">
           <form onSubmit={this.postAd}>
             <div className="modal-content"> 
               <div className="input-field">
                 <input onInput={this.addUrl} id="youtubeurl"  name='url' type='text' required/>
                 <label htmlFor="youtubeurl">YouTube URL</label>
               </div>
-              <iframe id="YTiframe" style={{display: "none",marginLeft: "Calc(50% - 278px)"}} width="560" height="315" frameBorder="0"></iframe>
+              <div className="evenMoreIframeContainer">
+                <div className="YTiframeContainer" style={{display: "none"}}>
+                  <iframe id="YTiframe"></iframe>
+                </div>
+              </div>
               <div className='row'>
-                <div className="input-field col s6">
+                <div className="input-field col s4">
                   <select name='category'>
                     <option disabled defaultValue>Select One</option>
                     <option value="Pets">Pets</option>
@@ -135,10 +141,16 @@ export default class Advertisers extends React.Component {
                   </select>
                   <label>Category</label>
                 </div>
-                <div className="col s6">
+                <div className="col s4">
                   <div className="input-field">
                     <input onBlur={this.formatCost} id="cost"  name='cost' type='text' required/>
                     <label htmlFor="cost">Pay per 100% smile</label>
+                  </div>
+                </div>
+                <div className="col s4">
+                  <div className="input-field">
+                    <input  id="title"  name='title' type='text' required/>
+                    <label htmlFor="title">Advertiser's Name</label>
                   </div>
                 </div>
               </div>
