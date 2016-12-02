@@ -29,7 +29,7 @@ export default class Advertisers extends React.Component {
 
   postAd(event){
     event.preventDefault(); //don't reload the page, which is the default submit action.
-    let videoId = /\?v=(\w*)/
+    let videoId = /\?v=([\w-]*)/
     try{
       let url4db = event.target.url.value.match(videoId)[1]
       let advertiserId = this.props.user.id;
@@ -55,11 +55,13 @@ export default class Advertisers extends React.Component {
     let iframe = document.getElementById('YTiframe');
     let yturl = event.target.value;
     //finds the match after ?v=, just alphanumerics. so it will stop matching it hits slashes, hashes, question marks etc.
-    let videoId = /\?v=(\w*)/
+    let videoId = /\?v=([\w-]*)/
     //match returns an array. I'm capturing the part I want. But I can only return [1] if it exists... if there's no match, match returns null
     yturl = yturl.match(videoId) ? yturl.match(videoId)[1] : '';
+
     //so, it will only update if there was a match for v?=
     if(yturl){
+      console.log("The youtube ID as far as I can tell is: ", yturl) 
       iframe.setAttribute('src', `https://www.youtube.com/embed/${yturl}`);
       iframe.style.display = 'block';
     } else {
