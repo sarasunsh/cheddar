@@ -33,7 +33,10 @@ export default class Landing extends Component {
               <div className="section text-center">
                     <div className="container landing">
                         <h5>ABOUT CHEDDAR</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus iaculis augue et ex pellentesque vestibulum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed commodo ligula quis ex dignissim mollis. Fusce ac mi vitae ipsum ornare vestibulum ac ut mauris. Aliquam ut sollicitudin lacus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc mattis ante risus, nec volutpat nibh blandit et.</p>
+                        <p>We believe the prevailing model of online advertising is broken for both companies and consumers. In the current landscape, the advertisement viewing experience can feel like an inconvenience to the same people who otherwise would be very interested in a product. It should not be that way! </p>
+                        <img src="img/smile/computer-worker.png" height="100"></img>
+                        <p>With the Cheddar platform, watching branded content becomes a joyful experience. A well-crafted, creative ad should bring a smile to your face. We make sure that happens.
+                        </p>
                     </div>
                </div>
 

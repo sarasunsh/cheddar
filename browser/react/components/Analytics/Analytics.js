@@ -72,11 +72,9 @@ export default class Analytics extends Component {
                 <ul id="slide-out" className="side-nav fixed">
                     <div className="stat-box z-depth-1">
                         <div className="container stats ">
-                        {/*    {this.props.adChoice.title} */}
-                            <div className="font-18 bold gap red-font" >Video Title goes here</div>
+                            <div className="font-18 bold gap red-font" >{this.props.adChoice.title}</div>
                             <span className="font-16 bold">Total Views:</span> {this.state.count}<br></br>
-                            {/*<span className="bold">Cost Per View:</span> {`$${this.props.adChoice.cost}`}<br></br>*/}
-                            <span className="font-16 bold">Cost Per View:</span> {`$5`}<br></br>
+                            <span className="font-16 bold">Cost Per View:</span> {`$${this.props.adChoice.cost}`}<br></br>
                             <span className="font-16 bold">Total Spend:</span> {this.state.total}
                         </div>
                     </div>
@@ -116,19 +114,3 @@ export default class Analytics extends Component {
         )
     }
 }
-
-
-//                     <ul className="collapsible" data-collapsible="accordion">
-//                         {configArr.map((config, idx) => (
-//                             <li key={idx}>
-//                                 <div className="collapsible-header turqoise active"><i className="material-icons">{test[idx]}</i>{`Graph ${idx+1}`}</div>
-//                                 <div className="collapsible-body">
-//                                     <ReactHighcharts
-//                                         class="center-align"
-//                                         config={config}>
-//                                     </ReactHighcharts>
-//                                 </div>
-//                             </li>
-//                             )
-//                         )}
-//                     </ul>
