@@ -1,15 +1,16 @@
 /* Things To Test */
-const request = require('supertest-as-promised')
-const {expect} = require('chai')
 const app = require('./index.js')
+const request = require('supertest-as-promised').agent(app)
+const {expect} = require('chai')
 
 //minimum viable test. get and post things to app. 
-describe('the home page', () =>{
+describe('the home page', (done) =>{
     describe('when you go to the website', () => {
         it('exists', () => 
-          request(app)
+          request
             .get('/')
             .expect(200)
+            .end(done)
         )
     })
 })
@@ -18,9 +19,31 @@ describe('the home page', () =>{
 //should probably test that we get denied and redirected with bad credentials.
 // describe('the advertisers log in page', () => {
 //     describe('when you attempt to login with an admin account', () => {
-//         it('')
-//             request(app)
-//             .post('/auth/')
+//         it('Lets you log in as admin', () => {
+//             request
+//             .post('/api/auth/adv_login')
+//             .send({
+//                 email: "admin@cheddar.com",
+//                 password: "12s3"
+//             })
+//             .expect(400)
+//         })
+//         it('responds with a redirect to /advertisers', () => {
+//             request
+//             .post('/api/auth/adv_login')
+//             .send({
+//                 email: "admin@cheddar.com",
+//                 password: "1323"
+//             })
+//             .then(res=> {
+//                 expect(res.body).to.equal("/adverti3sers")
+//             })
+//         })
+//         it('redirects bad credentials to /adv_login#failed', () => {
+//             request
+//             .post('/api/auth/adv_lo3gin')
+//             .send({})
+//         })
 //     })
 // })
 
