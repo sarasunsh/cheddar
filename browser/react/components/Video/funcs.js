@@ -39,9 +39,6 @@ export function saveSmile(canvas,id) {
 
 //function executes when Start button is pushed.
 export function onStart() {
-  T.post('statuses/update', { status: 'hello world!' }, function(err, data, response) {
-    console.log(data)
-  })
     if (window.detector && !window.detector.isRunning) {
         log("logs","Loading...");
         window.detector.start();

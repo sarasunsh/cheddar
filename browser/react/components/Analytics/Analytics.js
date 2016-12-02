@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { filterFunc, generateConfig, formatFilter } from './filterFunc';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import ReactHighcharts from 'react-highcharts'; // Expects that Highcharts was loaded in the code.
 
 export default class Analytics extends Component {
@@ -121,5 +120,3 @@ export default class Analytics extends Component {
         )
     }
 }
-
-
