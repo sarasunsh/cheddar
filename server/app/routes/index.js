@@ -13,6 +13,7 @@ router.use('/auth', require('./auth'));
 router.use('/views', require('./views'));
 router.use('/ad', require('./ad'));
 router.use('/advertiser', require('./advertiser'));
+router.use('/payment', require('./payment'));
 
 router.get('/videos', (req,res) => {
   if(req.user){

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import Payment from '../Payment/Payment';
 
 export default class Advertisers extends React.Component {
 
@@ -10,9 +11,11 @@ export default class Advertisers extends React.Component {
     //the props handed down include a findAds function from reducers/adsFromDb
     //                         and a selectAd function from reducers/adsFromClick
     this.state = {
-      totalDollarsSpent: 0
+      totalDollarsSpent: 0,
+      payment: false
     }
     this.retrieveTotalDollarsSpent = this.retrieveTotalDollarsSpent.bind(this);
+    this.openPayment = this.openPayment.bind(this);
   }
 
   componentDidMount(){
@@ -31,6 +34,17 @@ export default class Advertisers extends React.Component {
       this.setState({totalDollarsSpent: totalDollarsSpent.data});
     })
     .catch( err => console.error(err));
+  }
+
+  openPayment() {
+    console.log("Button was clicked and function running!");
+    if(this.state.payment) {
+      this.setState({payment: false});
+    } else {
+      this.setState({payment: true});
+
+      console.log("payment:", this.state.payment);
+    }
   }
 
   render() {
@@ -52,6 +66,7 @@ export default class Advertisers extends React.Component {
               <a href="#!email"><span className="black-text email">{user ? user.email : "Props didnt happen"}</span></a>
               <a href="#!email"><span className="black-text">{currentAds.length} Ads</span></a>
               <a href="#!email"><span className="black-text">${Math.round(this.state.totalDollarsSpent)} Ad Budget Spent</span></a>
+              <a type="button" className="btn" onClick={this.openPayment} >Add Money</a>
             </div>
           </li>
           <li><div className="divider"></div></li>
@@ -59,8 +74,18 @@ export default class Advertisers extends React.Component {
         <a href="#" data-activates="slide-out" className="button-collapse"><i className="material-icons">menu</i></a>
         <div className="container videocards">
           <h2 className="center">Advertiser Campaign</h2>
+
+          { this.state.payment &&
+            <div className="card large">
+              <div className="card-content">
+                <Payment/>
+              </div>
+            </div>
+          }
+
+
           {
-            currentAds && currentAds.map( ad => {
+            !this.state.payment && currentAds && currentAds.map( ad => {
               return (
 
                 <div className="card small" key={ad.id}>
