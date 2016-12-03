@@ -80,7 +80,7 @@ var PaymentForm = React.createClass({
         <h4>Credit Card Payment</h4>
         <span>{ this.state.paymentError }</span><br />
         <input type='text' name='amount' placeholder='Dollars to Add' /><br />
-        <input type='text' data-stripe='number' placeholder='credit card number' maxLength='12' /><br />
+        <input type='text' data-stripe='number' placeholder='credit card number' maxLength='16' /><br />
         <input type='text' data-stripe='exp-month' placeholder='expiration month' maxLength='2'/><br />
         <input type='text' data-stripe='exp-year' placeholder='expiration year' maxLength='4'/><br />
         <input type='text' data-stripe='cvc' placeholder='cvc' maxLength='3'/><br />

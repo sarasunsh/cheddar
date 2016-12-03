@@ -27,9 +27,14 @@ function fetchInitialData (type) {
 
 function requireUserAuth (nextRouterState, replace){
   fetchInitialData("user");
-  if (!localStorage.token || localStorage.token === "adv") {
+  if (!localStorage.token) {
     replace({
       pathname: '/login',
+      state: { nextPathname: nextRouterState.location.pathname }
+    })
+  } else if( localStorage.token === "adv") {
+    replace({
+      pathname: '/',
       state: { nextPathname: nextRouterState.location.pathname }
     })
   }
@@ -37,9 +42,14 @@ function requireUserAuth (nextRouterState, replace){
 
 function requireAdvAuth (nextRouterState, replace){
   fetchInitialData("adv");
-  if (!localStorage.token || localStorage.token === "user") {
+  if (!localStorage.token) {
     replace({
       pathname: '/adv_login',
+      state: { nextPathname: nextRouterState.location.pathname }
+    })
+  } else if( localStorage.token === "user") {
+    replace({
+      pathname: '/',
       state: { nextPathname: nextRouterState.location.pathname }
     })
   }
