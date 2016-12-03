@@ -5,6 +5,8 @@ import {spy} from 'sinon';
 
 import Analytics from '../../browser/react/components/Analytics/Analytics';
 
+import Ads from '../../browser/react/components/Ads/Ads';
+
 
 describe('<Analytics />', () => {
 
@@ -47,5 +49,25 @@ describe('Root reducer', () => {
         });
 
     });
+
+});
+
+describe('Ads page', () => {
+   it('On clicking an ad choice, it should call selectAds with the correct ad as a parameter', () => {
+
+        const onClickSpy = spy();
+        const wrapper = shallow(<Ads currentAds={[{id: 1, url: "abcd"},{id: 2, url: "efghi"}]}/>);
+
+        expect(wrapper.find("#imgtest1").node.props.src).to.equal(`//img.youtube.com/vi/abcd/0.jpg`);
+        // expect(wrapper.props().currentAds[0].id).to.equal(1);
+        // wrapper.find('#ad1').simulate('click');
+        // expect(onClickSpy.calledOnce).to.be.true;
+
+
+
+
+   });
+
+
 
 });

@@ -66,10 +66,10 @@ export default class Ads extends React.Component {
         <div className="container videocards">
           <div className="row">
             {ads[0] ? <div className="col s6">
-              <Link  onClick={() => selectAd(ads[0])} to="/video" >
+              <Link id="ad1" onClick={() => selectAd(ads[0])} to="/video" >
                 <div className="card">
                   <div className="card-image">
-                    <img src={`//img.youtube.com/vi/${urlA}/0.jpg`}/>
+                    <img id="imgtest1" src={`//img.youtube.com/vi/${urlA}/0.jpg`}/>
                     <span className="card-title">Ad 1</span>
                   </div>
                   <div className="card-content">
@@ -84,7 +84,7 @@ export default class Ads extends React.Component {
             : <div>No more ads at this time.<hr /></div>
             }
             {ads[1] ? <div className="col s6">
-              <Link onClick={() => selectAd(ads[1])} to="/video" >
+              <Link id="ad2" onClick={() => selectAd(ads[1])} to="/video" >
                 <div className="card">
                   <div className="card-image">
                     <img src={`//img.youtube.com/vi/${urlB}/0.jpg`}/>
