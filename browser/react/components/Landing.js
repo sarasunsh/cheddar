@@ -56,6 +56,10 @@ export default class Landing extends Component {
                          <img src="img/smile/computer-worker.png" height="100"></img>
                          <p>With the Cheddar platform, watching branded content becomes a joyful experience. A well-crafted, creative ad should bring a smile to your face. We make sure that happens.
                          </p>
+                          <div className="section text-center" style={{textAlign:"center"}}>
+                            <Link to='/login' className="waves-effect waves-teal btn-flat bold">Viewer Log In</Link>
+                            <Link to='/signup' className="waves-effect waves-teal btn-flat bold">Viewer Sign Up</Link>
+                          </div>
                      </div>
                 </div>
                 <div id="forAdv" className="section text-center blue lighten-3">
@@ -65,10 +69,10 @@ export default class Landing extends Component {
                           <img src="img/smile/computer-worker.png" height="100"></img>
                           <p>With the Cheddar platform, watching branded content becomes a joyful experience. A well-crafted, creative ad should bring a smile to your face. We make sure that happens.
                           </p>
-                                         <div className="section text-center" style={{textAlign:"center"}}>
-                  <Link to='/adv_login' className="waves-effect waves-teal btn-flat">Advertiser Log In</Link>
-                  <Link to='/adv_signup' className="waves-effect waves-teal btn-flat">Advertiser Sign Up</Link>
-                </div>
+                          <div className="section text-center" style={{textAlign:"center"}}>
+                            <Link to='/adv_login' className="waves-effect waves-teal btn-flat bold">Advertiser Log In</Link>
+                            <Link to='/adv_signup' className="waves-effect waves-teal btn-flat bold">Advertiser Sign Up</Link>
+                           </div>
                       </div>
                  </div>
 
