@@ -26,54 +26,50 @@ export default class Ads extends React.Component {
   }
 
   render() {
+
     let {user, selectAd, currentAds} = this.props;
+    //selectAd is a function to put the selected ad obj on the store, current Ads is an array of two ad objects to render in the component.
+    //currentAds is a array of objects. Each object has a url, title, id. Its also represented on the global store.
+    let adA = currentAds[0],
+        adB = currentAds[1]
+    //user is an obect with .name, .email etc, 
     //once there is a user, an earnedPay property will exist. otherwise just put it at $0
     let earnedPay = user ? user.earnedPay : '$0.00'
-    //database turns a string representing dollar amount. For user experience, lets give them points instead of pennies.
-    //split with regex [$.] is just 'split on either a '$' char OR a '.' char
-    let smilyPoints = Number(earnedPay.split(/[$.]/).join(''));
-    //user is an obect with .name, .email etc, selectAd is a function to put the selected ad obj on the store, current Ads is an array of two ad objects to render in the component.
-    let ads = currentAds;
-    //ads is a array of objects. Each object has a url, title, id. Its also represented on the global store.
-    let urlA = ads[0] ? ads[0].url : "",
-        titleA = ads[0] ? ads[0].title : "",
-        urlB = ads[1] ? ads[1].url : "",
-        titleB = ads[1] ? ads[1].title : "";
-
+    //database returns a string representing dollar amount. For user experience, lets give them points instead of pennies.
+    //this replace regex just deletes any dollar signs or dots. (g stands for global, ie don't stop after the first find')
+    let smilyPoints = Number(earnedPay.replace(/[$.]/g, ''));
+    //coercing to a number because '$0.00' becomes '000', and I just want to display 0. Number('000') returns 0.
 
     return (
-      <div id="ads">
+      <div id="ads">        
         <ul id="slide-out" className="side-nav fixed">
           <li>
             <div className="userView">
               <div className="background">
               </div>
-              <a href="#!user"><img className="circle" style={{width:'23px',height:'30px'}}src="img/smile/simplesmile.svg"/></a>
-              <a href="#!name"><span className="black-text name">{user ? user.name : 'Props didnt happen'} </span></a>
-              <a href=""><span className="black-text email">{user ? user.email : "Props didnt happen"}</span></a>
-              <a href=""><span className="black-text">Watched {this.state.adHistory.length} ads</span></a>
-              <a href=""><span className="black-text">Earned {smilyPoints} smilyPoints</span></a>
-              <a href=""><span className="btn green lighten-1">Cash Out</span></a>
+              {/* This is just displaying user info. Materialize CSS styles a tags specifically, being that this is a navbar component */}
+              <a><img className="circle" style={{width:'23px',height:'30px'}}src="img/smile/simplesmile.svg"/></a>
+              <a><span className="black-text name">{user ? user.name : 'Props didnt happen'} </span></a>
+              <a><span className="black-text email">{user ? user.email : "Props didnt happen"}</span></a>
+              <a><span className="black-text">Watched {this.state.adHistory.length} ads</span></a>
+              <a><span className="black-text">Earned {smilyPoints} smilyPoints</span></a>
+              <a><span className="btn green lighten-1">Cash Out</span></a>
             </div>
           </li>
-{/*          <li><a href="#!"><i className="material-icons">cloud</i>First Link With Icon</a></li>
-          <li><a href="#!">Second Link</a></li>
-          <li><div className="divider"></div></li>
-          <li><a className="subheader">Subheader</a></li>
-          <li><a className="waves-effect" href="#!">Third Link With Waves</a></li>*/}
         </ul>
         <a href="#" data-activates="slide-out" className="button-collapse"><i className="material-icons">menu</i></a>
+        {/* container videocards returns the ad options based off the currentAds array handed down as props. */}
         <div className="container videocards">
           <div className="row">
-            {ads[0] ? <div className="col s6">
-              <Link  onClick={() => selectAd(ads[0])} to="/video" >
+            {adA ? <div className="col s6">
+              <Link  onClick={() => selectAd(adA)} to="/video" >
                 <div className="card">
                   <div className="card-image">
-                    <img src={`//img.youtube.com/vi/${urlA}/0.jpg`}/>
+                    <img src={`//img.youtube.com/vi/${adA.url}/0.jpg`}/>
                     <span className="card-title">Ad 1</span>
                   </div>
                   <div className="card-content">
-                    <p>{titleA}</p>
+                    <p>{adA.title}</p>
                   </div>
                   <div className="card-action">
                     Watch!
@@ -83,15 +79,15 @@ export default class Ads extends React.Component {
             </div>
             : <div>No more ads at this time.<hr /></div>
             }
-            {ads[1] ? <div className="col s6">
-              <Link onClick={() => selectAd(ads[1])} to="/video" >
+            {adB ? <div className="col s6">
+              <Link onClick={() => selectAd(adB)} to="/video" >
                 <div className="card">
                   <div className="card-image">
-                    <img src={`//img.youtube.com/vi/${urlB}/0.jpg`}/>
+                    <img src={`//img.youtube.com/vi/${adB.url}/0.jpg`}/>
                     <span className="card-title">Ad 2</span>
                   </div>
                   <div className="card-content">
-                    <p>{titleB}</p>
+                    <p>{adB.title}</p>
                   </div>
                   <div className="card-action">
                     Watch!
