@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { connect } from 'react-redux';
 import axios from 'axios';
 import Payment from '../Payment/Payment';
 
@@ -21,8 +20,8 @@ export default class Advertisers extends React.Component {
 
   componentDidMount(){
     //Something better could go here. findAllAds might be refactored. Pull data for number 2 if user id doesnt happen just so it doesnt throw errors. Like I said. something better, later.
-    this.props.findAllAdsForAdvertiser(this.props.user ? this.props.user.id : 2);
-    this.retrieveTotalDollarsSpent(this.props.user ? this.props.user.id : 2);
+    this.props.findAllAdsForAdvertiser();
+    this.retrieveTotalDollarsSpent();
     $('#addAd').modal();
     $('#addMoney').modal();
     $('select').material_select();
@@ -46,7 +45,9 @@ export default class Advertisers extends React.Component {
         category,
         title
       }).then(()=>{
-        this.props.findAllAdsForAdvertiser(this.props.user ? this.props.user.id : 2);
+        // if(this.props.user){
+          this.props.findAllAdsForAdvertiser(this.props.user.id);
+        // }
       })
       .catch(err => console.log.bind(console))
     }catch(err){
@@ -179,17 +180,8 @@ export default class Advertisers extends React.Component {
         <div className="container videocards">
           <h2 className="center">Advertiser Campaign</h2>
 
-          { this.state.payment &&
-            <div className="card large">
-              <div className="card-content">
-                <Payment/>
-              </div>
-            </div>
-          }
-
-
           {
-            !this.state.payment && currentAds && currentAds.map( ad => {
+            currentAds && currentAds.map( ad => {
               return (
                 <div className="card small" key={ad.id}>
                   <div className="card-image">

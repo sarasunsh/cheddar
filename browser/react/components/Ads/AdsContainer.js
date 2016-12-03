@@ -1,4 +1,3 @@
-import React from 'react';
 import {connect} from 'react-redux';
 import Ads from './Ads'
 import {findAds} from '../../reducers/adsFromDb';
@@ -15,8 +14,9 @@ const mapDispatchToAds = (dispatch) => ({
     findAds: () => {
         dispatch(findAds())
     },
-    //selectAd is a function that will be used in the Ads component which
-    //, when a choice is clicked, will fire an action to set the store while redirecting to the video page
+    //selectAd is a function that will be used in the Ads component which,
+    //when a choice is clicked, will fire an action to set the store while 
+    //redirecting (via react-router.Link) to the video page
     selectAd: (theChosenAdObj) => {
         dispatch(selectAds(theChosenAdObj))
     }
