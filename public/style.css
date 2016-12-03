@@ -249,6 +249,6 @@ nav {
   color: #e57373;
 }
 
-toast {
-  background-color: red;
+.btn.nav {
+  color: #006064;
 }

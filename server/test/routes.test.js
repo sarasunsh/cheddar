@@ -7,24 +7,24 @@ const { Ad, View, User } = require('../db/models')
 const app = require('../start')
 
 const fakeTruck = {
-  id: 101,
-  name: 'The Taco Truck',
-  description: 'We make tacos',
-  location: '10 Hanover Sq, New York, NY 10005',
-  website: 'www.thetacotruck.com',
-  cuisine: 'Mexican'
-  image: 'http://i.imgur.com/e1lkilo.png',
-  menuItem: 101
+    id: 101,
+    name: 'The Taco Truck',
+    description: 'We make tacos',
+    location: '10 Hanover Sq, New York, NY 10005',
+    website: 'www.thetacotruck.com',
+    cuisine: 'Mexican'
+    image: 'http://i.imgur.com/e1lkilo.png',
+    menuItem: 101
 }
 
 const fakeMenuItem = {
-  id: 101,
-  name: 'Tacos',
-  description: 'Delicious tacos',
-  price: 4
+    id: 101,
+    name: 'Tacos',
+    description: 'Delicious tacos',
+    price: 4
 }
 
-describe('api/trucks', () => {
+describe('api/ad/1', () => {
   before('wait for the db', () => db.didSync)
 
   describe('gets all food trucks, a specific truck, and menu items', () => {
@@ -41,30 +41,30 @@ describe('api/trucks', () => {
       .catch()
     )
 
-    it('GET to / gets all columns of every food truck', () =>
-      request(app)
-        .get('/api/trucks')
-        .then(res => expect(res.body).to.contain(fakeTruck))
-      )
+  //   it('GET to / gets all columns of every food truck', () =>
+  //     request(app)
+  //       .get('/api/trucks')
+  //       .then(res => expect(res.body).to.contain(fakeTruck))
+  //     )
 
-    it('GET to /:truckId gets all columns of a single food truck', () =>
-      request(app)
-        .get('/api/trucks/101')
-        .then(res => expect(res.body).to.equal(fakeTruck))
-      )
+  //   it('GET to /:truckId gets all columns of a single food truck', () =>
+  //     request(app)
+  //       .get('/api/trucks/101')
+  //       .then(res => expect(res.body).to.equal(fakeTruck))
+  //     )
 
-    it('GET to /:truckId/menu gets all menu items for a truck', () =>
-      request(app)
-        .get('/api/trucks/101/menu')
-        .then(res => expect(res.body).to.contain(fakeMenuItem))
-      )
+  //   it('GET to /:truckId/menu gets all menu items for a truck', () =>
+  //     request(app)
+  //       .get('/api/trucks/101/menu')
+  //       .then(res => expect(res.body).to.contain(fakeMenuItem))
+  //     )
 
-    it('GET to /:truckId/menu/:orderId gets a single order by id', () =>
-      request(app)
-      .get('/api/trucks/101/menu/101')
-      .then(res => expect(res.body).to.equal(fakeMenuItem))
-      )
-  })
+  //   it('GET to /:truckId/menu/:orderId gets a single order by id', () =>
+  //     request(app)
+  //     .get('/api/trucks/101/menu/101')
+  //     .then(res => expect(res.body).to.equal(fakeMenuItem))
+  //     )
+  // })
 
   describe('creates and updates trucks and menu items', () => {
 

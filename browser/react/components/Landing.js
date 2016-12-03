@@ -40,7 +40,7 @@ export default class Landing extends Component {
                        </div>
                     </div>
                </div>
-               <div className="section text-center blue lighten-5">
+               <div className="section text-center">
                  <div className="container landing">
                    <h5>ABOUT CHEDDAR</h5>
                    <p>We believe the prevailing model of online advertising is broken for both companies and consumers. In the current landscape, the advertisement viewing experience can feel like an inconvenience to the same people who otherwise would be very interested in a product. It should not be that way! </p>
@@ -49,7 +49,7 @@ export default class Landing extends Component {
                    </p>
                  </div>
                </div>
-               <div id="forViewers" className="section text-center #90caf9 blue lighten-3">
+               <div id="forViewers" className="section text-center #90caf9 blue lighten-5">
                      <div className="container landing">
                          <h5>For Viewers</h5>
                          <p>We believe the prevailing model of online advertising is broken for both companies and consumers. In the current landscape, the advertisement viewing experience can feel like an inconvenience to the same people who otherwise would be very interested in a product. It should not be that way! </p>
@@ -58,17 +58,21 @@ export default class Landing extends Component {
                          </p>
                      </div>
                 </div>
-                <div id="forAdv" className="section text-center blue lighten-1">
+                <div id="forAdv" className="section text-center blue lighten-3">
                       <div className="container landing">
                           <h5>For Advertisers</h5>
                           <p>We believe the prevailing model of online advertising is broken for both companies and consumers. In the current landscape, the advertisement viewing experience can feel like an inconvenience to the same people who otherwise would be very interested in a product. It should not be that way! </p>
                           <img src="img/smile/computer-worker.png" height="100"></img>
                           <p>With the Cheddar platform, watching branded content becomes a joyful experience. A well-crafted, creative ad should bring a smile to your face. We make sure that happens.
                           </p>
+                                         <div className="section text-center" style={{textAlign:"center"}}>
+                  <Link to='/adv_login' className="waves-effect waves-teal btn-flat">Advertiser Log In</Link>
+                  <Link to='/adv_signup' className="waves-effect waves-teal btn-flat">Advertiser Sign Up</Link>
+                </div>
                       </div>
                  </div>
 
-               <div className="section text-center blue darken-1">
+               <div className="section text-center blue lighten-1">
                     <div className="container landing">
                         <h5>ABOUT US</h5>
                             <div className="row">
@@ -103,14 +107,9 @@ export default class Landing extends Component {
                             </div>
                     </div>
                </div>
-               <div className="section text-center" style={{textAlign:"center"}}>
-                  <Link to='/adv_login' className="waves-effect waves-teal btn-flat">Advertiser Log In</Link>
-                  <Link to='/adv_signup' className="waves-effect waves-teal btn-flat">Advertiser Sign Up</Link>
-                </div>
-               <div className="section text-center blue darken-3">
-                    <div className="container footer">
-                        <h5>DISCLAIMER</h5>
-                       <p>This is a test. This is only a test. Please remember, this is only a test... Though we will tweet your pictures at @cheddar_smiles. Thanks for smiling!</p>
+               <div className="section text-center">
+                    <div className="container footer text-center">
+                       <p>Cheddar Inc. Copyright 2016</p>
                     </div>
                </div>
 

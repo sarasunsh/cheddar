@@ -19,8 +19,8 @@ class Navbar extends React.Component {
                     </div>
                     :
                     <div>
-                      <li><Link className='btn green lighten-1' to="/login">Log in</Link></li>
-                      <li><Link className='btn green lighten-1' to="/signup">Sign Up</Link></li>
+                      <li><Link className='btn nav light-blue lighten-4' to="/login">Log in</Link></li>
+                      <li><Link className='btn nav light-blue lighten-4' to="/signup">Sign Up</Link></li>
                     </div>
                     }
                   </ul>
