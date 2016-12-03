@@ -5,10 +5,10 @@ const app = require('./index.js')
 const request = supertest(app)
 const { expect } = require('chai')
 
-//minimum viable test. get and post things to app. 
+//minimum viable test. get and post things to app.
 describe('the home page', (done) =>{
     describe('when you go to the website', () => {
-        it('exists', () => 
+        it('exists', () =>
           request
             .get('/')
             .expect(200)
@@ -21,7 +21,7 @@ describe('the home page', (done) =>{
 //should probably test that we get denied and redirected with bad credentials.
 describe('the advertisers log in page', () => {
     describe('when you attempt to login with an admin account', () => {
-       //in order for Mocha to test asynchronously, we define 
+       //in order for Mocha to test asynchronously, we define
         it('Lets you log in as admin', (done) => {
             request
             .post('/api/auth/adv_login')
@@ -64,3 +64,14 @@ describe('the advertisers log in page', () => {
 // If you hit /login when you're already logged in, you get redirected to ads
 // You can post the results oof watching a video
 // You can get a list of videos you've watched'
+
+// describe('Advertisers', () => {
+//     describe('When you go to the Advertisers page, you get a total ad dollars', () =>
+
+
+//              )
+
+
+
+
+// });

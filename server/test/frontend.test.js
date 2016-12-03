@@ -6,6 +6,7 @@ import {spy} from 'sinon';
 import Analytics from '../../browser/react/components/Analytics/Analytics';
 
 import Ads from '../../browser/react/components/Ads/Ads';
+import Payment from '../../browser/react/components/Payment/Payment';
 
 
 describe('<Analytics />', () => {
@@ -53,7 +54,7 @@ describe('Root reducer', () => {
 });
 
 describe('Ads page', () => {
-   it('On clicking an ad choice, it should call selectAds with the correct ad as a parameter', () => {
+   it('The URL of one of the ads is correctly passed from props', () => {
 
         const onClickSpy = spy();
         const wrapper = shallow(<Ads currentAds={[{id: 1, url: "abcd"},{id: 2, url: "efghi"}]}/>);
@@ -62,11 +63,30 @@ describe('Ads page', () => {
         // expect(wrapper.props().currentAds[0].id).to.equal(1);
         // wrapper.find('#ad1').simulate('click');
         // expect(onClickSpy.calledOnce).to.be.true;
+   });
+});
 
+describe("Payment page", () => {
+    it('Creates a token by testing onSubmit', () => {
+        const event = {
+            target: {
+                amount: 21,
+                data-stripe: 1
+
+
+            }
+
+
+
+
+        }
+        const wrapper = shallow(<Payment/>);
+        wrapper.instance().onSubmit
 
 
 
    });
+
 
 
 

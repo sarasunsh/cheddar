@@ -34,6 +34,7 @@ var PaymentForm = React.createClass({
   },
 
   onSubmit: function(event) {
+    console.log("event.target", event.target);
     var self = this;
     event.preventDefault();
     // console.log("event.target.amount.value", event.target.amount.value);
