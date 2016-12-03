@@ -55,7 +55,6 @@ export default class Ads extends React.Component {
             </div>
           </li>
         </ul>
-        <a href="#" data-activates="slide-out" className="button-collapse"><i className="material-icons">menu</i></a>
         {/* container videocards returns the ad options based off the currentAds array handed down as props. */}
         <div className="container videocards">
           <div className="row">

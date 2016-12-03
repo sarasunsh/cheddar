@@ -26,7 +26,6 @@ export default class Analytics extends Component {
 
     componentDidMount(){
         axios.get(`/api/ad/${this.props.adChoice.id}`)
-        // axios.get(`/api/ad/2`)
         .then(res => {
             const filtered = filterFunc(res.data[2], this.state.filters)
             this.setState({
@@ -99,7 +98,6 @@ export default class Analytics extends Component {
                         </div>
                     </div>
                 </ul>
-                <a href="#" data-activates="slide-out" className="button-collapse"><i className="material-icons">menu</i></a>
                 <div className="container videocards">
                     {configArr.map((config, idx) => (
                             <ReactHighcharts
