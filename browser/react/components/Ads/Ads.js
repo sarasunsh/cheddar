@@ -2,21 +2,19 @@ import moment from 'moment'
 import axios from 'axios'
 import React from 'react';
 import { Link } from 'react-router';
-import { connect } from 'react-redux';
 
 export default class Ads extends React.Component {
 
   constructor(props) {
     super(props);
-    //yeah so numberOfAds is basically ads.length but this way I can check if the axios happened. numberOfAds is undefined unless it is 0.
     this.state = {
       adHistory: []
      }
-    //the props handed down include a findAds function from reducers/adsFromDb
-    //                         and a selectAd function from reducers/adsFromClick
-
   }
   componentDidMount(){
+      //hitting views/adHistory will return an array of watched ads for this user
+      //this is fired even before the auth gets set by /api/auth/me, but the server 
+      //knows which user because the user.id is on req.session.
       this.props.findAds();
       axios.get(`/api/views/adHistory`)
            .then(res => {
@@ -38,7 +36,7 @@ export default class Ads extends React.Component {
     //database returns a string representing dollar amount. For user experience, lets give them points instead of pennies.
     //this replace regex just deletes any dollar signs or dots. (g stands for global, ie don't stop after the first find')
     let smilyPoints = Number(earnedPay.replace(/[$.]/g, ''));
-    //coercing to a number because '$0.00' becomes '000', and I just want to display 0. Number('000') returns 0.
+    //with replace, '$0.00' becomes '000', and I just want to display 0. Coercing to a number just because Number('000') returns 0.
 
     return (
       <div id="ads">        
