@@ -52,10 +52,8 @@ export default class Landing extends Component {
                <div id="forViewers" className="section text-center #90caf9 blue lighten-5">
                      <div className="container landing">
                          <h5>For Viewers</h5>
-                         <p>We believe the prevailing model of online advertising is broken for both companies and consumers. In the current landscape, the advertisement viewing experience can feel like an inconvenience to the same people who otherwise would be very interested in a product. It should not be that way! </p>
-                         <img src="img/smile/computer-worker.png" height="100"></img>
-                         <p>With the Cheddar platform, watching branded content becomes a joyful experience. A well-crafted, creative ad should bring a smile to your face. We make sure that happens.
-                         </p>
+                         <p> With a cheddar account, you're paid for smiling. That's all there is to it. We use cutting edge facial expression recognition to determine your expression, scoring your smile from 0 to 100%. If you keep your smile at 100% for the duration of the video, you're paid out the maximum amount. </p>
+                     
                           <div className="section text-center" style={{textAlign:"center"}}>
                             <Link to='/login' className="waves-effect waves-teal btn-flat bold">Viewer Log In</Link>
                             <Link to='/signup' className="waves-effect waves-teal btn-flat bold">Viewer Sign Up</Link>
@@ -65,10 +63,8 @@ export default class Landing extends Component {
                 <div id="forAdv" className="section text-center blue lighten-3">
                       <div className="container landing">
                           <h5>For Advertisers</h5>
-                          <p>We believe the prevailing model of online advertising is broken for both companies and consumers. In the current landscape, the advertisement viewing experience can feel like an inconvenience to the same people who otherwise would be very interested in a product. It should not be that way! </p>
-                          <img src="img/smile/computer-worker.png" height="100"></img>
-                          <p>With the Cheddar platform, watching branded content becomes a joyful experience. A well-crafted, creative ad should bring a smile to your face. We make sure that happens.
-                          </p>
+                          <p> You pay a one-time fee for listing the ad, and set a maximum payout for a viewer watching that ad with their biggest smile. As the ad is served to viewers, their smile is tracked and scored from 0 to 100%. Your payment to that viewer is determined by their score, so you only pay for smiles. At any time you can check the metrics for a particular ad and see a full breakdown of how different people are responding to the ad.</p>
+
                           <div className="section text-center" style={{textAlign:"center"}}>
                             <Link to='/adv_login' className="waves-effect waves-teal btn-flat bold">Advertiser Log In</Link>
                             <Link to='/adv_signup' className="waves-effect waves-teal btn-flat bold">Advertiser Sign Up</Link>

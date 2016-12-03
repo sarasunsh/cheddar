@@ -1,6 +1,16 @@
 * {
   box-sizing: border-box;
 }
+
+
+.container.landing h5{
+  color: rgba(0,0,0,0.5);
+  font-size: medium;
+  text-transform: uppercase;
+}
+.container.landing p {
+  font-size: large; 
+}
 /*
   So this iframe situation
   to make it response
@@ -190,6 +200,7 @@ nav {
 }
 
 .card-title.welcome-title {
+  line-height: 1.5em;
   font-size: 48px;
   font-weight: bold;
   color: white;
