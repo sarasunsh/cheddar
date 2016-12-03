@@ -107,15 +107,6 @@ const commandYT = (commandName, theIframe) => {
     theIframe.postMessage(`{"event":"command","func":"${commandName}","args":""}`,'*');
 }
 
-// export const onYouTubeStateChange = (state) => {
-//     let theAd = document.getElementById("theAd");
-//     if(state.data === YT.PlayerState.ENDED ) {
-//         theAd.style.display = "none";
-//         log('#logs', `Congratulations! Your smilyScore was ${Math.trunc(smilyScore[0])}`);
-//         onStop();
-//     }
-// }
-
 //Draw the detected facial feature points on the image
 export const drawFeaturePoints = (img, featurePoints) => {
     var contxt = $('#face_video_canvas')[0].getContext('2d');
