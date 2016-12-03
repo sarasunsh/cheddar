@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Navbar from './Navbar';
 
 export default class App extends Component {
-
   render () {
     return (
       <div>
@@ -21,8 +20,6 @@ export default class App extends Component {
           </div>
           }
       </div>
-);
+    );
   }
 }
-
-// Read more about children route components here: https://github.com/reactjs/react-router-tutorial/tree/master/lessons/04-nested-routes
