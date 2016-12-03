@@ -67,48 +67,44 @@ export default class Analytics extends Component {
             1: "trending_down"
         }
         return (
-            <div id="ads">
-                <ul id="slide-out" className="side-nav fixed">
-                    <div className="stat-box z-depth-1">
-                        <div className="container stats ">
-                            <div className="font-18 bold gap red-font" >{this.props.adChoice.title}</div>
-                            <span className="font-16 bold">Total Views:</span> {this.state.count}<br></br>
-                            <span className="font-16 bold">Cost Per View:</span> {`$${this.props.adChoice.cost}`}<br></br>
-                            <span className="font-16 bold">Total Spend:</span> {this.state.total}
-                        </div>
-                    </div>
-                    <div>
-                    <div className="userView">
-                            <div className="font-18 bold ">Filter by demographic</div>
-                            <hr></hr>
-                            {filters.map((filterName, idx) => (
-                                <li key={idx} className="switch" onChange={() => this.toggleClick(filterName)}>
-                                    <div className="col s7 filter-name">{formatFilter(filterName)}</div>
-                                    <div className="col s5">
-                                        <label>
-
-                                            <input disabled={this.state.disabled && !this.state.filters[filterName]} type="checkbox"/>
-                                            <span className="lever"></span>
-
-                                        </label>
-                                    </div>
-                                </li>
-                                )
-                            )}
-                        </div>
-                    </div>
-                </ul>
-                <div className="container videocards">
-                    {configArr.map((config, idx) => (
-                            <ReactHighcharts
-                                class="center-align"
-                                key={idx}
-                                config={config}>
-                            </ReactHighcharts>
-                        )
-                    )}
+          <div id="ads">
+              <ul id="slide-out" className="side-nav fixed">
+                <div className="stat-box z-depth-1">
+                  <div className="container stats ">
+                    <div className="font-18 bold gap red-font" >{this.props.adChoice.title}</div>
+                    <span className="font-16 bold">Total Views:</span> {this.state.count}<br></br>
+                    <span className="font-16 bold">Cost Per View:</span> {`$${this.props.adChoice.cost}`}<br></br>
+                    <span className="font-16 bold">Total Spend:</span> {this.state.total}
+                  </div>
                 </div>
-            </div>
+                <div>
+                  <div className="userView">
+                    <div className="font-18 bold ">Filter by demographic</div>
+                    <hr></hr>
+                    {filters.map((filterName, idx) => (
+                      <li key={idx} className="switch" onChange={() => this.toggleClick(filterName)}>
+                        <div className="col s7 filter-name">{formatFilter(filterName)}</div>
+                        <div className="col s5">
+                          <label>
+                            <input disabled={this.state.disabled && !this.state.filters[filterName]} type="checkbox"/>
+                            <span className="lever"></span>
+                          </label>
+                        </div>
+                      </li>
+                    ))}
+                  </div>
+                </div>
+              </ul>
+              <div className="container videocards">
+                {configArr.map((config, idx) => (
+                    <ReactHighcharts
+                      class="center-align"
+                      key={idx}
+                      config={config}>
+                    </ReactHighcharts>
+                ))}
+              </div>
+          </div>
         )
     }
 }
