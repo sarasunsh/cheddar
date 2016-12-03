@@ -65,25 +65,3 @@ export default class Login extends React.Component {
 
   }
 }
-
-
-/* OAuth code that was inside Render which can be put back
-
-<div className="or buffer">
-          <div className="back-line">
-            <span>OR</span>
-          </div>
-        </div>
-        <div className="buffer oauth">
-          <p>
-            <a target="_self"
-               href="/auth/google"
-               className="btn btn-social btn-google">
-            <i className="fa fa-google"></i>
-            <span>{message} with Google</span>
-            </a>
-          </p>
-        </div>
-
-
-*/

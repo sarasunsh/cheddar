@@ -17,12 +17,12 @@ export default class Video extends React.Component {
         this.progressBar = this.progressBar.bind(this);
         this.width = 640,
         this.height = 480;
-        this.url = `https://www.youtube.com/embed/${this.props.currentAd.url}?enablejsapi=1&controls=0&showinfo=0&iv_load_policy=3&rel=0`;
-        //enablejsapi=1 must be appended to embed url so we can control play/pause
-        //showinfo=0 and controls=0 will hide the youtube player controls
-        //disablekb=1 will prevent you from skipping ahead with arrow keys
-        //iv_load_policy=3 hides video annotations / popups / subscribe now stuff
-        //rel=0 prevents related videos from popping up at the end
+        this.url = `https://www.youtube.com/embed/${this.props.currentAd.url}?`;
+        this.url += 'enablejsapi=1&' // must be appended to embed url so we can control play/pause
+        this.url += 'showinfo=0&' // and controls=0 will hide the youtube player controls
+        // this.url += 'disablekb=1&' // will prevent you from skipping ahead with arrow keys
+        this.url += 'iv_load_policy=3&' // hides video annotations / popups / subscribe now stuff
+        this.url += 'rel=0' // prevents related videos from popping up at the end
     }
 
     clickPlay(e){
@@ -60,11 +60,6 @@ export default class Video extends React.Component {
                     .then(() => setTimeout(() => location.pathname='/ads', 5000))
                     .catch(err => console.log(err))
                 })
-
-
-            //that would be the reacty way to do it, but I'm having problems re-initializing the youtube API, so we'll clear the window when this is over.
-            // location.pathname = '/ads'
-
         }
     }
 

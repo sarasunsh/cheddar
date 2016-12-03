@@ -1,16 +1,13 @@
-import React from 'react';
 import {connect} from 'react-redux';
 import Advertisers from './Advertisers'
 import {findAllAdsForAdvertiser} from '../../reducers/adsFromDb';
 import {selectAds} from '../../reducers/adFromClick';
 
-
-
-
 const mapStateToProps = (state) => ({
   user: state.auth,
   currentAds: state.currentAds
 })
+
 const mapDispatchToProps = (dispatch) => ({
     findAllAdsForAdvertiser: (advertiserId) => {
         // console.log("findAllAdsForAdvertiser running in mapDispatchToProps")
