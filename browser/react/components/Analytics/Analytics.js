@@ -55,14 +55,12 @@ export default class Analytics extends Component {
     }
 
     render(){
-        console.log(this.state)
         const filters = Object.keys(this.state.filters)
         const configArr = this.state.graphData.map(set => generateConfig(set[0], set[1]))
         if (configArr.length < 2) {
             configArr.map(config => config['legend'] = {enabled:false}) // generate config objects for chart
         }
 
-        console.log('configArr', configArr)
         const test = {
             0: "trending_up",
             1: "trending_down"

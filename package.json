@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "webpack -w & nodemon --watch server -e js,html server/start.js",
-    "test": "mocha --compilers js:babel-register server/**/*.test.js",
+    "test": "mocha --watch --compilers js:babel-register server/**/*.test.js",
     "postinstall": "webpack --config ./webpack.config.js --progress --colors",
     "build-watch": "check-node-version --node '>= 6.7.0' && bin/setup && webpack -w",
     "seed": "node server/db/seed.js"

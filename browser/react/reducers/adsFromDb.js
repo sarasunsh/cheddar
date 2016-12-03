@@ -4,8 +4,6 @@ import axios from 'axios'
 
 
 const SET_NEXT_ADS = 'SET_NEXT_ADS';
-const SET_SELECT_ADS = 'SET_SELECT_ADS';
-
 
 
 /* ------------   ACTION CREATORS     ------------------ */
@@ -24,7 +22,6 @@ export default function reducer (currentAds = [], action) {
 }
 
 /* ------------       DISPATCHERS     ------------------ */
-
 export const findAds = () => dispatch => {
     //respond to get api ads next should be an array of ad urls
     axios.get('/api/videos')
