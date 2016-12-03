@@ -11,8 +11,10 @@ export default class Auth extends React.Component {
   }
 
   componentDidMount(){
-    if(localStorage.token) {
-      // browserHistory.push('////')
+    if(localStorage.token){
+      //if there's a storage token when you hit the sign up route, 
+      //check if the token is adv or user, and history.push to the appropriate route
+      browserHistory.push((localStorage.token === 'adv' ? '/advertisers' : '/ads'))
     }
     $('select').material_select();
   }
