@@ -14,9 +14,7 @@ import LoginContainer from './components/Login/LoginContainer';
 import SignupContainer from './components/Signup/SignupContainer';
 import AdvLoginContainer from './components/AdvLogin/LoginContainer';
 import AdvSignupContainer from './components/AdvSignup/SignupContainer';
-
 import AdvertisersContainer from './components/Advertisers/AdvertisersContainer';
-import Analytics from './components/Analytics/Analytics';
 import AnalyticsContainer from './components/Analytics/AnalyticsContainer';
 import Landing from './components/Landing';
 
