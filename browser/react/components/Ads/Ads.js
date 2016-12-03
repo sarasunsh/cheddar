@@ -65,7 +65,7 @@ export default class Ads extends React.Component {
         <a href="#" data-activates="slide-out" className="button-collapse"><i className="material-icons">menu</i></a>
         <div className="container videocards">
           <div className="row">
-            <div className="col s6">
+            {ads[0] ? <div className="col s6">
               <Link  onClick={() => selectAd(ads[0])} to="/video" >
                 <div className="card">
                   <div className="card-image">
@@ -81,7 +81,9 @@ export default class Ads extends React.Component {
                 </div>
               </Link>
             </div>
-            <div className="col s6">
+            : <div>No more ads at this time.<hr /></div>
+            }
+            {ads[1] ? <div className="col s6">
               <Link onClick={() => selectAd(ads[1])} to="/video" >
                 <div className="card">
                   <div className="card-image">
@@ -97,6 +99,8 @@ export default class Ads extends React.Component {
                 </div>
               </Link>
             </div>
+            : <div></div>
+            }
           </div>
           <div className="row">
             <div className="col s12">

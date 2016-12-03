@@ -224,8 +224,3 @@ export default class Video extends React.Component {
         )
     }
 }
-
-
-/*
-(function () {  return "progress green";})()
-*/
