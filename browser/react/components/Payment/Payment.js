@@ -2,6 +2,11 @@ var React = require('react');
 var ReactScriptLoaderMixin = require('react-script-loader').ReactScriptLoaderMixin;
 import axios from 'axios';
 
+/* 
+  Thanks to David Walsh for "Step by Step Guide to Payments in React"
+  https://davidwalsh.name/step-step-guide-stripe-payments-react
+*/
+
 var PaymentForm = React.createClass({
   mixins: [ ReactScriptLoaderMixin ],
 

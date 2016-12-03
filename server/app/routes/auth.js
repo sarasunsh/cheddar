@@ -68,7 +68,7 @@ passport.use('advertisers',new LocalStrategy({
 passport.serializeUser(function(user, cb) {
   let key = {
     id: user.id,
-    type: "advertiser_name" in user? 'adv' : 'user'
+    type: "advertiser_name" in user ? 'adv' : 'user'
   }
   cb(null, key);
 });
