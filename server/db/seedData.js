@@ -61,7 +61,7 @@ const adModel = casual.define('adModel', (tmp) => {
     url: ads_list[tmp].url,
     category: ads_list[tmp].cat,
     cost: parseFloat(Math.round(casual.double(.5, 5) * 100) / 100).toFixed(2),
-    advertiserId: casual.integer(1)
+    advertiserId: 1
   }
 })
 
