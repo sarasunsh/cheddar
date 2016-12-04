@@ -26,7 +26,6 @@ function fetchInitialData (type) {
 }
 
 function requireUserAuth (nextRouterState, replace){
-  fetchInitialData("user");
   if (!localStorage.token) {
     replace({
       pathname: '/login',
@@ -38,10 +37,10 @@ function requireUserAuth (nextRouterState, replace){
       state: { nextPathname: nextRouterState.location.pathname }
     })
   }
+  fetchInitialData(localStorage.token);
 }
 
 function requireAdvAuth (nextRouterState, replace){
-  fetchInitialData("adv");
   if (!localStorage.token) {
     replace({
       pathname: '/adv_login',
@@ -53,6 +52,7 @@ function requireAdvAuth (nextRouterState, replace){
       state: { nextPathname: nextRouterState.location.pathname }
     })
   }
+  fetchInitialData(localStorage.token)
 }
 
 // React-Router--------------------------------------------------------

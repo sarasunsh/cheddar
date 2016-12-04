@@ -9,9 +9,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    findAllAdsForAdvertiser: (advertiserId) => {
+    findAllAdsForAdvertiser: () => {
         // console.log("findAllAdsForAdvertiser running in mapDispatchToProps")
-        dispatch(findAllAdsForAdvertiser(advertiserId))
+        dispatch(findAllAdsForAdvertiser())
     },
     // We are not using the advertiserId at the moment because we are assuming there is only one advertiser; this will just get ALL of the ads in the database for the moment; the parameter is there for when we need it in the next step
 

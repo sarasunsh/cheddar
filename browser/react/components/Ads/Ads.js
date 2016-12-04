@@ -13,7 +13,7 @@ export default class Ads extends React.Component {
   }
   componentDidMount(){
       //hitting views/adHistory will return an array of watched ads for this user
-      //this is fired even before the auth gets set by /api/auth/me, but the server 
+      //this is fired even before the auth gets set by /api/auth/me, but the server
       //knows which user because the user.id is on req.session.
       this.props.findAds();
       axios.get(`/api/views/adHistory`)
@@ -30,7 +30,7 @@ export default class Ads extends React.Component {
     //currentAds is a array of objects. Each object has a url, title, id. Its also represented on the global store.
     let adA = currentAds[0],
         adB = currentAds[1]
-    //user is an obect with .name, .email etc, 
+    //user is an obect with .name, .email etc,
     //once there is a user, an earnedPay property will exist. otherwise just put it at $0
     let earnedPay = user ? user.earnedPay : '$0.00'
     //database returns a string representing dollar amount. For user experience, lets give them points instead of pennies.
@@ -39,19 +39,19 @@ export default class Ads extends React.Component {
     //with replace, '$0.00' becomes '000', and I just want to display 0. Coercing to a number just because Number('000') returns 0.
 
     return (
-      <div id="ads">        
+      <div id="ads">
         <ul id="slide-out" className="side-nav fixed">
           <li>
             <div className="userView">
               <div className="background">
               </div>
               {/* This is just displaying user info. Materialize CSS styles a tags specifically, being that this is a navbar component */}
-              <a><img className="circle" style={{width:'23px',height:'30px'}}src="img/smile/simplesmile.svg"/></a>
-              <a><span className="black-text name">{user ? user.name : 'Props didnt happen'} </span></a>
-              <a><span className="black-text email">{user ? user.email : "Props didnt happen"}</span></a>
-              <a><span className="black-text">Watched {this.state.adHistory.length} ads</span></a>
-              <a><span className="black-text">Earned {smilyPoints} smilyPoints</span></a>
-              <a><span className="btn green lighten-1">Cash Out</span></a>
+              <img className="circle" style={{width:'23px',height:'30px'}}src="img/smile/simplesmile.svg"/>
+              <div className="black-text name">{user ? user.name : 'Props didnt happen'} </div>
+              <div className="black-text email">{user ? user.email : "Props didnt happen"}</div>
+              <div className="black-text">Watched {this.state.adHistory.length} ad{this.state.adHistory.length < 2? '':'s'}</div>
+              <div className="black-text">Earned {smilyPoints} Smily Point{smilyPoints < 2? '':'s'}</div>
+              <div className="btn green lighten-1">Cash Out</div>
             </div>
           </li>
         </ul>

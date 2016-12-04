@@ -6,6 +6,7 @@ import { Button, Image, Col } from 'react-bootstrap';
 
 export default class Landing extends Component {
   componentDidMount(){
+    // Smooth scrolling via https://css-tricks.com/snippets/jquery/smooth-scrolling/
     $(function() {
       $('a[href*="#"]:not([href="#"])').click(function() {
         if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
@@ -53,7 +54,7 @@ export default class Landing extends Component {
                      <div className="container landing">
                          <h5>For Viewers</h5>
                          <p> With a cheddar account, you're paid for smiling. That's all there is to it. We use cutting edge facial expression recognition to determine your expression, scoring your smile from 0 to 100%. If you keep your smile at 100% for the duration of the video, you're paid out the maximum amount. </p>
-                     
+
                           <div className="section text-center" style={{textAlign:"center"}}>
                             <Link to='/login' className="waves-effect waves-teal btn-flat bold">Viewer Log In</Link>
                             <Link to='/signup' className="waves-effect waves-teal btn-flat bold">Viewer Sign Up</Link>

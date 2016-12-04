@@ -88,9 +88,8 @@ export default class Advertisers extends React.Component {
   }
 
   retrieveTotalDollarsSpent (advertiserId) {
-    axios.get(`api/advertiser/totalspend`)
+    axios.get(`/api/advertiser/totalspend`)
     .then( totalDollarsSpent => {
-      console.log("totalDollarsSpent", totalDollarsSpent);
       this.setState({totalDollarsSpent: totalDollarsSpent.data});
     })
     .catch( err => console.error(err));
@@ -109,11 +108,11 @@ export default class Advertisers extends React.Component {
             <div className="userView">
               <div className="background">
               </div>
-              <a href="#!user"><img className="circle" src="img/smile/2.jpg"/></a>
-              <a href="#!name"><span className="black-text name">{user ? user.name : 'Props didnt happen'} </span></a>
-              <a href="#!email"><span className="black-text email">{user ? user.email : "Props didnt happen"}</span></a>
-              <a href="#!email"><span className="black-text">{currentAds.length} Ads</span></a>
-              <a href="#!email"><span className="black-text">${Math.round(this.state.totalDollarsSpent)} Ad Budget Spent</span></a>
+              <img className="circle" style={{width:'23px',height:'30px'}}src="img/smile/simplesmile.svg"/>
+              <div className="black-text name">{user ? user.name : 'Props didnt happen'} </div>
+              <div className="black-text email">{user ? user.email : "Props didnt happen"}</div>
+              <div className="black-text">{currentAds.length} Ad{currentAds.length < 2? '':'s'}</div>
+              <div className="black-text">${Math.round(this.state.totalDollarsSpent)} Ad Budget Spent</div>
             {/*<a href="#!email"><span className="black-text">${this.props.user && Math.round(this.props.user.totalCharged)} Ad Dollars Deposited</span></a>*/}
             </div>
           </li>

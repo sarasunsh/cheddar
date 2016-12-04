@@ -33,22 +33,20 @@ export const login = credentials => dispatch => {
   axios.post('/api/auth/login', credentials)
       .then((res) => {
         localStorage.setItem('token', "user")
-        dispatch(retrieveLoggedInUser());
         return res.data;
       })
       .then(redirect => browserHistory.push(redirect))
-     .catch(err => browserHistory.push('/login#failed'));
+      .catch(err => browserHistory.push('/login#failed'));
 }
 
 export const adv_login = credentials => dispatch => {
   axios.post('/api/auth/adv_login', credentials)
       .then((res) => {
         localStorage.setItem('token', "adv")
-        dispatch(retrieveLoggedInUser());
         return res.data;
       })
       .then(redirect => browserHistory.push(redirect))
-     .catch(err => browserHistory.push('/adv_login#failed'));
+      .catch(err => browserHistory.push('/adv_login#failed'));
 }
 
 export const signup = credentials => dispatch => {
@@ -59,10 +57,8 @@ export const signup = credentials => dispatch => {
         //res.data will be the redirect url path
         return res.data;
       })
-      .then(redirect => {
-        browserHistory.push(redirect)
-      })
-     .catch(err => {
+      .then(redirect => browserHistory.push(redirect))
+      .catch(err => {
        console.error(err)
        browserHistory.push('/signup#failed')
      })
@@ -76,16 +72,14 @@ export const adv_signup = credentials => dispatch => {
         //res.data will be the redirect url path
         return res.data;
       })
-      .then(redirect => {
-        browserHistory.push(redirect)
-      })
-     .catch(err => {
+      .then(redirect => browserHistory.push(redirect))
+      .catch(err => {
        console.error(err)
        browserHistory.push('/adv_signup#failed')
      })
 }
 
-export const retrieveLoggedInUser = (type) => dispatch => {
+export const retrieveLoggedInUser = (type = localStorage.token) => dispatch => {
   axios.get('/api/auth/me')
       .then(res => {
         dispatch(set(res.data))
@@ -105,7 +99,7 @@ export const retrieveLoggedInUser = (type) => dispatch => {
 export const logout = () => dispatch => {
     dispatch(remove())
     localStorage.removeItem('token');
-    axios.get('api/auth/logout')
+    axios.get('/api/auth/logout')
     .then(res => browserHistory.push('/'))
     .catch(err => console.error('logout unsuccessful', err));
 }
