@@ -1,6 +1,4 @@
 var FileSaver = require('file-saver');
-
-
 const preSmilyScore = [];
 export let isPlaying = false;
 export const smilyScore = [0,0]; // first element is the score, second is amount of elements

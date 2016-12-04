@@ -5,11 +5,11 @@
 
 .container.landing h5{
   color: rgba(0,0,0,0.5);
-  font-size: medium;
+  font-size: 20px;
   text-transform: uppercase;
 }
 .container.landing p {
-  font-size: large; 
+  font-size: 14px;
 }
 /*
   So this iframe situation
@@ -243,7 +243,6 @@ nav {
   font-size: 18px;
 }
 
-
 .font-16 {
   font-size: 16px;
 }
@@ -262,4 +261,10 @@ nav {
 
 .btn.nav {
   color: #006064;
+}
+
+.center-block {
+   margin-left:auto;
+   margin-right:auto;
+   display:block;
 }
