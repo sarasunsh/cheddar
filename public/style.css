@@ -8,9 +8,17 @@
   font-size: 24px;
   font-weight: bold;
 }
+
 .container.landing p {
   font-size: 14px;
 }
+
+.brand-logo {
+  font-family: 'Reem Kufi', sans-serif;
+  font-weight: bolder;
+  text-shadow: -1px 1px #000;
+}
+
 /*
   So this iframe situation
   to make it response

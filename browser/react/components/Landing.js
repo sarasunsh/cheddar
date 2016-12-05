@@ -55,7 +55,7 @@ export default class Landing extends Component {
                             <img src="img/smile/mancomputer.png"></img>
                           </div>
                           <div className="card-content">
-                            <span className="text-center font-18">10,000+ views</span>
+                            <span className="text-center font-18">More Views</span>
                           </div>
                         </div>
                       </div>
@@ -65,7 +65,7 @@ export default class Landing extends Component {
                             <img src="img/smile/give-money-hand.png"></img>
                           </div>
                           <div className="card-content">
-                            <span className="text-center font-18">$25,000+ earned</span>
+                            <span className="text-center font-18">Earn $$</span>
                           </div>
                         </div>
                       </div>
@@ -75,7 +75,7 @@ export default class Landing extends Component {
                             <img src="img/smile/smile.jpg"></img>
                           </div>
                           <div className="card-content">
-                            <span className="text-center font-18">300+ hours of smiles</span>
+                            <span className="text-center font-18">Hours of smiles</span>
                           </div>
                         </div>
                       </div>
@@ -95,12 +95,11 @@ export default class Landing extends Component {
                       </div>
                   </div>
                   <div className="carousel">
-                    <Link className="carousel-item" ><img src="/img/twit/ben.jpg-large" /></Link>
-                    <Link className="carousel-item" ><img src="/img/twit/jackson.jpg-large" /></Link>
-                    <Link className="carousel-item" ><img src="/img/twit/sara.jpg-large" /></Link>
-                    <Link className="carousel-item" ><img src="/img/twit/david.jpg-large" /></Link>
-                    <Link className="carousel-item" ><img src="/img/twit/char.jpg-large" /></Link>
-
+                    <Link className="carousel-item" ><img src="/img/tweet/ben.jpg" /></Link>
+                    <Link className="carousel-item" ><img src="/img/tweet/jackson.jpg" /></Link>
+                    <Link className="carousel-item" ><img src="/img/tweet/sara.jpg" /></Link>
+                    <Link className="carousel-item" ><img src="/img/tweet/david.jpg" /></Link>
+                    <Link className="carousel-item" ><img src="/img/tweet/char.jpg" /></Link>
                   </div>
                 </div>
                 <div id="forAdv" className="section text-center blue lighten-3">
