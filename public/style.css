@@ -2,7 +2,26 @@
   box-sizing: border-box;
 }
 
+.pitch {
+  display: inline-block;
+}
 
+.pitch p {
+  padding: 10% 5%;
+  padding-bottom: 0;
+}
+
+.pitch img {
+  margin: 15px;
+}
+
+.pitch:nth-child(even) img {
+  float: left;
+}
+
+.pitch:nth-child(odd) img {
+  float: right;
+}
 .container.landing h5{
   color: rgba(0,0,0,0.5);
   font-size: 24px;
@@ -10,7 +29,7 @@
 }
 
 .container.landing p {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .brand-logo {
@@ -265,7 +284,7 @@ nav {
 }
 
 .name-pop {
-  color: #00897b;
+  color: #e65100;
 }
 
 .bold {

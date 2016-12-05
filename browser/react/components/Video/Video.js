@@ -35,7 +35,8 @@ export default class Video extends React.Component {
     onPlayerStateChange(state){
         console.log('player state is ', state)
         if(state.data === YT.PlayerState.ENDED ) {
-            let finalSmile = funcs.smilyScore[0];
+            let finalSmile = funcs.smilyScore[0]
+            this.setState({ finalSmile });
             document.getElementById("theAd").style.display = "none";
             const canvas = document.getElementById('best_smile');
             canvas.height = 480;
@@ -49,6 +50,7 @@ export default class Video extends React.Component {
             ctx.shadowOffsetY = 2;
             ctx.shadowBlur    = 3;
             ctx.fillText(this.props.currentAd.title.split(" ")[0] + " makes me smile!", 320, 60, 600);
+
 
             funcs.log('logs', `Congratulations! Your smilyScore was ${Math.trunc(finalSmile)}`);
             funcs.onStop();
@@ -120,10 +122,6 @@ export default class Video extends React.Component {
                 } else {
                     funcs.smilyScoreAvg(faces[0].expressions.smile);
                     this.setState({determinate: true, progress: `${funcs.preSmilyScoreAvg(faces[0].expressions.smile)}%`});
-                    // this.setState({determinate: true, progress: `${funcs.smilyScore[0]}%`});
-
-                    // console.log("smilyScore!",funcs.smilyScore[0]);
-                    // console.log(faces[0].emojis.dominantEmoji);
                     if(window.top_smile[0] <  faces[0].expressions.smile){
                       window.top_smile[0] = faces[0].expressions.smile;
                       window.top_smile[1] = image;
@@ -180,9 +178,19 @@ export default class Video extends React.Component {
     }
 
     render() {
+        console.log(this.state.finalSmile >= 0)
         return (
             <div style={{height: this.height}}>
               <div style={{textAlign:"center"}}>
+                {this.state.finalSmile >= 0 ?
+                    <div className="card blue lighten-3">
+                        <div className="card-content white-text">
+                            <span className="card-title bold">{`Congratulations! Your smilyScore was ${Math.trunc(this.state.finalSmile)}`}</span>
+                            <p>We're proud of you, so we tweeted about your success at @cheddar_smiles. Spread the news with a retweet!</p>
+                        </div>
+                    </div>
+                    :
+                    null}
                 <canvas id="best_smile" height="1px" width={this.width}></canvas>
               </div>
               <div id="logs"> Click Play when ready . . .</div>

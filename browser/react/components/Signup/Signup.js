@@ -38,7 +38,7 @@ export default class Auth extends React.Component {
             <div className="signin-container">
                 {/* This displays error messages*/}
                 <div className="errorContainer">
-                    {location.hash === '#failed' ? <span> Sign Up Unsuccessful. Perhaps the email was already used. </span> : null}
+                    {location.hash === '#failed' ? <span> Sign-up unsuccessful. The email you provided is already registered. </span> : null}
                 </div>
 
                 {/* This is the main body of the sign-up form*/}
