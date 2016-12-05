@@ -51,7 +51,7 @@ export default class Ads extends React.Component {
               <div className="black-text email">{user ? user.email : "Props didnt happen"}</div>
               <div className="black-text">Watched {this.state.adHistory.length} ad{this.state.adHistory.length < 2? '':'s'}</div>
               <div className="black-text">Earned {smilyPoints} Smily Point{smilyPoints < 2? '':'s'}</div>
-              <div className="btn green lighten-1">Cash Out</div>
+              <div className="btn">Cash Out</div>
             </div>
           </li>
         </ul>

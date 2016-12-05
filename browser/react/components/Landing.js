@@ -32,11 +32,11 @@ export default class Landing extends Component {
                            <div className="card transparent z-depth-5 welcome">
                                 <div className="card-content">
                                     <span className="card-title welcome-title">Say cheese, get cash.</span>
-                                    <p className='welcome-text'>A new kind of ad platform, built on <br></br>consumer smiles and customer satisfaction.</p>
+                                    <p className='welcome-text'><br></br>A new kind of ad platform, built on <br></br>consumer smiles and customer satisfaction.</p>
                                 </div>
                                 <div className="card-action">
-                                    <a href="#forViewers" className="landing-box bold font-18">For Viewers</a>
-                                    <a href="#forAdv" className="landing-box bold font-18">For Advertisers</a>
+                                    <a href="#forViewers" className="landing-box bold font-18 padded">For Viewers</a>
+                                    <a href="#forAdv" className="landing-box bold font-18 padded">For Advertisers</a>
                                 </div>
                            </div>
                        </div>

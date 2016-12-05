@@ -22,7 +22,7 @@ module.exports = {
     'maritalStatus' : ['Married', 'Widowed', 'Divorced', 'Single'],
     'education':
         ["Less than high school",
-        "High school graduate (includes equivalency)",
+        "High school graduate",
         "Some college, no degree",
         "Associate degree",
         "Bachelor degree",

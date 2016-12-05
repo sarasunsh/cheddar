@@ -14,7 +14,7 @@ class Navbar extends React.Component {
                   <ul className="right hide-on-med-and-down">
                     {this.props.user ?
                     <div>
-                      <li><Link to={localStorage.token === "adv"?'/advertisers':'/ads'}>{this.props.user.name || this.props.user.email}</Link></li>
+                      <li><Link className="name-pop" to={localStorage.token === "adv"?'/advertisers':'/ads'}>{this.props.user.name || this.props.user.email}</Link></li>
                       <li><Link to='/' className='btn nav waves-effect waves-teal btn-flat' onClick={this.props.logoutClick}>Log out</Link></li>
                     </div>
                     :

@@ -25,27 +25,31 @@ export default class Login extends React.Component {
         <div className="errorContainer">
         {location.hash === '#failed' ? <span> Username and password were incorrect </span> : null}
         </div>
-        <div className="buffer local">
+        <div className="buffer local col s6 push-s3 pull-s3">
             <form onSubmit={this.onSubmit}>
-                <div className="form-group">
-                  <label>email</label>
-                  <input
+                <div className="input-field">
+               <i className="material-icons prefix">email</i>
+               <label htmlFor="icon_prefix">Email</label>
+                <input
+                    id="icon_prefix"
                     name="email"
                     type="email"
                     className="form-control"
                     required
                   />
                 </div>
-                <div className="form-group">
-                    <label>password</label>
-                    <input
+                <div className="input-field">
+                <i className="material-icons prefix">lock_outline</i>
+                <label htmlFor="icon_prefix">Password</label>
+                <input
+                      id="icon_prefix"
                       name="password"
                       type="password"
                       className="form-control"
                       required
                     />
                 </div>
-                <button type="submit" className="btn btn-block btn-primary green lighten-1">Login</button>
+                <button type="submit" className="btn btn-block btn-primary center-block">Log in</button>
             </form>
         </div>
       </div>

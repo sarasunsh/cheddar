@@ -4,98 +4,140 @@ import {browserHistory} from 'react-router';
 /* -----------------    COMPONENT     ------------------ */
 
 export default class Auth extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-
-  componentDidMount(){
-   if(localStorage.token){
-      //if there's a storage token when you hit the sign up route, 
-      //check if the token is adv or user, and history.push to the appropriate route
-      browserHistory.push((localStorage.token === 'adv' ? '/advertisers' : '/ads'))
-    }
-    $('select').material_select();
-  }
-
-  render() {
-    return (
-      <div className="signin-container">
-        <div className="errorContainer">
-        {location.hash === '#failed' ? <span> Sign Up Unsuccessful. Perhaps the email was already used. </span> : null}
-        </div>
-        <div className="buffer local">
-            <form onSubmit={this.onSubmit}>
-                <div className="form-group">
-                  <label>name</label>
-                  <input
-                    name="name"
-                    type="text"
-                    className="form-control"
-                  />
-                </div>
-                <div className="form-group">
-                  <label>email</label>
-                  <input
-                    name="email"
-                    type="text"
-                    className="form-control"
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                    <label>password</label>
-                    <input
-                      name="password"
-                      type="password"
-                      className="form-control"
-                      required
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Age</label>
-                    <input
-                      name="age"
-                      type="number"
-                      className="form-control"
-                    />
-                </div>
-                <div className="form-group">
-                  <p>
-                    <input className="group1" type="radio" name="gender" id="test1" />
-                    <label htmlFor="test1">Female</label>
-                  </p>
-                  <p>
-                    <input className="group1" type="radio" name="gender" id="test2" />
-                    <label htmlFor="test2">Male</label>
-                  </p>
-                </div>
-                <div className="form-group input-field">
-                  <select>
-                    <option defaultValue value="">Income</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                  </select>
-                </div>
-                <button type="submit" className="btn btn-block btn-primary green lighten-1">Signup</button>
-            </form>
-        </div>
-      </div>
-    );
-  }
-
-  onSubmit(event) {
-    event.preventDefault();
-    const { signup } = this.props;
-    const credentials = {
-      name: event.target.name.value,
-      email: event.target.email.value,
-      password: event.target.password.value
+    constructor(props) {
+        super(props);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
-    signup(credentials);
+    componentDidMount(){
+        if(localStorage.token){
+        //if there's a storage token when you hit the sign up route,
+        //check if the token is adv or user, and history.push to the appropriate route
+            browserHistory.push((localStorage.token === 'adv' ? '/advertisers' : '/ads'))
+        }
+        $('select').material_select();
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15 // Creates a dropdown of 15 years to control year
+        });
+    }
 
-  }
+    onSubmit(event) {
+        event.preventDefault();
+        const { signup } = this.props;
+        const credentials = {
+            name: event.target.name.value,
+            email: event.target.email.value,
+            password: event.target.password.value
+        }
+        signup(credentials);
+    }
+
+    render() {
+        return (
+            <div className="signin-container">
+                {/* This displays error messages*/}
+                <div className="errorContainer">
+                    {location.hash === '#failed' ? <span> Sign Up Unsuccessful. Perhaps the email was already used. </span> : null}
+                </div>
+
+                {/* This is the main body of the sign-up form*/}
+                <div className="buffer local col s6 push-s3 pull-s3">
+                    <form onSubmit={this.onSubmit}>
+                        <div className="row">
+                            <div className="input-field col s6">
+                                <i className="material-icons prefix">account_circle</i>
+                                <label htmlFor="icon_prefix">First Name</label>
+                                <input
+                                    id="icon_prefix"
+                                    name="name"
+                                    type="text"
+                                    className="form-control"
+                                />
+                            </div>
+                            <div className="input-field col s6">
+                                <label>Last Name</label>
+                                <input
+                                    name="name"
+                                    type="text"
+                                    className="form-control"
+                                />
+                            </div>
+                        </div>
+                        <div className="input-field">
+                            <i className="material-icons prefix">email</i>
+                            <label htmlFor="icon_prefix">Email</label>
+                            <input
+                                id="icon_prefix"
+                                name="email"
+                                type="text"
+                                className="form-control validate"
+                                required
+                            />
+                        </div>
+                        <div className="input-field">
+                            <i className="material-icons prefix">lock_outline</i>
+                            <label htmlFor="icon_prefix">Password</label>
+                            <input
+                                id="icon_prefix"
+                                name="password"
+                                type="password"
+                                className="form-control"
+                                required
+                            />
+                        </div>
+                        <div className="input-field">
+                            <i className="material-icons prefix">launch</i>
+                            <label htmlFor="icon_prefix">Birthdate</label>
+                            <input
+                                id="icon_prefix"
+                                type="date"
+                                className="datepicker"
+                            />
+                        </div>
+                        <div className="row">
+                            <div className="input-field col s6">
+                                <i className="material-icons prefix">work</i>
+                                <select>
+                                    <option htmlFor="icon_prefix" defaultValue value="">Income</option>
+                                    <option value="1">Less than $25,000</option>
+                                    <option value="2">$25,000 to $34,999</option>
+                                    <option value="3">$35,000 to $49,999</option>
+                                    <option value="4">$50,000 to $74,999</option>
+                                    <option value="4">$75,000 to $99,999</option>
+                                    <option value="5">$100,000 to $149,999</option>
+                                    <option value="6">$150,000 or more</option>
+                                </select>
+                            </div>
+                            <div className="input-field col s6">
+                                <select>
+                                    <option defaultValue value="">Education</option>
+                                    <option value="1">Less than high school</option>
+                                    <option value="2">High school graduate</option>
+                                    <option value="3">Some college, no degree</option>
+                                    <option value="4">Associate degree</option>
+                                    <option value="4">Bachelor degree</option>
+                                    <option value="5">Ph.D.</option>
+                                    <option value="6">Graduate or professional degree</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="input-field ">
+                                <div className="col s6 push-s3">
+                                    <input className="group1" type="radio" name="gender" id="test1" />
+                                    <label htmlFor="test1">Female</label>
+                                </div>
+                                <div className="col s6">
+                                    <input className="group1" type="radio" name="gender" id="test2" />
+                                    <label htmlFor="test2">Male</label>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" className="waves-effect waves-teal btn padded">Sign up</button>
+                    </form>
+                </div>
+            </div>
+        );
+    }
 }

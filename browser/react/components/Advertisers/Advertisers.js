@@ -177,7 +177,7 @@ export default class Advertisers extends React.Component {
         </div>
         {/* This section will contain a list of 'video cards', one for each result pulled from database */}
         <div className="container videocards">
-          <h2 className="center">Advertiser Campaign</h2>
+          <h5 className="center">Advertiser Campaign</h5>
 
           {
             currentAds && currentAds.map( ad => {
