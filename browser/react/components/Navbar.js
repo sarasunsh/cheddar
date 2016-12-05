@@ -11,7 +11,7 @@ class Navbar extends React.Component {
             <nav>
               <div className="nav-wrapper">
                   <Link className="brand-logo" to='/'> Cheddar </Link>
-                  <ul className="right hide-on-med-and-down">
+                    <ul className="right hide-on-med-and-down">
                     {this.props.user ?
                     <div>
                       <li><Link className="name-pop" to={localStorage.token === "adv"?'/advertisers':'/ads'}>{this.props.user.name || this.props.user.email}</Link></li>

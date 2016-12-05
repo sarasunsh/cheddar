@@ -65,7 +65,7 @@ export default class Landing extends Component {
                             <img src="img/smile/give-money-hand.png"></img>
                           </div>
                           <div className="card-content">
-                            <span className="text-center font-18">Earn $$</span>
+                            <span className="text-center font-18">Earn Money</span>
                           </div>
                         </div>
                       </div>
@@ -75,7 +75,7 @@ export default class Landing extends Component {
                             <img src="img/smile/smile.jpg"></img>
                           </div>
                           <div className="card-content">
-                            <span className="text-center font-18">Hours of smiles</span>
+                            <span className="text-center font-18">Spread Joy</span>
                           </div>
                         </div>
                       </div>
@@ -105,7 +105,7 @@ export default class Landing extends Component {
                 <div id="forAdv" className="section text-center blue lighten-3">
                       <div className="container landing">
                           <h5>Your ads deserve to be appreciated.</h5>
-                          <p> Your team works hard to craft creative, catchy eyes. But in the modern online landscape, it can be hard to get your customers' attention eyeballs on those ads -- and even harder to keep it! </p>
+                          <p> Your team works hard to craft creative, catchy ads. But in the modern online landscape, it can be hard to get your customers' attention on those ads -- and even harder to keep it! </p>
                           <img className='center-block' src="/img/smile/megaphone.png" height="250"></img>
                           <p> Cheddar provides a surefire way to build  engagement, and moreover our approach ensures your target consumer demographics will associate positive emotions with your brand. That's priceless! </p>
                           <img className='center-block' src="/img/smile/ppl.png" height="250"></img>
