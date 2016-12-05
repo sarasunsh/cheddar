@@ -16,9 +16,13 @@ export default class Auth extends React.Component {
             browserHistory.push((localStorage.token === 'adv' ? '/advertisers' : '/ads'))
         }
         $('select').material_select();
+        let date = new Date();
+        date.setFullYear(date.getFullYear() - 13);
         $('.datepicker').pickadate({
             selectMonths: true, // Creates a dropdown to control month
-            selectYears: 15 // Creates a dropdown of 15 years to control year
+            selectYears: 100, // Creates a dropdown of 100 years to control year
+            max: date
+
         });
     }
 
