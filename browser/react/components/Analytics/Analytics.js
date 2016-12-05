@@ -54,7 +54,7 @@ export default class Analytics extends Component {
         });
 
         if (bool) {
-            Materialize.toast('You can only select two filters. If you would like to add another, please first remove one of the current selections.', 1000, 'rounded')
+            Materialize.toast('You can only select two filters. If you would like to add another, please first remove one of the current selections.', 2000, 'rounded')
         }
     }
 
