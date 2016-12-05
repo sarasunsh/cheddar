@@ -7,25 +7,32 @@ const ads_list = {
     url:'HU80R7jGanE',
     cat:'Entertainment'
   },
-  "Winston":
-  {
-    url:'-fPwpymO1bs',
-    cat:'Health & Fitness'
-  },
   "Apple":{
     url:'2zfqw8nhUwA',
     cat:'Technology'
   },
-  "Budweiser": {
+  "Budweiser Frogs": {
     url:'VPKXAToDr-M',
     cat:'Food & Drink'
   },
-  "Pets.com 1":{
-    url: 'AQ2w9gV1yeM',
-    cat: 'Pets'
+  "Budweiser Wassup": {
+    url:'JJmqCKtJnxM',
+    cat:'Food & Drink'
   },
-  "Pets.com 2":{
-    url:'8F4LiqYzBZY',
+  "Budweiser Clydesdale": {
+    url:'E0HI4DAmVDo',
+    cat:'Food & Drink'
+  },
+  "Budweiser America": {
+    url:'eHRDal7aako',
+    cat:'Food & Drink'
+  },
+  "Budweiser Alien": {
+    url:'iz8fuvBvrH8',
+    cat:'Food & Drink'
+  },
+  "Pets.com":{
+    url: 'AQ2w9gV1yeM',
     cat: 'Pets'
   },
   "Qualcomm":{

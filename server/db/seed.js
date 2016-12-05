@@ -4,8 +4,8 @@ const { ads, users, views, advertisers } = require('./seedData')
 
 
 const test = [{
-        name: 'Admin',
-        email: 'admin@cheddar.com',
+        name: 'Anheuser-Busch InBev',
+        email: 'marketing@beer.com',
         password: "123"
 }]
 const seedAdmin = () => db.Promise.map(test, admin => models.Advertiser.create(admin));

@@ -104,22 +104,26 @@ export default class Advertisers extends React.Component {
       <div id="ads">
       {/* This is the sidebar that displays user information and contains a button to activate the modal */}
         <ul id="slide-out" className="side-nav fixed">
+            <div className="stat-box z-depth-1">
+              <div className="container stats ">
+                <span className="font-16 bold">Number of Ads:</span> {currentAds.length} <br></br>
+                <span className="font-16 bold">Total Ad Spend:</span> ${Math.round(this.state.totalDollarsSpent)}<br></br>
+              </div>
+            </div>
           <li>
             <div className="userView">
               <div className="background">
               </div>
-              <img className="circle" style={{width:'23px',height:'30px'}}src="img/smile/simplesmile.svg"/>
-              <div className="black-text name">{user ? user.name : 'Props didnt happen'} </div>
-              <div className="black-text email">{user ? user.email : "Props didnt happen"}</div>
-              <div className="black-text">{currentAds.length} Ad{currentAds.length < 2? '':'s'}</div>
-              <div className="black-text">${Math.round(this.state.totalDollarsSpent)} Ad Budget Spent</div>
-            {/*<a href="#!email"><span className="black-text">${this.props.user && Math.round(this.props.user.totalCharged)} Ad Dollars Deposited</span></a>*/}
+              <img style={{width:'250px'}}src="img/smile/Bud.png"/>
+
             </div>
           </li>
           <li><div className="divider"></div></li>
 
-          <li><a type="button" className="waves-effect modal-trigger" href="#addMoney">Add Money</a></li>
-          <li><a className="waves-effect modal-trigger" href="#addAd">Add New Advertisement</a></li>
+          <li>
+            <a type="button" className="waves-effect modal-trigger" href="#addMoney"><i className="material-icons left">credit_card</i>Add Money</a>
+            </li>
+          <li><a className="waves-effect modal-trigger" href="#addAd"><i className="material-icons left">video_library</i>Add New Advertisement</a></li>
         </ul>
         {/* This is a modal popup that allows advertisers to add video to database */}
         {/* Overflow: visible so that the dropdown select menu breaks out of the modal popup box  */}
@@ -188,7 +192,7 @@ export default class Advertisers extends React.Component {
                     <span className="card-title">{ad.title}</span>
                   </div>
                   <div className="card-content">
-                    <p>Cost: ${ad.cost}</p>
+                     <span className="bold">Cost per view at 100% smile: </span> ${ad.cost}
                   </div>
                   <div className="card-action">
                     <Link  onClick={() => selectAd(ad)} to={`/advertisers/${ad.id}`} >See Analytics</Link>

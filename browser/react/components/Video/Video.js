@@ -36,7 +36,6 @@ export default class Video extends React.Component {
         console.log('player state is ', state)
         if(state.data === YT.PlayerState.ENDED ) {
             let finalSmile = funcs.smilyScore[0]
-            this.setState({ finalSmile });
             document.getElementById("theAd").style.display = "none";
             const canvas = document.getElementById('best_smile');
             canvas.height = 480;
@@ -53,13 +52,14 @@ export default class Video extends React.Component {
 
 
             funcs.log('logs', `Congratulations! Your smilyScore was ${Math.trunc(finalSmile)}`);
+            Materialize.toast("We're proud of you, so we tweeted about your success at @cheddar_smiles. Spread the news with a retweet!", 2000, 'rounded')
             funcs.onStop();
             funcs.saveSmile(canvas,this.props.user.id + "_" + this.props.currentAd.id, this.props.currentAd.title.split(" ")[0] + " makes me smile!");
             axios.post(`api/views/${this.props.user.id}/${this.props.currentAd.id}`, {smilyScore: finalSmile})
                 .catch(err => console.log(err))
                 .then( () =>{
                   axios.post(`api/tweet/`, {text: this.props.currentAd.title.split(" ")[0] + " makes me smile! 😀 #smile", smile: canvas.toDataURL("image/png").replace(/^data:image\/(png|jpg);base64,/, "")})
-                    .then(() => setTimeout(() => location.pathname='/ads', 5000))
+                    .then(() => setTimeout(() => location.pathname='/ads', 10000))
                     .catch(err => console.log(err))
                 })
         }
@@ -181,18 +181,6 @@ export default class Video extends React.Component {
         console.log(this.state.finalSmile >= 0)
         return (
             <div style={{height: this.height}}>
-              <div style={{textAlign:"center"}}>
-                {this.state.finalSmile >= 0 ?
-                    <div className="card blue lighten-3">
-                        <div className="card-content white-text">
-                            <span className="card-title bold">{`Congratulations! Your smilyScore was ${Math.trunc(this.state.finalSmile)}`}</span>
-                            <p>We're proud of you, so we tweeted about your success at @cheddar_smiles. Spread the news with a retweet!</p>
-                        </div>
-                    </div>
-                    :
-                    null}
-                <canvas id="best_smile" height="1px" width={this.width}></canvas>
-              </div>
               <div id="logs"> Click Play when ready . . .</div>
               <div style={{textAlign:"center"}}>
                   <i id="playButton"
