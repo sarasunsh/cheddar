@@ -154,6 +154,14 @@ export default class Video extends React.Component {
         funcs.onStop();
         let apiTag = document.getElementById('apiTag')
         apiTag.remove();
+        let widgetTag = document.getElementById('www-widgetapi-script')
+        widgetTag.remove();
+        window.detector = null;
+        window.YT = null;
+        window.YTConfig = null;
+        window.onYouTubeIframeAPIReady = null;
+        window.onYTReady = null;
+        setTimeout(()=> {location.pathname = location.pathname}, 50);
         console.log('componentWillUnmount')
     }
 
