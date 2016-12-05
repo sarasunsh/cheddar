@@ -1,5 +1,5 @@
 module.exports = {
-    gender : ['male', 'female'],
+    gender : ['male', 'female', 'other_decline'],
     income : [
         'Less than $25,000',
         '$25,000 to $34,999',
@@ -30,5 +30,3 @@ module.exports = {
         "Graduate or professional degree"]
 }
 ;
-
-

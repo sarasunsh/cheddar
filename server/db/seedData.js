@@ -45,7 +45,7 @@ const userModel = casual.define('userModel', () => {
   return {
     name: casual.full_name,
     email: casual.email,
-    age: casual.random_element(constants.age),
+    birthday: casual.date(format = 'YYYY-MM-DD'),
     gender: casual.random_element(constants.gender),
     petOwner: casual.random_element(constants.petOwner),
     income: casual.random_element(constants.income),

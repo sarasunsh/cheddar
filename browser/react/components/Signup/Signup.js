@@ -26,9 +26,10 @@ export default class Auth extends React.Component {
         event.preventDefault();
         const { signup } = this.props;
         const credentials = {
-            name: event.target.name.value,
+            name: (event.target.first_name.value + " " + event.target.last_name.value).trim(),
             email: event.target.email.value,
-            password: event.target.password.value
+            password: event.target.password.value,
+            gender: event.target.gender.value || null
         }
         signup(credentials);
     }
@@ -50,7 +51,7 @@ export default class Auth extends React.Component {
                                 <label htmlFor="icon_prefix">First Name</label>
                                 <input
                                     id="icon_prefix"
-                                    name="name"
+                                    name="first_name"
                                     type="text"
                                     className="form-control"
                                 />
@@ -58,7 +59,7 @@ export default class Auth extends React.Component {
                             <div className="input-field col s6">
                                 <label>Last Name</label>
                                 <input
-                                    name="name"
+                                    name="last_name"
                                     type="text"
                                     className="form-control"
                                 />
@@ -123,14 +124,18 @@ export default class Auth extends React.Component {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="input-field ">
-                                <div className="col s6 push-s3">
-                                    <input className="group1" type="radio" name="gender" id="test1" />
-                                    <label htmlFor="test1">Female</label>
+                            <div className="gender-field">
+                                <div className="col s4">
+                                    <input className="gender" value="female" type="radio" name="gender" id="female" />
+                                    <label htmlFor="female">Female</label>
                                 </div>
-                                <div className="col s6">
-                                    <input className="group1" type="radio" name="gender" id="test2" />
-                                    <label htmlFor="test2">Male</label>
+                                <div className="col s4">
+                                    <input className="gender" value="male" type="radio" name="gender" id="male" />
+                                    <label htmlFor="male">Male</label>
+                                </div>
+                                <div className="col s4">
+                                    <input className="gender" value="other_decline" type="radio" name="gender" id="other_decline" />
+                                    <label htmlFor="other_decline">Other/Decline</label>
                                 </div>
                             </div>
                         </div>
