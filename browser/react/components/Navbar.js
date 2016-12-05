@@ -15,12 +15,12 @@ class Navbar extends React.Component {
                     {this.props.user ?
                     <div>
                       <li><Link to={localStorage.token === "adv"?'/advertisers':'/ads'}>{this.props.user.name || this.props.user.email}</Link></li>
-                      <li><Link to='/' className='btn green lighten-1' onClick={this.props.logoutClick}>Log out</Link></li>
+                      <li><Link to='/' className='btn nav waves-effect waves-teal btn-flat' onClick={this.props.logoutClick}>Log out</Link></li>
                     </div>
                     :
                     <div>
-                      <li><Link className='btn nav light-blue lighten-4' to="/login">Log in</Link></li>
-                      <li><Link className='btn nav light-blue lighten-4' to="/signup">Sign Up</Link></li>
+                      <li><Link className='btn nav waves-effect waves-teal btn-flat' to="/login">Log in</Link></li>
+                      <li><Link className='btn nav waves-effect waves-teal btn-flat' to="/signup">Sign Up</Link></li>
                     </div>
                     }
                   </ul>
