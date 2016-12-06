@@ -118,7 +118,7 @@ export default class Landing extends Component {
                           <p> Here's how it works -- you post an ad, and we use cutting-edge facial recognition technology to ensure that viewers are smiling throughout the ad. Fifty years of psychology research shows that enticing people to smile will change their mood for the better and create strong positive associations. </p>
                         </div>
                         <div className="pitch ">
-                          <img className='center-block' src="/img/smile/video.jpeg" height="250"></img>
+                          <img className='center-block' src="/img/smile/bestvideo.png" height="250"></img>
                           <p> As your ad is served to viewers, their smile is tracked and scored from 0 to 100%. Viewers are rewarded Smile Points based on how much they grin, so both you and your customers will be smiling. </p>
                         </div>
                         <div className="pitch ">
@@ -228,7 +228,7 @@ export default class Landing extends Component {
                                             </a>
                                           </div>
                                       </div>
-                                        David Kim claims to be a board-certified radiologist, but in actuality that story is a cover for the fact that he has X-Ray vision. Think about it -- have you ever seen him without sunglasses? In addition to being an X-Man, he enjoys long walks on the beach and beautiful sunsets.
+                                        David Kim is a physician entrepreneur, and started life as an investment banker, strategy consultant, neuroradiologist, and hip hop dancer who's 15 minutes of glory was performing before his mom in school (she gave him two thumbs up).
                                     </div>
                                 </div>
                             </div>

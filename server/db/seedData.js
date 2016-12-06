@@ -5,39 +5,48 @@ const ads_list = {
   "Nintendo":
   {
     url:'HU80R7jGanE',
-    cat:'Entertainment'
+    cat:'Entertainment',
+    coID: 2
   },
   "Apple":{
     url:'2zfqw8nhUwA',
-    cat:'Technology'
+    cat:'Technology',
+    coID: 3
   },
   "Budweiser Frogs": {
     url:'VPKXAToDr-M',
-    cat:'Food & Drink'
+    cat:'Food & Drink',
+    coID: 1
   },
   "Budweiser Wassup": {
     url:'JJmqCKtJnxM',
-    cat:'Food & Drink'
+    cat:'Food & Drink',
+    coID: 1
   },
   "Budweiser Clydesdale": {
     url:'E0HI4DAmVDo',
-    cat:'Food & Drink'
+    cat:'Food & Drink',
+    coID: 1
   },
   "Budweiser America": {
     url:'eHRDal7aako',
-    cat:'Food & Drink'
+    cat:'Food & Drink',
+    coID: 1
   },
   "Budweiser Alien": {
     url:'iz8fuvBvrH8',
-    cat:'Food & Drink'
+    cat:'Food & Drink',
+    coID: 1
   },
   "Pets.com":{
     url: 'AQ2w9gV1yeM',
-    cat: 'Pets'
+    cat: 'Pets',
+    coID: 2
   },
   "Qualcomm":{
     url:'XmQSRqxRIJw',
-    cat: 'Technology'
+    cat: 'Technology',
+    coID: 3
   }
 };
 
@@ -47,12 +56,11 @@ const NUMBER_OF_USERS = 200;
 const NUMBER_OF_VIEWS = 500;
 
 
-
 const userModel = casual.define('userModel', () => {
   return {
     name: casual.full_name,
     email: casual.email,
-    birthday: casual.date(format = 'YYYY-MM-DD'),
+    age: casual.random_element(constants.age),
     gender: casual.random_element(constants.gender),
     petOwner: casual.random_element(constants.petOwner),
     income: casual.random_element(constants.income),
@@ -68,7 +76,7 @@ const adModel = casual.define('adModel', (tmp) => {
     url: ads_list[tmp].url,
     category: ads_list[tmp].cat,
     cost: parseFloat(Math.round(casual.double(.5, 5) * 100) / 100).toFixed(2),
-    advertiserId: 1
+    advertiserId: ads_list[tmp].coID
   }
 })
 
