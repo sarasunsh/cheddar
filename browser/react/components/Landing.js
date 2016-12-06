@@ -228,7 +228,7 @@ export default class Landing extends Component {
                                             </a>
                                           </div>
                                       </div>
-                                        David Kim claims to be a board-certified radiologist, but in actuality that story is a cover for the fact that he has X-Ray vision. Think about it -- have you ever seen him without sunglasses? In addition to being an X-Man, he enjoys long walks on the beach and beautiful sunsets.
+                                        David Kim is a physician entrepreneur, and started life as an investment banker, strategy consultant, neuroradiologist, and hip hop dancer who's 15 minutes of glory was performing before his mom in school (she gave him two thumbs up).
                                     </div>
                                 </div>
                             </div>
