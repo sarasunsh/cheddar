@@ -10,8 +10,8 @@ class Navbar extends React.Component {
           <div className='navbar-fixed'>
             <nav>
               <div className="nav-wrapper">
-                  <Link className="brand-logo" to='/'> Cheddar </Link>
-                    <ul className="right hide-on-med-and-down">
+                  <Link className="left brand-logo" to='/'> Cheddar </Link>
+                    <ul className="right">
                     {this.props.user ?
                     <div>
                       <li><Link className="name-pop" to={localStorage.token === "adv"?'/advertisers':'/ads'}>{this.props.user.name || this.props.user.email}</Link></li>
