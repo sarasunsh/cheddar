@@ -227,6 +227,12 @@ nav {
 
 .bio-text{
   text-align: center;
+  font-size: 13px;
+}
+
+.bio-icon {
+  width: 35px;
+  display: inline-block;
 }
 
 .card-title.welcome-title {

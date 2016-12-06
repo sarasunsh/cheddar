@@ -138,34 +138,102 @@ export default class Landing extends Component {
 
                <div className="section text-center blue lighten-1">
                     <div className="container landing">
-                        <h5>ABOUT US</h5>
+                        <h5 style={{textAlign:"center"}}>ABOUT US</h5>
                             <div className="row">
                                 <div className="col s3 text-center">
                                     <div className="bio ben">
                                     </div>
                                     <div className="bio-text">
-                                        Ben is beatific.
+                                        <div className='bio-contact'>
+                                          <div className='bio-icon'>
+                                            <a href="mailto: ben@gmail.com">
+                                              <img src="/img/email.png" height="20" />
+                                            </a>
+                                          </div>
+                                          <div className='bio-icon'>
+                                            <a href="http://www.github.com/ben">
+                                              <img src="/img/Github.png" height="20" />
+                                            </a>
+                                          </div>
+                                          <div className='bio-icon'>
+                                            <a href="http://www.linkedin.com/in/ben" >
+                                              <img src="/img/linkedIn.png" height="20"/>
+                                            </a>
+                                          </div>
+                                        </div>
+                                        Ben Brodsky enjoys speech synthesis and artificial intelligence. He is also very tall. In his former life, he was involved in New York politics and moonlighted as a wedding singer. Go Eagles!
                                     </div>
                                 </div>
                                 <div className="col s3">
                                     <div className="bio sara">
                                     </div>
                                     <div className="bio-text">
-                                       Sara is sassy.
+                                      <div className='bio-contact'>
+                                          <div className='bio-icon'>
+                                            <a href="mailto: sarasunsh@gmail.com">
+                                              <img src="/img/email.png" height="20" />
+                                            </a>
+                                          </div>
+                                          <div className='bio-icon'>
+                                            <a href="http://www.github.com/sarasunsh">
+                                              <img src="/img/Github.png" height="20" />
+                                            </a>
+                                          </div>
+                                          <div className='bio-icon'>
+                                            <a href="http://www.linkedin.com/in/sara-sunshine" >
+                                              <img src="/img/linkedIn.png" height="20"/>
+                                            </a>
+                                          </div>
+                                      </div>
+                                        Sara Sunshine loves using code to solve puzzles and make cool things. She has a background in biotech and neuroscience, and is excited about technology's ability to improve people's lives. And yes, that is her real last name!
                                     </div>
                                 </div>
                                 <div className="col s3">
                                     <div className="bio jackson">
                                     </div>
                                     <div className="bio-text">
-                                       Jackson is jazzy.
+                                      <div className='bio-contact'>
+                                          <div className='bio-icon'>
+                                            <a href="mailto: sarasunsh@gmail.com">
+                                              <img src="/img/email.png" height="20" />
+                                            </a>
+                                          </div>
+                                          <div className='bio-icon'>
+                                            <a href="http://www.github.com/sarasunsh">
+                                              <img src="/img/Github.png" height="20" />
+                                            </a>
+                                          </div>
+                                          <div className='bio-icon'>
+                                            <a href="http://www.linkedin.com/in/sara-sunshine" >
+                                              <img src="/img/linkedIn.png" height="20"/>
+                                            </a>
+                                          </div>
+                                      </div>
+                                        Colten Jackson is a CSS wizard and a creative thinker. He likes interactive tech. He can also play the saxophone with his toes. Eat your heart out, Miles Davis!
                                     </div>
                                 </div>
                                 <div className="col s3">
                                     <div className="bio david">
                                     </div>
                                     <div className="bio-text">
-                                        David is dope.
+                                      <div className='bio-contact'>
+                                          <div className='bio-icon'>
+                                            <a href="mailto: sarasunsh@gmail.com">
+                                              <img src="/img/email.png" height="20" />
+                                            </a>
+                                          </div>
+                                          <div className='bio-icon'>
+                                            <a href="http://www.github.com/sarasunsh">
+                                              <img src="/img/Github.png" height="20" />
+                                            </a>
+                                          </div>
+                                          <div className='bio-icon'>
+                                            <a href="http://www.linkedin.com/in/sara-sunshine" >
+                                              <img src="/img/linkedIn.png" height="20"/>
+                                            </a>
+                                          </div>
+                                      </div>
+                                        David Kim claims to be a board-certified radiologist, but in actuality that story is a cover for the fact that he has X-Ray vision. Think about it -- have you ever seen him without sunglasses? In addition to being an X-Man, he enjoys long walks on the beach and beautiful sunsets.
                                     </div>
                                 </div>
                             </div>
