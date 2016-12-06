@@ -1,5 +1,5 @@
 module.exports = {
-    gender : ['male', 'female', 'other_decline'],
+    gender : ['male', 'female', 'otherOrDecline'],
     income : [
         'Less than $25,000',
         '$25,000 to $34,999',
