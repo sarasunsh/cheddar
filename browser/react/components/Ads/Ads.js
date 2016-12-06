@@ -49,8 +49,8 @@ export default class Ads extends React.Component {
               <img className="circle" style={{width:'23px',height:'30px'}}src="img/smile/simplesmile.svg"/>
               <div className="black-text name">{user ? user.name : 'Props didnt happen'} </div>
               <div className="black-text email">{user ? user.email : "Props didnt happen"}</div>
-              <div className="black-text">Watched {this.state.adHistory.length} ad{this.state.adHistory.length < 2? '':'s'}</div>
-              <div className="black-text">Earned {smilyPoints} Smily Point{smilyPoints < 2? '':'s'}</div>
+              <div className="black-text">Watched {this.state.adHistory.length} ad{this.state.adHistory.length === 1? '':'s'}</div>
+              <div className="black-text">Earned {smilyPoints} Smily Point{smilyPoints === 1? '':'s'}</div>
               <div className="btn">Cash Out</div>
             </div>
           </li>

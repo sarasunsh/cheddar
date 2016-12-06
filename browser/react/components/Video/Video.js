@@ -42,7 +42,7 @@ export default class Video extends React.Component {
             canvas.style.paddingTop = "20px";
             const ctx = canvas.getContext('2d');
             ctx.putImageData(window.top_smile[1], 0, 0);
-            ctx.font = "48px Happy Monkey";
+            ctx.font = "48px Reem Kufi";
             ctx.textAlign="center";
             ctx.shadowColor = '#FFF';
             ctx.shadowOffsetX = 3;
@@ -52,7 +52,7 @@ export default class Video extends React.Component {
 
 
             funcs.log('logs', `Congratulations! Your smilyScore was ${Math.trunc(finalSmile)}`);
-            Materialize.toast("We're proud of you, so we tweeted about your success at @cheddar_smiles. Spread the news with a retweet!", 2000, 'rounded')
+            Materialize.toast("We tweeted your lovely smile at @cheddar_smiles. Spread the news with a retweet!", 4000, 'rounded')
             funcs.onStop();
             funcs.saveSmile(canvas,this.props.user.id + "_" + this.props.currentAd.id, this.props.currentAd.title.split(" ")[0] + " makes me smile!");
             axios.post(`api/views/${this.props.user.id}/${this.props.currentAd.id}`, {smilyScore: finalSmile})
