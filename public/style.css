@@ -217,7 +217,7 @@ nav {
   background-size: cover;
 }
 .bio.jackson {
-  background:url('/img/jackson.jpg');
+  background:url('/img/coltenbio.png');
   background-size: cover;
 }
 /* .bio + span means spans which are direct siblings of nodes of class bio*/

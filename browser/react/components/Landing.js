@@ -189,22 +189,22 @@ export default class Landing extends Component {
                                     <div className="bio-text">
                                       <div className='bio-contact'>
                                           <div className='bio-icon'>
-                                            <a href="mailto: sarasunsh@gmail.com">
+                                            <a href="mailto: jazzyjackson@gmail.com">
                                               <img src="/img/email.png" height="20" />
                                             </a>
                                           </div>
                                           <div className='bio-icon'>
-                                            <a href="http://www.github.com/sarasunsh">
+                                            <a href="http://www.github.com/jazzyjackson">
                                               <img src="/img/Github.png" height="20" />
                                             </a>
                                           </div>
                                           <div className='bio-icon'>
-                                            <a href="http://www.linkedin.com/in/sara-sunshine" >
+                                            <a href="http://www.linkedin.com/in/cdjacksn" >
                                               <img src="/img/linkedIn.png" height="20"/>
                                             </a>
                                           </div>
                                       </div>
-                                        Colten Jackson is a CSS wizard and a creative thinker. He likes interactive tech. He can also play the saxophone with his toes. Eat your heart out, Miles Davis!
+                                        Colten Jackson is a maker, coder, and artist who is principally interested in building things that don't exist yet. His background is a combination of youth education and robotics.
                                     </div>
                                 </div>
                                 <div className="col s3">
