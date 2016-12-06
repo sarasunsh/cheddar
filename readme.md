@@ -10,7 +10,7 @@ This project was built with the following tools:
   - Node/Express and Sequelize/PostgreSQL on the back-end
   - Passport.js and bcrypt for authentication
   - Webpack as a build tool
-  - Enzyme and Mocha for testing. 
+  - Enzyme and Mocha for testing
   
 In addition to the Affectiva SDK, Cheddar also utilizes APIs from Twitter and Stripe. The data visualization dashboard was built with a React implementation of the Highcharts library.
 
