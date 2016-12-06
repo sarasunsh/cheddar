@@ -146,22 +146,17 @@ export default class Landing extends Component {
                                     <div className="bio-text">
                                         <div className='bio-contact'>
                                           <div className='bio-icon'>
-                                            <a href="mailto: ben@gmail.com">
+                                            <a href="mailto:bbrodsky+smile@gmail.com">
                                               <img src="/img/email.png" height="20" />
                                             </a>
                                           </div>
                                           <div className='bio-icon'>
-                                            <a href="http://www.github.com/ben">
+                                            <a href="https://github.com/bbrodsky">
                                               <img src="/img/Github.png" height="20" />
                                             </a>
                                           </div>
-                                          <div className='bio-icon'>
-                                            <a href="http://www.linkedin.com/in/ben" >
-                                              <img src="/img/linkedIn.png" height="20"/>
-                                            </a>
-                                          </div>
                                         </div>
-                                        Ben Brodsky enjoys speech synthesis and artificial intelligence. He is also very tall. In his former life, he was involved in New York politics and moonlighted as a wedding singer. Go Eagles!
+                                        Ben Brodsky
                                     </div>
                                 </div>
                                 <div className="col s3">
