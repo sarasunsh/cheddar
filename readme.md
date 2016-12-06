@@ -21,4 +21,4 @@ If you would like to check out the advertiser end, you can use the following cre
     Password: 123
     https://cheddar-fsa.herokuapp.com/adv_login
 
-We also have a Twitter account @cheddar_smiles.
+We also have a Twitter account [@cheddar_smiles] (http://www.twitter.com/cheddar_smiles)
