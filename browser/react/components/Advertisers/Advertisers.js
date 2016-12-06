@@ -151,7 +151,7 @@ export default class Advertisers extends React.Component {
               <div className='row'>
                 <div className="input-field col s4">
                   <select name='category'>
-                    <option disabled defaultValue>Select One</option>
+                    <option defaultValue>Select One</option>
                     <option value="Pets">Pets</option>
                     <option value="Health & Fitness">Health & Fitness</option>
                     <option value="Food & Drink">Food & Drink</option>
