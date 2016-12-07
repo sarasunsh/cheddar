@@ -204,7 +204,7 @@ export default class Landing extends Component {
                                             </a>
                                           </div>
                                       </div>
-                                        Colten Jackson is a maker, coder, and artist who is principally interested in building things that don't exist yet. His background is a combination of youth education and robotics.
+                                        Colten Jackson is a maker, coder, and artist who is principally interested in working on things that don't exist yet. His background is a combination of youth education and robotics.
                                     </div>
                                 </div>
                                 <div className="col s3">
