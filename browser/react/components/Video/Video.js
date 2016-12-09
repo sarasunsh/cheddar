@@ -152,18 +152,23 @@ export default class Video extends React.Component {
     }
 
     componentWillUnmount(){
-        funcs.onStop();
-        let apiTag = document.getElementById('apiTag')
-        apiTag.remove();
-        let widgetTag = document.getElementById('www-widgetapi-script')
-        widgetTag.remove();
-        window.detector = null;
-        window.YT = null;
-        window.YTConfig = null;
-        window.onYouTubeIframeAPIReady = null;
-        window.onYTReady = null;
-        setTimeout(()=> {location.pathname = location.pathname}, 50);
-        console.log('componentWillUnmount')
+        try {
+            funcs.onStop();
+            let apiTag = document.getElementById('apiTag')
+            apiTag.remove();
+            let widgetTag = document.getElementById('www-widgetapi-script')
+            widgetTag.remove();
+            window.detector = null;
+            window.YT = null;
+            window.YTConfig = null;
+            window.onYouTubeIframeAPIReady = null;
+            window.onYTReady = null;
+            setTimeout(()=> {location.pathname = location.pathname}, 50);
+            console.log('componentWillUnmount');
+        } catch(e) {
+            console.error(e);
+        }
+     
     }
 
     progressBar(){
