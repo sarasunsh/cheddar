@@ -15,11 +15,11 @@ export default class Video extends React.Component {
         this.onPlayerStateChange = this.onPlayerStateChange.bind(this);
 
         this.progressBar = this.progressBar.bind(this);
-        this.width = 640,
+        this.width = 640;
         this.height = 480;
         this.url = `https://www.youtube.com/embed/${this.props.currentAd.url}?`;
         this.url += 'enablejsapi=1&' // must be appended to embed url so we can control play/pause
-        this.url =+ 'controls=0&'
+        this.url += 'controls=0&'
         this.url += 'showinfo=0&' // and controls=0 will hide the youtube player controls
         this.url += 'disablekb=1&' // will prevent you from skipping ahead with arrow keys
         this.url += 'iv_load_policy=3&' // hides video annotations / popups / subscribe now stuff
